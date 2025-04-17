@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Καταχώρηση ΑΠ</title>
+</head>
+<body>
+    <h1>Καταχώρηση Αριθμού Πρωτοκόλλου</h1>
+    <form id="protocolForm" action="/set-ap" method="POST">
+        <label for="id">ID Διπλωματικής:</label>
+        <input type="text" id="id" name="id" required>
+        <br><br>
+        <label for="protocolNumber">Αριθμός Πρωτοκόλλου (ΑΠ):</label>
+        <input type="text" id="protocolNumber" name="protocolNumber" required>
+        <br><br>
+        <button type="submit">Καταχώρηση</button>
+    </form>
+</body>
+</html>
