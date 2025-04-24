@@ -1,4 +1,3 @@
-//Λύση  Φοιτητή ερωτήματος 1) Προβολή θέματος
 const express = require("express");
 const router = express.Router();
 const { MongoClient } = require("mongodb");
@@ -52,5 +51,130 @@ router.get("/my", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
   }
 });
+
+//POST /api/diplomas/invite , Ερωτημα 3)1 προσκλησεις καθηγητων για επιτροπη
+router.post("/invite", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "student") {
+      return res.status(403).json({ message: "Δεν επιτρέπεται η πρόσβαση." });
+    }
+
+    const { didaskonId, onoma, epitheto } = req.body;
+    const col = await getCollection();
+
+    // Εντοπισμός διπλωματικής υπό ανάθεση για τον φοιτητή
+    const diploma = await col.findOne({
+      "foititis.arithmosMitroou": parseInt(req.user.am),
+      katastasi: "υπό ανάθεση"
+    });
+
+    if (!diploma) {
+      return res.status(404).json({ message: "Η διπλωματική δεν είναι υπό ανάθεση ή δεν βρέθηκε." });
+    }
+
+    // Έλεγχος για διπλή πρόσκληση
+    const alreadyInvited = diploma.proskliseis?.some(p => p.didaskonId === didaskonId);
+    if (alreadyInvited) {
+      return res.status(400).json({ message: "Ο διδάσκων έχει ήδη προσκληθεί." });
+    }
+
+    // Προσθήκη πρόσκλησης
+    const result = await col.updateOne(
+      { _id: diploma._id },
+      {
+        $push: {
+          proskliseis: {
+            didaskonId,
+            onoma,
+            epitheto,
+            apodoxi: null
+          }
+        }
+      }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(500).json({ message: "Η πρόσκληση δεν καταχωρήθηκε." });
+    }
+
+    res.json({ message: "Η πρόσκληση στάλθηκε επιτυχώς." });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+  }
+});
+
+//προβολη προσκλησεων που εχει κανει ο ιδιος ο φοιτητης (μπορει να μην χρειαστει)
+router.get("/my-invites", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "student") {
+      return res.status(403).json({ message: "Δεν επιτρέπεται η πρόσβαση." });
+    }
+
+    const col = await getCollection();
+    const diploma = await col.findOne({
+      "foititis.arithmosMitroou": parseInt(req.user.am)
+    });
+
+    if (!diploma) {
+      return res.status(404).json({ message: "Η διπλωματική δεν βρέθηκε." });
+    }
+
+    const invites = diploma.proskliseis || [];
+
+    res.json({
+      invites: invites.map((inv) => ({
+        didaskonId: inv.didaskonId,
+        onoma: inv.onoma,
+        epitheto: inv.epitheto,
+        apodoxi: inv.apodoxi // true, false ή null
+      }))
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+  }
+});
+
+
+
+
+router.put("/upload-draft", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "student") {
+      return res.status(403).json({ message: "Δεν επιτρέπεται η πρόσβαση." });
+    }
+
+    const { pdfProxeiroKeimeno, linkYliko } = req.body;
+
+    if (!pdfProxeiroKeimeno) {
+      return res.status(400).json({ message: "Απαιτείται link για το πρόχειρο κείμενο." });
+    }
+
+    const col = await getCollection();
+
+    const result = await col.updateOne(
+      {
+        "foititis.arithmosMitroou": parseInt(req.user.am),
+        katastasi: "υπό εξέταση"
+      },
+      {
+        $set: {
+          pdfProxeiroKeimeno,
+          linkYliko
+        }
+      }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική σε κατάσταση υπό εξέταση." });
+    }
+
+    res.json({ message: "Το πρόχειρο και το υλικό καταχωρήθηκαν επιτυχώς!" });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+  }
+});
+
+
+
 
 module.exports = router;
