@@ -29,6 +29,18 @@ router.get("/my", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική εργασία" });
     }
 
+    //Αν είναι περατωμένη
+    if (diploma.katastasi === "περατωμένη") {
+      return res.json({
+        title: diploma.titlos,
+        status: diploma.katastasi,
+        committee: diploma.trimeriEpitropi,
+        assignment_date: diploma.imerominiaAnathesis,
+        praktikoHTML: diploma.praktikoHTML || null,
+        statusHistory: diploma.proigoumenesKatastaseis || []
+      });
+    }
+
     // Ανάκτηση και επεξεργασία χρόνου
     let timeSinceAssignment = null;
     if (diploma.imerominiaAnathesis) {
@@ -175,6 +187,56 @@ router.put("/upload-draft", authMiddleware, async (req, res) => {
 });
 
 
+router.put("/set-exam-info", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "student") {
+      return res.status(403).json({ message: "Δεν επιτρέπεται η πρόσβαση." });
+    }
 
+    const {
+      imerominiaOraExetasis,
+      troposExetasis,
+      aithousaExetasis,
+      syndesmosExetasis
+    } = req.body;
+
+    // Έλεγχος υποχρεωτικών πεδίων
+    if (!imerominiaOraExetasis || !troposExetasis) {
+      return res.status(400).json({ message: "Η ημερομηνία και ο τρόπος εξέτασης είναι υποχρεωτικά." });
+    }
+
+    if (troposExetasis === "από κοντά" && !aithousaExetasis) {
+      return res.status(400).json({ message: "Απαιτείται αίθουσα εξέτασης για δια ζώσης." });
+    }
+
+    if (troposExetasis === "εξ αποστάσεως" && !syndesmosExetasis) {
+      return res.status(400).json({ message: "Απαιτείται σύνδεσμος για εξ αποστάσεως εξέταση." });
+    }
+
+    const diplomas = await getCollection();
+    const result = await diplomas.updateOne(
+      {
+        "foititis.arithmosMitroou": parseInt(req.user.am),
+        katastasi: "υπό εξέταση"
+      },
+      {
+        $set: {
+          imerominiaOraExetasis,
+          troposExetasis,
+          aithousaExetasis: troposExetasis === "από κοντά" ? aithousaExetasis : null,
+          syndesmosExetasis: troposExetasis === "εξ αποστάσεως" ? syndesmosExetasis : null
+        }
+      }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: "Η διπλωματική δεν βρέθηκε ή δεν είναι υπό εξέταση." });
+    }
+
+    res.json({ message: "Τα στοιχεία της εξέτασης καταχωρήθηκαν!" });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+  }
+});
 
 module.exports = router;
