@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
 import StudentHome from "./components/StudentHome";
 import ThesisView from "./components/ThesisView";
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LoginForm />} />
         <Route path="/student" element={<StudentHome />} />
         <Route path="/thesis" element={<ThesisView />} />
         <Route path="/profile" element={<ProfileEditor />} />
