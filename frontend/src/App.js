@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import StudentHome from "./components/StudentHome";
 import ThesisView from "./components/ThesisView";
+import ProfileEditor from "./components/ProfileEditor";
 
-const ProfileEditor = () => <h2>Επεξεργασία Προφίλ</h2>;
+
 const DiplomaManager = () => <h2>Διαχείριση Διπλωματικής</h2>;
 
 function App() {
