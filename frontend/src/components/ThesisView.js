@@ -37,7 +37,12 @@ const ThesisView = () => {
         </p>
       )}
       <p><strong>Κατάσταση:</strong> {data.status}</p>
-      <p><strong>Ημερομηνία Ανάθεσης:</strong> {new Date(data.assignment_date).toLocaleDateString()}</p>
+      {data.assignment_date ? (
+        <p><strong>Ημερομηνία Ανάθεσης:</strong> {new Date(data.assignment_date).toLocaleDateString("el-GR")}</p>
+        ) : (
+        <p><strong>Ημερομηνία Ανάθεσης:</strong> Δεν έχει οριστεί</p>
+        )}
+
       {data.time_since_assignment && (
         <p><strong>Μέρες από ανάθεση:</strong> {data.time_since_assignment}</p>
       )}
