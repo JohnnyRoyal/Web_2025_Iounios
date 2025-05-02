@@ -1,6 +1,7 @@
 // src/components/DiplomaManager.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ExetasiPhase from "./ExetasiPhase";
 
 const DiplomaManager = () => {
   const [status, setStatus] = useState("");
@@ -51,38 +52,46 @@ const DiplomaManager = () => {
     }
   };
 
-  if (status !== "υπό ανάθεση") return <p>Η διαχείριση είναι διαθέσιμη μόνο στη φάση "υπό ανάθεση".</p>;
+  if (!status) return <p>Φόρτωση...</p>;
 
-  return (
-    <div style={{ padding: 20, maxWidth: 800, margin: "auto" }}>
-      <h2>📨 Διαχείριση Προσκλήσεων Επιτροπής</h2>
+  if (status.trim() === "υπό ανάθεση") {
+    return (
+      <div style={{ padding: 20, maxWidth: 800, margin: "auto" }}>
+        <h2>📨 Διαχείριση Προσκλήσεων Επιτροπής</h2>
 
-      <div style={{ marginBottom: 20 }}>
-        <label>ID Διδάσκοντα:</label>
-        <input value={form.didaskonId} onChange={(e) => setForm({ ...form, didaskonId: e.target.value })} />
-        <br />
-        <label>Όνομα:</label>
-        <input value={form.onoma} onChange={(e) => setForm({ ...form, onoma: e.target.value })} />
-        <br />
-        <label>Επίθετο:</label>
-        <input value={form.epitheto} onChange={(e) => setForm({ ...form, epitheto: e.target.value })} />
-        <br />
-        <button onClick={handleInvite}>➕ Αποστολή Πρόσκλησης</button>
+        <div style={{ marginBottom: 20 }}>
+          <label>ID Διδάσκοντα:</label>
+          <input value={form.didaskonId} onChange={(e) => setForm({ ...form, didaskonId: e.target.value })} />
+          <br />
+          <label>Όνομα:</label>
+          <input value={form.onoma} onChange={(e) => setForm({ ...form, onoma: e.target.value })} />
+          <br />
+          <label>Επίθετο:</label>
+          <input value={form.epitheto} onChange={(e) => setForm({ ...form, epitheto: e.target.value })} />
+          <br />
+          <button onClick={handleInvite}>➕ Αποστολή Πρόσκλησης</button>
+        </div>
+
+        <h3>📋 Απεσταλμένες Προσκλήσεις</h3>
+        <ul>
+          {invites.map((inv, idx) => (
+            <li key={idx}>
+              {inv.onoma} {inv.epitheto} ({inv.didaskonId}) -
+              {inv.apodoxi === null ? "Εκκρεμεί" : inv.apodoxi ? "Αποδεκτή" : "Απορρίφθηκε"}
+            </li>
+          ))}
+        </ul>
+
+        {message && <p style={{ color: message.includes("Σφάλμα") ? "red" : "green" }}>{message}</p>}
       </div>
+    );
+  }
 
-      <h3>📋 Απεσταλμένες Προσκλήσεις</h3>
-      <ul>
-        {invites.map((inv, idx) => (
-          <li key={idx}>
-            {inv.onoma} {inv.epitheto} ({inv.didaskonId}) - 
-            {inv.apodoxi === null ? "Εκκρεμεί" : inv.apodoxi ? "Αποδεκτή" : "Απορρίφθηκε"}
-          </li>
-        ))}
-      </ul>
+  if (status.trim() === "υπό εξέταση") {
+    return <ExetasiPhase />;
+  }
 
-      {message && <p style={{ color: message.includes("Σφάλμα") ? "red" : "green" }}>{message}</p>}
-    </div>
-  );
+  return <p>Η κατάσταση "{status}" δεν υποστηρίζεται αυτή τη στιγμή από το frontend.</p>;
 };
 
 export default DiplomaManager;

@@ -5,6 +5,8 @@ import StudentHome from "./components/StudentHome";
 import ThesisView from "./components/ThesisView";
 import ProfileEditor from "./components/ProfileEditor";
 import DiplomaManager from "./components/DiplomaManager";
+import ExetasiPhase from "./components/ExetasiPhase";
+
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path="/thesis" element={<ThesisView />} />
         <Route path="/profile" element={<ProfileEditor />} />
         <Route path="/diploma" element={<DiplomaManager />} />
+        
+
       </Routes>
     </BrowserRouter>
   );
