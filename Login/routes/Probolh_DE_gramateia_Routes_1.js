@@ -16,18 +16,20 @@ async function getDiplomasCollection() {
 // Route για επιστροφή διπλωματικών με κατάσταση "Ενεργή" ή "Υπό Ανάθεση"
 router.get("/", authMiddleware, async (req, res) => {
   try {
+    console.log("User from Token:", req.user); // Εμφανίζει τα δεδομένα του χρήστη από το token
     // Ελέγχουμε αν ο χρήστης είναι γραμματεία
     if (req.user.role !== "secretary") {
-      return res.status(403).json({ message: "Δεν έχετε δικαίωμα πρόσβασης." });
+      return res.status(403).json({ message: "Μόνο η γραμματεία έχει πρόσβαση εδώ." });
     }
 
     const diplomas = await getDiplomasCollection();
     const diplomatikesData = await diplomas.find({
       $or: [
-        { katastasi: "Ενεργή" },
-        { katastasi: "Υπό Ανάθεση" }
+        { katastasi : "Ενεργή" },
+        { katastasi : "υπό ανάθεση" }
       ]
     }).toArray();
+    console.log("Διπλωματικές :" , diplomatikesData);
 
     res.json(diplomatikesData); // Επιστροφή δεδομένων σε JSON μορφή
   } catch (error) {

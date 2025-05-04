@@ -1,0 +1,18 @@
+login ρουτίνα για debug
+
+
+στο powershell
+Invoke-RestMethod -Uri "http://localhost:4000/api/auth/login" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"username":"john.placeholder","password":"hashed_placeholder"}' -UseBasicParsing
+
+
+Αίτημα προβολής διπλματικών με token
+
+στο cmd
+
+curl -H "Authorization: Bearer <secretary-token>" http://localhost:4000/api/secretary/diplomas
+
+αίτημα χωρίς token
+
+curl http://localhost:4000/api/secretary/diplomas
+
+jwt.io για αποκοδηκοποιηση των tokens να καταλαβαίνουμε τι λέει, αν και φαίνεται και στο command window στο log
