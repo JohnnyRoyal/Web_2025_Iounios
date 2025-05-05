@@ -13,7 +13,17 @@ async function getDiplomasCollection() {
   return client.db("users").collection("Diplomatikes");
 }
 
-// Route για επιστροφή διπλωματικών με κατάσταση "Ενεργή" ή "Υπό Ανάθεση"
+// Υπολογισμός χρόνου από την ανάθεση
+function calculateTimeSinceSubmission(imerominiaAnathesis) {
+  if (!imerominiaAnathesis) return "Δεν υπάρχει ημερομηνία ανάθεσης.";
+  const currentDate = new Date();
+  const submissionDate = new Date(imerominiaAnathesis);
+  const timeDifference = currentDate - submissionDate; // Διαφορά σε milliseconds
+  const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24)); // Μετατροπή σε ημέρες
+  return `${daysPassed} ημέρες`;
+}
+
+// Route για επιστροφή διπλωματικών με επιλεγμένα πεδία
 router.get("/", authMiddleware, async (req, res) => {
   try {
     console.log("User from Token:", req.user); // Εμφανίζει τα δεδομένα του χρήστη από το token
@@ -25,13 +35,28 @@ router.get("/", authMiddleware, async (req, res) => {
     const diplomas = await getDiplomasCollection();
     const diplomatikesData = await diplomas.find({
       $or: [
-        { katastasi : "Ενεργή" },
-        { katastasi : "υπό ανάθεση" }
+        { katastasi: "Ενεργή" },
+        { katastasi: "υπό ανάθεση" },
+        { katastasi: "υπό εξέταση" }, //προσςρινό για debugging
+
       ]
     }).toArray();
-    console.log("Διπλωματικές :" , diplomatikesData);
 
-    res.json(diplomatikesData); // Επιστροφή δεδομένων σε JSON μορφή
+    // Φιλτράρουμε τα δεδομένα για να επιστρέψουμε μόνο τα απαραίτητα πεδία
+    const filteredData = diplomatikesData.map((doc) => ({
+      titlos: doc.titlos,
+      perigrafi: doc.perigrafi,
+      katastasi: doc.katastasi,
+      trimerisEpitropi: doc.trimeriEpitropi?.map((member) => ({
+        onoma: member.onoma,
+        epitheto: member.epitheto,
+        vathmos: member.vathmos || null, // Προαιρετικά, αν θέλεις να συμπεριλάβεις τον βαθμό
+      })) || [],
+      xronosApoAnathesi: calculateTimeSinceSubmission(doc.imerominiaAnathesis)
+    }));
+    console.log("📌 Δεδομένα Διπλωματικών:", filteredData); // Εμφάνιση φιλτραρισμένων δεδομένων στο console για καλητερούλη DeBug
+
+    res.json(filteredData); // Επιστροφή φιλτραρισμένων δεδομένων σε JSON μορφή
   } catch (error) {
     console.error("❌ Σφάλμα σύνδεσης:", error);
     res.status(500).send("Σφάλμα κατά την ανάκτηση δεδομένων.");

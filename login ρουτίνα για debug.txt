@@ -9,6 +9,8 @@ Invoke-RestMethod -Uri "http://localhost:4000/api/auth/login" -Method POST -Head
 
 στο cmd
 
+curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4ucGxhY2Vob2xkZXIiLCJyb2xlIjoic2VjcmV0YXJ5IiwiaWF0IjoxNzQ2NDM1NTg5LCJleHAiOjE3NDY0NDI3ODl9.sYup5eos5YXUuU_mb1ZQWwmsO6TEp0_UBkpLl5Hv7Lo" http://localhost:4000/api/secretary/diplomas
+
 curl -H "Authorization: Bearer <secretary-token>" http://localhost:4000/api/secretary/diplomas
 
 αίτημα χωρίς token
@@ -16,3 +18,10 @@ curl -H "Authorization: Bearer <secretary-token>" http://localhost:4000/api/secr
 curl http://localhost:4000/api/secretary/diplomas
 
 jwt.io για αποκοδηκοποιηση των tokens να καταλαβαίνουμε τι λέει, αν και φαίνεται και στο command window στο log
+
+
+
+Αίτημα εισαγωγής προσωπικών δεδομένων
+
+
+curl -X POST http://localhost:4000/api/secretary/eisagwgh -H "Content-Type: application/json" -H "Authorization: Bearer <secretary-token>" -d "{\"students\":[{\"onoma\":\"MakisTest\",\"epitheto\":\"MakopoulosTestopoulos\",\"username\":\"test.testopoulos\",\"email\":\"10433999@students.upatras.gr\"}],\"professors\":[{\"onoma\":\"AndreasTest\",\"epitheto\":\"KomninosTestopoulos\",\"email\":\"akomninos@ceid.upatras.gr\",\"username\":\"testakis.testaras\"}]}"
