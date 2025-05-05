@@ -25,3 +25,5 @@ jwt.io για αποκοδηκοποιηση των tokens να καταλαβα
 
 
 curl -X POST http://localhost:4000/api/secretary/eisagwgh -H "Content-Type: application/json" -H "Authorization: Bearer <secretary-token>" -d "{\"students\":[{\"onoma\":\"MakisTest\",\"epitheto\":\"MakopoulosTestopoulos\",\"username\":\"test.testopoulos\",\"email\":\"10433999@students.upatras.gr\"}],\"professors\":[{\"onoma\":\"AndreasTest\",\"epitheto\":\"KomninosTestopoulos\",\"email\":\"akomninos@ceid.upatras.gr\",\"username\":\"testakis.testaras\"}]}"
+
+
