@@ -6,6 +6,7 @@ import ThesisView from "./components/ThesisView";
 import ProfileEditor from "./components/ProfileEditor";
 import DiplomaManager from "./components/DiplomaManager";
 import ExetasiPhase from "./components/ExetasiPhase";
+import FinishedPhase from "./components/FinishedPhase";
 
 
 

@@ -34,6 +34,8 @@ router.get("/my", authMiddleware, async (req, res) => {
       return res.json({
         title: diploma.titlos,
         status: diploma.katastasi,
+        summary: diploma.perigrafi,
+        pdf_url: diploma.pdfExtraPerigrafi,
         committee: diploma.trimeriEpitropi,
         assignment_date: diploma.imerominiaAnathesis,
         praktikoHTML: diploma.praktikoHTML || null,

@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ExetasiPhase from "./ExetasiPhase";
+import FinishedPhase from "./FinishedPhase";
 
 const DiplomaManager = () => {
   const [status, setStatus] = useState("");
   const [invites, setInvites] = useState([]);
   const [form, setForm] = useState({ didaskonId: "", onoma: "", epitheto: "" });
   const [message, setMessage] = useState("");
+  
 
   const token = localStorage.getItem("token");
 
@@ -89,6 +91,10 @@ const DiplomaManager = () => {
 
   if (status.trim() === "υπό εξέταση") {
     return <ExetasiPhase />;
+  }
+
+  if (status.trim() === "περατωμένη") {
+    return <FinishedPhase />;
   }
 
   return <p>Η κατάσταση "{status}" δεν υποστηρίζεται αυτή τη στιγμή από το frontend.</p>;
