@@ -20,6 +20,7 @@ function App() {
         <Route path="/profile" element={<ProfileEditor />} />
         <Route path="/diploma" element={<DiplomaManager />} />
         <Route path="/secretary" element={<GramateiaHome />} /> 
+        <Route path="/diplomas" element={<GramateiaView />} /> {/* Κουμπί προβολής διπλωματικών */}
       </Routes>
     </BrowserRouter>
   );
