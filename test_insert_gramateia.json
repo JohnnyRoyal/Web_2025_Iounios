@@ -1,0 +1,18 @@
+{
+    "students": [
+      {
+        "onoma": "MakisTest",
+        "epitheto": "MakopoulosTestopoulos",
+        "username": "test.testopoulos",
+        "email": "10433999@students.upatras.gr"
+      }
+    ],
+    "professors": [
+      {
+        "onoma": "AndreasTest",
+        "epitheto": "KomninosTestopoulos",
+        "email": "akomninos@ceid.upatras.gr",
+        "username": "testakis.testaras"
+      }
+    ]
+  }

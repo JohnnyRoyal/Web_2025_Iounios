@@ -6,6 +6,7 @@ import ThesisView from "./components/ThesisView";
 import ProfileEditor from "./components/ProfileEditor";
 import GramateiaHome from "./components/GramateiaHome"; //Αρχική σελίδα γραμματείας
 import GramateiaView from "./components/GramateiaView"; //Κουμπί προβολής διπλωματικών
+import GramateiaInsert from "./components/GramateiaInsert"; //Κουμπί εισαγωγής προσωπικών δεδομένων καθηγητών και φοιτητών
 
 
 const DiplomaManager = () => <h2>Διαχείριση Διπλωματικής</h2>;
@@ -21,6 +22,7 @@ function App() {
         <Route path="/diploma" element={<DiplomaManager />} />
         <Route path="/secretary" element={<GramateiaHome />} /> 
         <Route path="/diplomas" element={<GramateiaView />} /> {/* Κουμπί προβολής διπλωματικών */}
+        <Route path="/data-entry" element={<GramateiaInsert />} /> {/* Κουμπί εισαγωγής προσωπικών δεδομένων καθηγητών και φοιτητών */}
       </Routes>
     </BrowserRouter>
   );
