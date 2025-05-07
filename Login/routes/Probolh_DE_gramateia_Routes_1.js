@@ -47,6 +47,7 @@ router.get("/", authMiddleware, async (req, res) => {
       titlos: doc.titlos,
       perigrafi: doc.perigrafi,
       katastasi: doc.katastasi,
+      pdf_extra_perigrafh: doc.pdfExtraPerigrafi,
       trimerisEpitropi: doc.trimeriEpitropi?.map((member) => ({
         onoma: member.onoma,
         epitheto: member.epitheto,
