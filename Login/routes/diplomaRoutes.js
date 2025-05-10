@@ -59,7 +59,10 @@ router.get("/my", authMiddleware, async (req, res) => {
       status: diploma.katastasi,
       committee: diploma.trimeriEpitropi,
       assignment_date: diploma.imerominiaAnathesis,
-      time_since_assignment: timeSinceAssignment
+      time_since_assignment: timeSinceAssignment,
+      pdfProxeiroKeimeno: diploma.pdfProxeiroKeimeno || null,
+      linkYliko: diploma.linkYliko || null
+
     });
   } catch (err) {
     res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
@@ -240,5 +243,51 @@ router.put("/set-exam-info", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
   }
 });
+
+
+
+const { generatePraktikoHTML } = require("../studentExtra/praktikoHTML");
+
+router.put("/finalize", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "student") {
+      return res.status(403).json({ message: "Μόνο φοιτητές μπορούν να δουν το πρακτικο εξετασης." });
+    }
+
+    const col = await getCollection();
+
+    const diploma = await col.findOne({
+      "foititis.arithmosMitroou": parseInt(req.user.am),
+      katastasi: "υπό εξέταση"
+    });
+
+    if (!diploma) {
+      return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική υπό εξέταση." });
+    }
+
+    const praktikoHTML = generatePraktikoHTML(diploma);
+
+    const result = await col.updateOne(
+      { _id: diploma._id },
+      {
+        $set: {
+          praktikoHTML: praktikoHTML
+        }
+        
+      }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(500).json({ message: "Αποτυχία προβολής πρακτικου" });
+    }
+
+    const updatedDiploma = await col.findOne({ _id: diploma._id });
+    res.json(updatedDiploma);
+
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+  }
+}); 
+
 
 module.exports = router;

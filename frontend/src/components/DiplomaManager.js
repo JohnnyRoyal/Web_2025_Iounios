@@ -35,6 +35,8 @@ const DiplomaManager = () => {
     }
   };
 
+  
+
   useEffect(() => {
     fetchDiploma();
     fetchInvites();
@@ -91,6 +93,7 @@ const DiplomaManager = () => {
 
   if (status.trim() === "υπό εξέταση") {
     return <ExetasiPhase />;
+       
   }
 
   if (status.trim() === "περατωμένη") {

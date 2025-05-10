@@ -58,12 +58,6 @@ const ThesisView = () => {
         </>
       )}
 
-      {/*{data.praktikoHTML && (
-        <>
-          <h3>📜 Πρακτικό Εξέτασης</h3>
-          <div dangerouslySetInnerHTML={{ __html: data.praktikoHTML }} style={{ border: "1px solid #ccc", padding: 10, marginTop: 10 }} />
-        </>
-      )}*/}
     </div>
   );
 };

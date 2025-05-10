@@ -6,13 +6,13 @@ const ExetasiPhase = () => {
   const [data, setData] = useState(null);
   const [draftForm, setDraftForm] = useState({
     pdfProxeiroKeimeno: "",
-    sundesmosYlikou: ""
+    linkYliko: ""
   });
   const [examForm, setExamForm] = useState({
     imerominiaOraExetasis: "",
     troposExetasis: "",
     aithousaExetasis: "",
-    sundesmosExetasis: ""
+    syndesmosExetasis: ""
   });
   const [msg, setMsg] = useState({ draft: "", exam: "" });
   const token = localStorage.getItem("token");
@@ -26,13 +26,13 @@ const ExetasiPhase = () => {
         setData(res.data);
         setDraftForm({
           pdfProxeiroKeimeno: res.data.pdfProxeiroKeimeno || "",
-          sundesmosYlikou: res.data.linkYliko || ""
+          linkYliko: res.data.linkYliko || ""
         });
         setExamForm({
           imerominiaOraExetasis: res.data.imerominiaOraExetasis?.slice(0, 16) || "",
           troposExetasis: res.data.troposExetasis || "",
           aithousaExetasis: res.data.aithousaExetasis || "",
-          sundesmosExetasis: res.data.syndesmosExetasis || ""
+          syndesmosExetasis: res.data.syndesmosExetasis || ""
         });
       } catch {
         setMsg({ draft: "Σφάλμα φόρτωσης", exam: "Σφάλμα φόρτωσης" });
@@ -75,7 +75,7 @@ const ExetasiPhase = () => {
       <label>PDF link:</label>
       <input value={draftForm.pdfProxeiroKeimeno} onChange={e => setDraftForm({ ...draftForm, pdfProxeiroKeimeno: e.target.value })} /><br /><br />
       <label>Σύνδεσμος Υλικού:</label>
-      <input value={draftForm.sundesmosYlikou} onChange={e => setDraftForm({ ...draftForm, sundesmosYlikou: e.target.value })} /><br /><br />
+      <input value={draftForm.linkYliko} onChange={e => setDraftForm({ ...draftForm, linkYliko: e.target.value })} /><br /><br />
       <button onClick={handleSaveDraft}>💾 Αποθήκευση Πρόχειρου</button>
       {msg.draft && <p style={{ color: msg.draft.includes("Σφάλμα") ? "red" : "green" }}>{msg.draft}</p>}
 
@@ -99,12 +99,14 @@ const ExetasiPhase = () => {
       {examForm.troposExetasis === "εξ αποστάσεως" && (
         <>
           <label>Σύνδεσμος Εξέτασης:</label>
-          <input value={examForm.sundesmosExetasis} onChange={e => setExamForm({ ...examForm, sundesmosExetasis: e.target.value })} /><br /><br />
+          <input value={examForm.syndesmosExetasis} onChange={e => setExamForm({ ...examForm, syndesmosExetasis: e.target.value })} /><br /><br />
         </>
       )}
 
       <button onClick={handleSaveExam}>💾 Αποθήκευση Εξέτασης</button>
       {msg.exam && <p style={{ color: msg.exam.includes("Σφάλμα") ? "red" : "green" }}>{msg.exam}</p>}
+
+    
     </div>
   );
 };
