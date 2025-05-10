@@ -36,8 +36,8 @@ router.get("/", authMiddleware, async (req, res) => {
     const diplomatikesData = await diplomas.find({
       $or: [
         { katastasi: "Ενεργή" },
-        { katastasi: "υπό ανάθεση" },
-        { katastasi: "υπό εξέταση" }, //προσςρινό για debugging
+        //{ katastasi: "υπό ανάθεση" }  //προσςρινό για debugging
+        { katastasi: "υπό εξέταση" } 
 
       ]
     }).toArray();

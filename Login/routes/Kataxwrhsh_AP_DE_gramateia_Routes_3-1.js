@@ -9,27 +9,36 @@ const client = new MongoClient(uri);
 
 // Route για την καταχώρηση του ΑΠ
 router.post("/", authMiddleware, async (req, res) => {
-  const { id, protocolNumber } = req.body; // Λήψη δεδομένων από το σώμα του αιτήματος
+  const { id, protocolNumber } = req.body;
 
   try {
-    console.log("User from Token:", req.user); // Εμφανίζει τα δεδομένα του χρήστη από το token
+    // Debugging
+    console.log('Received request:', {
+      id: id,
+      protocolNumber: protocolNumber
+    });
 
-    // Ελέγχουμε αν ο χρήστης έχει δικαιώματα (π.χ., είναι γραμματεία)
-    if (req.user.role !== "secretary") {
-      return res.status(403).json({ message: "Μόνο η γραμματεία έχει πρόσβαση εδώ." });
+    if (!id || !protocolNumber) {
+      return res.status(400).json({ 
+        message: "❌ Απαιτούνται τόσο το ID όσο και ο αριθμός πρωτοκόλλου" 
+      });
     }
 
-    // Σύνδεση στη βάση δεδομένων
+    // Έλεγχος εγκυρότητας του ObjectId
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ 
+        message: "❌ Μη έγκυρο ID διπλωματικής" 
+      });
+    }
+
     await client.connect();
     console.log("✅ Συνδέθηκε επιτυχώς στη MongoDB!");
 
-    // Επιλογή βάσης δεδομένων και συλλογής
     const database = client.db("users");
-    const collection = database.collection("diplomatikes");
+    const collection = database.collection("Diplomatikes");
 
-    // Ενημέρωση της διπλωματικής με το νέο ΑΠ
     const result = await collection.updateOne(
-      { _id: ObjectId(id), katastasi: "Ενεργή" }, // Εύρεση των ενεργών διπλωματικών με βάση το ID
+      { _id: new ObjectId(id), katastasi: "Ενεργή" },
       {
         $set: {
           AP: protocolNumber,
@@ -38,17 +47,22 @@ router.post("/", authMiddleware, async (req, res) => {
     );
 
     if (result.matchedCount === 0) {
-      res.status(404).json({ message: `❌ Δεν βρέθηκε διπλωματική με ID: ${id}, είτε το ID είναι λάθος είτε η διπλωματική δεν είναι ενεργή.` });
-    } else {
-      res.status(200).json({ message: `✅ Ενημερώθηκε η διπλωματική με ID: ${id}` });
+      return res.status(404).json({ 
+        message: "❌ Δεν βρέθηκε ενεργή διπλωματική με το συγκεκριμένο ID" 
+      });
     }
+
+    res.status(200).json({ 
+      message: "✅ Ο αριθμός πρωτοκόλλου καταχωρήθηκε επιτυχώς!" 
+    });
+
   } catch (error) {
-    console.error("❌ Σφάλμα κατά την ενημέρωση:", error);
-    res.status(500).json({ message: "❌ Σφάλμα κατά την ενημέρωση." });
+    console.error("Error details:", error);
+    res.status(500).json({ 
+      message: "❌ Σφάλμα κατά την ενημέρωση της διπλωματικής" 
+    });
   } finally {
-    // Κλείσιμο σύνδεσης
     await client.close();
-    console.log("🔌 Σύνδεση στη MongoDB έκλεισε.");
   }
 });
 
