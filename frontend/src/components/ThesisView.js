@@ -27,7 +27,7 @@ const ThesisView = () => {
     <div style={{ padding: 20, maxWidth: 800, margin: "auto" }}>
       <h2>📄 Διπλωματική Εργασία</h2>
       <p><strong>Τίτλος:</strong> {data.title}</p>
-      {data.summary && <p><strong>Περίληψη:</strong> {data.summary}</p>}
+      {data.summary && <p><strong>Περιγραφή:</strong> {data.summary}</p>}
       {data.pdf_url && (
         <p>
           <strong>Περιγραφή PDF:</strong>{" "}
@@ -37,7 +37,12 @@ const ThesisView = () => {
         </p>
       )}
       <p><strong>Κατάσταση:</strong> {data.status}</p>
-      <p><strong>Ημερομηνία Ανάθεσης:</strong> {new Date(data.assignment_date).toLocaleDateString()}</p>
+      {data.assignment_date ? (
+        <p><strong>Ημερομηνία Ανάθεσης:</strong> {new Date(data.assignment_date).toLocaleDateString("el-GR")}</p>
+        ) : (
+        <p><strong>Ημερομηνία Ανάθεσης:</strong> Δεν έχει οριστεί</p>
+        )}
+
       {data.time_since_assignment && (
         <p><strong>Μέρες από ανάθεση:</strong> {data.time_since_assignment}</p>
       )}
@@ -53,12 +58,6 @@ const ThesisView = () => {
         </>
       )}
 
-      {/*{data.praktikoHTML && (
-        <>
-          <h3>📜 Πρακτικό Εξέτασης</h3>
-          <div dangerouslySetInnerHTML={{ __html: data.praktikoHTML }} style={{ border: "1px solid #ccc", padding: 10, marginTop: 10 }} />
-        </>
-      )}*/}
     </div>
   );
 };
