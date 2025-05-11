@@ -13,6 +13,7 @@ router.post("/", authMiddleware, async (req, res) => {
 
   try {
     console.log("User from Token:", req.user); // Εμφανίζει τα δεδομένα του χρήστη από το token
+    console.log("Received request:", { id}); // Για debugging
 
     // Ελέγχουμε αν ο χρήστης έχει δικαιώματα (π.χ., είναι γραμματεία)
     if (req.user.role !== "secretary") {
@@ -27,8 +28,18 @@ router.post("/", authMiddleware, async (req, res) => {
     const database = client.db("users");
     const collection = database.collection("Diplomatikes");
 
+    //Φτιάνω το id της διπλωματικής από το string που έρχεται από το frontend που ταν το id
+    // και το μετατρέπω σε ObjectId για να μπορέσω να το χρησιμοποιήσω στη MongoDB
+    //κάτι buggare με τα  ObkectId και ήθελε το new ObjectId(id)
+    let my_objectId;
+    try {
+      my_objectId = new ObjectId(id);
+    } catch (err) {
+      return res.status(400).json({ message: "❌ Μη έγκυρο ID διπλωματικής" });
+    }
+
     // Εύρεση της διπλωματικής με βάση το ID
-    const diploma = await collection.findOne({ _id: ObjectId(id) });
+    const diploma = await collection.findOne({ _id: my_objectId });
 
     if (!diploma) {
       return res.status(404).json({ message: `❌ Δεν βρέθηκε διπλωματική με ID: ${id}.` });
@@ -52,7 +63,7 @@ router.post("/", authMiddleware, async (req, res) => {
 
     // Ενημέρωση της διπλωματικής με την κατάσταση "Περατωμένη" και προσθήκη στο array "proigoumenesKatastaseis"
     const result = await collection.updateOne(
-      { _id: ObjectId(id), katastasi: "υπό εξέταση" }, // Εύρεση της διπλωματικής με βάση το ID και την κατάσταση
+      { _id: my_objectId, katastasi: "υπό εξέταση" }, // Εύρεση της διπλωματικής με βάση το ID και την κατάσταση
       {
         $set: {
           katastasi: "Περατωμένη", // Ενημέρωση της κατάστασης
@@ -65,10 +76,10 @@ router.post("/", authMiddleware, async (req, res) => {
 
     if (result.matchedCount === 0) {
       res.status(404).json({
-        message: `❌ Δεν βρέθηκε διπλωματική με τίτλο: ${titlos}, είτε το ID είναι λάθος είτε η κατάσταση δεν είναι "υπό εξέταση".`,
+        message: `❌ Δεν βρέθηκε διπλωματική με id: ${id}, είτε το ID είναι λάθος είτε η κατάσταση δεν είναι "υπό εξέταση".`,
       });
     } else {
-      res.status(200).json({ message: `✅ Ενημερώθηκε η διπλωματική με τίτλο: ${titlos} σε "Περατωμένη" και προστέθηκε στο array "proigoumenesKatastaseis".` });
+      res.status(200).json({ message: `✅ Ενημερώθηκε η διπλωματική με id: ${id} σε "Περατωμένη" και προστέθηκε στο array "proigoumenesKatastaseis".` });
     }
   } catch (error) {
     console.error("❌ Σφάλμα κατά την ενημέρωση:", error);

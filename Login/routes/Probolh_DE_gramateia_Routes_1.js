@@ -38,12 +38,12 @@ router.get("/", authMiddleware, async (req, res) => {
         { katastasi: "Ενεργή" },
         //{ katastasi: "υπό ανάθεση" }  //προσςρινό για debugging
         { katastasi: "υπό εξέταση" } 
-
       ]
     }).toArray();
 
     // Φιλτράρουμε τα δεδομένα για να επιστρέψουμε μόνο τα απαραίτητα πεδία
     const filteredData = diplomatikesData.map((doc) => ({
+      _id: doc._id.toString(), // Προσθήκη του _id ως string για χρήση στο frontend
       titlos: doc.titlos,
       perigrafi: doc.perigrafi,
       katastasi: doc.katastasi,

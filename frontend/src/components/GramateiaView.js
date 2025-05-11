@@ -25,53 +25,58 @@ const GramateiaView = () => {
   }, []);
 
   const handleSetAP = async (id) => {
-    const protocolNumber = prompt("Εισάγετε τον αριθμό πρωτοκόλλου:");
-    if (!protocolNumber) return;
+      const protocolNumber = prompt("Εισάγετε τον αριθμό πρωτοκόλλου:");
+      if (!protocolNumber) return;
 
-    try {
-      const token = localStorage.getItem("token");
-      
-      // Debugging
-      console.log('Sending request with:', {
-        id: id,
-        protocolNumber: protocolNumber
-      });
+      // Έλεγχος ότι το id υπάρχει και είναι έγκυρο
+      if (!id) {
+        alert("❌ Δεν υπάρχει έγκυρο ID για τη διπλωματική!");
+        console.error("Missing id for diploma");
+        return;
+      }
 
-      const response = await axios.post(
-        "http://localhost:4000/api/secretary/set-ap",
-        { 
-          id: id,
-          protocolNumber: protocolNumber 
-        },
-        {
-          headers: {
-            Authorization: token,
-            'Content-Type': 'application/json'
+      console.log("Στέλνω αίτημα με ID:", id, "και protocolNumber:", protocolNumber);
+
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+          "http://localhost:4000/api/secretary/set-ap",
+          { 
+            id: id.toString(), // Μετατροπή σε string σε περίπτωση που είναι αντικείμενο
+            protocolNumber 
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: token,
+              'Content-Type': 'application/json'
+            },
+          }
+        );
+        
+        console.log("Απάντηση από server:", response.data);
+        alert("✅ Ο αριθμός πρωτοκόλλου καταχωρήθηκε επιτυχώς!");
+        // Ανανέωση της σελίδας για να δείξει τις αλλαγές
+        // Ενημερώνουμε το state με τα νέα δεδομένα αντί να κάνουμε reload
+        /*
+        setDiplomas(prevDiplomas => 
+          prevDiplomas.map(diploma => 
+            diploma._id === id 
+              ? { ...diploma, AP: protocolNumber } 
+              : diploma
+          )
+        );
+        */
+       //Δεν χρειάζεται γιατί δεν φαίνεται το AP στην λίστα οπότε δεν χρειάζεται να το κάνω update να φανεί
 
-      console.log('Response:', response.data); // Debugging
-      
-      if (response.data.message) {
-        alert(response.data.message);
-        window.location.reload(); // Ανανέωση σελίδας μετά την επιτυχία
+      } catch (err) {
+        console.error("Πλήρες σφάλμα:", err);
+        if (err.response && err.response.data && err.response.data.message) {
+          alert(err.response.data.message);
+        } else {
+          alert("❌ Σφάλμα κατά την καταχώρηση του αριθμού πρωτοκόλλου.");
+        }
       }
-    } catch (err) {
-      console.error('Full error:', err);
-      console.error('Error details:', {
-        message: err.response?.data?.message,
-        status: err.response?.status,
-        statusText: err.response?.statusText
-      });
-      
-      if (err.response && err.response.data && err.response.data.message) {
-        alert(err.response.data.message);
-      } else {
-        alert("❌ Σφάλμα κατά την καταχώρηση του αριθμού πρωτοκόλλου.");
-      }
-    }
-  };
+    };
 
   // Συνάρτηση για την ακύρωση της ανάθεσης για το κουμπί "Ακύρωση Ανάθεσης"
   const handleCancelAssignment = async (id) => {
@@ -106,8 +111,15 @@ const GramateiaView = () => {
       );
       alert("✅ Η ανάθεση ακυρώθηκε επιτυχώς!");
       // Ανανέωση της σελίδας για να φανούν οι αλλαγές
-      window.location.reload();
-    } catch (err) {
+      //window.location.reload(); κακό
+      //καλώ την setDiplomas για να ξαναδημιουργήσω την λίστα με τις διπλωματικές, από τις prevDiplomas (τις Διπλωματικές που είχα φορτώσει πριν)
+      //τις φιλτράρω και τις ξαναβάζω στην μεταβλητή diplomas κρατώντας μόνο αυτές που έχουν id διαφορετικό από το id που ακύρωσα.
+      setDiplomas(prevDiplomas => 
+      prevDiplomas.filter(diploma => diploma._id !== id)
+      );
+
+    }
+     catch (err) {
       console.error(err);
       alert("❌ Σφάλμα κατά την ακύρωση της ανάθεσης.");
     }
@@ -136,6 +148,11 @@ const GramateiaView = () => {
         }
       );
       alert("✅ Η διπλωματική εργασία ολοκληρώθηκε επιτυχώς!");
+      // Ανανέωση της σελίδας για να φανούν οι αλλαγές
+      //δες πάνω στο handleCancelAssignment
+      setDiplomas(prevDiplomas => 
+      prevDiplomas.filter(diploma => diploma._id !== id)
+      );
     } 
     catch (err) {
       if (err.response && err.response.status === 400) {
