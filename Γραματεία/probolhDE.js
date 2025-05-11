@@ -18,10 +18,15 @@ async function all_diplomatikes() {
 
         // Επιλογή βάσης δεδομένων και συλλογής
         const database = client.db("users");  // Όνομα βάσης
-        const collection = database.collection("diplomatikes");  // Όνομα συλλογής
+        const collection = database.collection("Diplomatikes");  // Όνομα συλλογής
 
         // Επιστροφή όλων των διπλωματικών από τη συλλογή
-        diplomatikesData = await collection.find({}).toArray();
+        diplomatikesData = await collection.find({
+            $or: [
+                { katastasi : "Ενεργή" },
+                { katastasi : "υπό εξέταση"}
+            ]
+        }).toArray();
         console.log("📌 Δεδομένα χρηστών:", diplomatikesData);
 
     } catch (error) {

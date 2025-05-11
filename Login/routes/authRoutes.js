@@ -6,11 +6,11 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 
-async function getCollection() {
+async function getCollection(collectionName) {
   if (!client.topology || !client.topology.isConnected()) {
     await client.connect();
   }
-  return client.db("users").collection("students"); 
+  return client.db("users").collection(collectionName);
 }
 
 // LOGIN route
@@ -18,24 +18,55 @@ router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const col = await getCollection();
-    const student = await col.findOne({ username }); // Άμεσο match στο έγγραφο
+    // Έλεγχος στη συλλογή gramateia
+    const gramateiaCol = await getCollection("gramateia");
+    const secretary = await gramateiaCol.findOne({ username });
 
-    if (!student) {
-      return res.status(404).json({ message: "Ο χρήστης δεν βρέθηκε" });
+    if (secretary) {
+      // Αν βρεθεί στη γραμματεία, ελέγχουμε τον κωδικό πρόσβασης
+      if (secretary.password !== password) {
+        return res.status(401).json({ message: "Λάθος κωδικός πρόσβασης" });
+      }
+
+      // Δημιουργία token για γραμματεία
+      const token = jwt.sign(
+        {
+          username: secretary.username,
+          role: "secretary"
+        },
+        "MY_SECRET_KEY",
+        { expiresIn: "2h" }
+      );
+
+      return res.json({ token });
     }
 
-    if (student.password !== password) {
-      return res.status(401).json({ message: "Λάθος κωδικός πρόσβασης" });
+    // Έλεγχος στη συλλογή students
+    const studentsCol = await getCollection("students");
+    const student = await studentsCol.findOne({ username });
+
+    if (student) {
+      // Αν βρεθεί στους φοιτητές, ελέγχουμε τον κωδικό πρόσβασης
+      if (student.password !== password) {
+        return res.status(401).json({ message: "Λάθος κωδικός πρόσβασης" });
+      }
+
+      // Δημιουργία token για φοιτητή
+      const token = jwt.sign(
+        {
+          username: student.username,
+          role: "student",
+          am: student.arithmosMitroou
+        },
+        "MY_SECRET_KEY",
+        { expiresIn: "2h" }
+      );
+
+      return res.json({ token });
     }
 
-    const token = jwt.sign({
-      am: student.arithmosMitroou,
-      username: student.username,
-      role: "student"
-    }, "MY_SECRET_KEY", { expiresIn: "2h" });
-
-    res.json({ token });
+    // Αν δεν βρεθεί ο χρήστης σε καμία συλλογή
+    return res.status(404).json({ message: "Ο χρήστης δεν βρέθηκε" });
   } catch (err) {
     res.status(500).json({ message: "Σφάλμα κατά το login", error: err.message });
   }

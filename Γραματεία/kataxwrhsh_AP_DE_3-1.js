@@ -2,8 +2,6 @@ const express = require("express"); // για ένωση mongodb με http serve
 const { MongoClient, ObjectId } = require("mongodb"); //για σύνδεση με mongodb και να μετατρέψουμε το id σε objectId
 const bodyParser = require("body-parser"); // για parsing των δεδομένων της φόρμας
 
-const app = express(); // Δημιουργία express app
-const port = 3000; // Θύρα του server
 
 // MongoDB connection URI
 const uri = "mongodb://localhost:27017";

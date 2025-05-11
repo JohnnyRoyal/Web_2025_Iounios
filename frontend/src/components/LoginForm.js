@@ -19,8 +19,19 @@ const LoginForm = () => {
         password
       });
 
+      // Αποθήκευση του token στο localStorage
       localStorage.setItem("token", `Bearer ${res.data.token}`);
-      navigate("/student");
+
+      // Έλεγχος του ρόλου από το token
+      const { role } = JSON.parse(atob(res.data.token.split(".")[1])); // Αποκωδικοποίηση του payload του JWT του token
+
+      if (role === "student") {
+        navigate("/student");
+      } else if (role === "secretary") {
+        navigate("/secretary");
+      } else {
+        setError("Μη έγκυρος ρόλος χρήστη");
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Σφάλμα σύνδεσης");
     }
@@ -28,7 +39,7 @@ const LoginForm = () => {
 
   return (
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
-      <h2>🔐 Σύνδεση Φοιτητή</h2>
+      <h2>🔐 Σύνδεση </h2>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 10 }}>
           <label>Username:</label>
