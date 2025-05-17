@@ -28,6 +28,16 @@ router.post("/", authMiddleware, async (req, res) => {
     const database = client.db("users");
     const collection = database.collection("Diplomatikes");
 
+    // Έλεγχος αν υπάρχει ήδη ΑΠ στη διπλωματική
+    const existingDiploma = await collection.findOne({ _id: new ObjectId(id) });
+    
+    if (existingDiploma && existingDiploma.AP) {
+      return res.status(400).json({ 
+        message: `❌ Η διπλωματική έχει ήδη καταχωρημένο ΑΠ: ${existingDiploma.AP}`,
+        errorType: "AP_ALREADY_EXISTS"
+      });
+    }
+
     // Ενημέρωση της διπλωματικής με το νέο ΑΠ
     const result = await collection.updateOne(
       { _id: new ObjectId(id), katastasi: "Ενεργή" }, // Εύρεση των ενεργών διπλωματικών με βάση το ID

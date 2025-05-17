@@ -68,13 +68,27 @@ const GramateiaView = () => {
         */
        //Δεν χρειάζεται γιατί δεν φαίνεται το AP στην λίστα οπότε δεν χρειάζεται να το κάνω update να φανεί
 
-      } catch (err) {
-        console.error("Πλήρες σφάλμα:", err);
-        if (err.response && err.response.data && err.response.data.message) {
-          alert(err.response.data.message);
-        } else {
-          alert("❌ Σφάλμα κατά την καταχώρηση του αριθμού πρωτοκόλλου.");
+      } 
+      catch (err) {
+      console.error("Πλήρες σφάλμα:", err); //console log για debugging
+      //σφαματα τύπου 400
+      if (err.response && err.response.status === 400) {
+        //σφάλμα τύπου 400 με errorType υπαρχει ήδη ΑΠ
+        switch (err.response.data.errorType) {
+          case "AP_ALREADY_EXISTS":  // περίπτωση που υπάρχει ήδη ΑΠ
+            alert(err.response.data.message);
+            break;
+            //σφάλμα τύπου 400 χωρίς errorType, γενική περίπτωση
+          default:
+            alert(err.response.data.message || "❌ Σφάλμα κατά την καταχώρηση του αριθμού πρωτοκόλλου."); //επιστρέφει το μήνυμα σφάλματος από τον server αν υπάρχει αλλιώς το string με το Χ
         }
+        //σφάλματα με άλλους τύπους status ότι νανε
+      } else if (err.response && err.response.data && err.response.data.message) { //επιστρέφει οτι μήνυμα σφάλματος  βρει
+        alert(err.response.data.message);
+        //σφάλμα χωρίς απάντηση από τον server , σχωρίς status κτλ
+      } else {
+        alert("❌ Σφάλμα κατά την καταχώρηση του αριθμού πρωτοκόλλου.");
+      }
       }
     };
 
