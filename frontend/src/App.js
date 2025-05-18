@@ -12,6 +12,7 @@ import GramateiaInsert from "./components/GramateiaInsert"; //Κουμπί ει�
 import DiplomaManager from "./components/DiplomaManager";
 import ExetasiPhase from "./components/ExetasiPhase";
 import FinishedPhase from "./components/FinishedPhase";
+import PraktikoView from "./components/PraktikoView";
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/thesis" element={<ThesisView />} />
         <Route path="/profile" element={<ProfileEditor />} />
         <Route path="/diploma" element={<DiplomaManager />} />
+        <Route path="/praktiko" element={<PraktikoView />} />
 
         <Route path="/secretary" element={<GramateiaHome />} /> 
         <Route path="/diplomas" element={<GramateiaView />} /> {/* Κουμπί προβολής διπλωματικών */}

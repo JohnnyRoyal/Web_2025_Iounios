@@ -1,8 +1,11 @@
 // src/components/ExetasiPhase.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const ExetasiPhase = () => {
+  const navigate = useNavigate(); //new
   const [data, setData] = useState(null);
   const [draftForm, setDraftForm] = useState({
     pdfProxeiroKeimeno: "",
@@ -70,6 +73,11 @@ const ExetasiPhase = () => {
   return (
     <div style={{ maxWidth: 800, margin: "auto", padding: 20 }}>
       <h3>📑 Φάση Υπό Εξέταση</h3>
+
+      <button onClick={() => navigate("/praktiko")}>
+      🧾 Προβολή Πρακτικού Εξέτασης
+        </button>
+
 
       <h4>📄 Πρόχειρο Κείμενο</h4>
       <label>PDF link:</label>

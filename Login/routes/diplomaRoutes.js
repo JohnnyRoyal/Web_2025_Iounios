@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { MongoClient } = require("mongodb");
 const authMiddleware = require("../middlewares/authMiddleware");
+//new
 
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
@@ -245,13 +246,37 @@ router.put("/set-exam-info", authMiddleware, async (req, res) => {
 });
 
 
+//new test
+function generatePraktikoHTML(diploma) {
+  const { foititis, trimeriEpitropi, mainKathigitis } = diploma;
+  const dateStr = diploma.imerominiaOraExetasis
+    ? new Date(diploma.imerominiaOraExetasis).toLocaleString("el-GR")
+    : "—";
 
-const { generatePraktikoHTML } = require("../studentExtra/praktikoHTML");
+  const gradesHTML = (trimeriEpitropi || [])
+    .map(member => `<li>${member.onoma} ${member.epitheto}: ${member.vathmos ?? "—"}</li>`)
+    .join("");
 
-router.put("/finalize", authMiddleware, async (req, res) => {
+  const avg = diploma.telikosVathmos ?? "—";
+
+  return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.5;">
+      <h2 style="text-align:center;">ΠΡΑΚΤΙΚΟ ΕΞΕΤΑΣΗΣ ΔΙΠΛΩΜΑΤΙΚΗΣ ΕΡΓΑΣΙΑΣ</h2>
+      <p>Ο φοιτητής/η φοιτήτρια <strong>${foititis?.onoma || "-"} ${foititis?.epitheto || "-"}</strong>, με Αριθμό Μητρώου <strong>${foititis?.arithmosMitroou || "-"}</strong>, παρουσίασε τη διπλωματική εργασία με τίτλο <em>"${diploma.titlos || "-"}"</em>.</p>
+      <p>Η εξέταση έλαβε χώρα: <strong>${dateStr}</strong></p>
+      <h3>Βαθμολογία Επιτροπής:</h3>
+      <ul>${gradesHTML}</ul>
+      <p><strong>Μέσος Όρος:</strong> ${avg}</p>
+      <br/>
+      <p style="text-align:right;">Ο Επιβλέπων Καθηγητής: ${mainKathigitis?.onoma || ""} ${mainKathigitis?.epitheto || ""}</p>
+    </div>
+  `;
+}
+
+router.get("/generate-praktiko", authMiddleware, async (req, res) => {
   try {
     if (req.user.role !== "student") {
-      return res.status(403).json({ message: "Μόνο φοιτητές μπορούν να δουν το πρακτικο εξετασης." });
+      return res.status(403).json({ message: "Μόνο φοιτητές έχουν πρόσβαση." });
     }
 
     const col = await getCollection();
@@ -262,32 +287,16 @@ router.put("/finalize", authMiddleware, async (req, res) => {
     });
 
     if (!diploma) {
-      return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική υπό εξέταση." });
+      return res.status(404).json({ message: "Η διπλωματική δεν βρέθηκε ή δεν είναι υπό εξέταση." });
     }
 
-    const praktikoHTML = generatePraktikoHTML(diploma);
+    const html = generatePraktikoHTML(diploma);
 
-    const result = await col.updateOne(
-      { _id: diploma._id },
-      {
-        $set: {
-          praktikoHTML: praktikoHTML
-        }
-        
-      }
-    );
-
-    if (result.modifiedCount === 0) {
-      return res.status(500).json({ message: "Αποτυχία προβολής πρακτικου" });
-    }
-
-    const updatedDiploma = await col.findOne({ _id: diploma._id });
-    res.json(updatedDiploma);
-
+    res.send(html);
   } catch (err) {
-    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+    res.status(500).send("Σφάλμα κατά τη δημιουργία πρακτικού.");
   }
-}); 
-
+});
 
 module.exports = router;
+
