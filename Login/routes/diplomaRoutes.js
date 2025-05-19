@@ -247,7 +247,7 @@ router.put("/set-exam-info", authMiddleware, async (req, res) => {
 
 
 //new test
-function generatePraktikoHTML(diploma) {
+/*function generatePraktikoHTML(diploma) {
   const { foititis, trimeriEpitropi, mainKathigitis } = diploma;
   const dateStr = diploma.imerominiaOraExetasis
     ? new Date(diploma.imerominiaOraExetasis).toLocaleString("el-GR")
@@ -296,7 +296,40 @@ router.get("/generate-praktiko", authMiddleware, async (req, res) => {
   } catch (err) {
     res.status(500).send("Σφάλμα κατά τη δημιουργία πρακτικού.");
   }
+});*/
+
+router.get("/praktiko-data", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "student") {
+      return res.status(403).json({ message: "Μόνο φοιτητές έχουν πρόσβαση." });
+    }
+
+    const col = await getCollection();
+    const diploma = await col.findOne({
+      "foititis.arithmosMitroou": parseInt(req.user.am),
+      katastasi: "υπό εξέταση"
+    });
+
+    if (!diploma) {
+      return res.status(404).json({ message: "Δεν βρέθηκε η διπλωματική σας." });
+    }
+
+    res.json({
+      onoma: diploma.foititis.onoma,
+      epitheto: diploma.foititis.epitheto,
+      am: diploma.foititis.arithmosMitroou,
+      titlos: diploma.titlos,
+      trimeriEpitropi: diploma.trimeriEpitropi || [],
+      telikosVathmos: diploma.telikosVathmos || null,
+      troposExetasis: diploma.troposExetasis,
+      imerominiaOraExetasis: diploma.imerominiaOraExetasis || null,
+      mainKathigitis: diploma.mainKathigitis || {}
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+  }
 });
+
 
 module.exports = router;
 

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ExetasiPhase = () => {
   const navigate = useNavigate(); //new
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(null); 
   const [draftForm, setDraftForm] = useState({
     pdfProxeiroKeimeno: "",
     linkYliko: ""
