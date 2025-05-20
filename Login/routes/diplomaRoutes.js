@@ -37,10 +37,13 @@ router.get("/my", authMiddleware, async (req, res) => {
         status: diploma.katastasi,
         summary: diploma.perigrafi,
         pdf_url: diploma.pdfExtraPerigrafi,
-        committee: diploma.trimeriEpitropi,
+        trimeriEpitropi: diploma.trimeriEpitropi || [],
+        telikosVathmos: diploma.telikosVathmos || null,
         assignment_date: diploma.imerominiaAnathesis,
-        praktikoHTML: diploma.praktikoHTML || null,
-        statusHistory: diploma.proigoumenesKatastaseis || []
+        troposExetasis: diploma.troposExetasis,
+        imerominiaOraExetasis: diploma.imerominiaOraExetasis || null,
+        mainKathigitis: diploma.mainKathigitis || {},
+        proigoumenesKatastaseis: diploma.proigoumenesKatastaseis || []
       });
     }
 
@@ -307,7 +310,7 @@ router.get("/praktiko-data", authMiddleware, async (req, res) => {
     const col = await getCollection();
     const diploma = await col.findOne({
       "foititis.arithmosMitroou": parseInt(req.user.am),
-      katastasi: "υπό εξέταση"
+      katastasi: { $in: ["υπό εξέταση", "περατωμένη"] }
     });
 
     if (!diploma) {

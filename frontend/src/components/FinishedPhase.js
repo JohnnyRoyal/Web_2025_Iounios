@@ -119,20 +119,12 @@ const FinishedPhase = () => {
       <p><strong>Περίληψη:</strong> {diploma.summary || diploma.perigrafi || "—"}</p>
       <p><strong>Κατάσταση:</strong> {diploma.status || diploma.katastasi}</p>
 
-      <h3>📋 Τελικές Πληροφορίες</h3>
       <p><strong>Τελικός Βαθμός:</strong> {diploma.telikosVathmos ?? "—"}</p>
 
       {diploma.telikokeimenoPdf && (
         <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.telikokeimenoPdf} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
       )}
 
-      {diploma.anakoinosiExetasis && (
-        <p><strong>Πρακτικό Εξέτασης:</strong> <a href={diploma.anakoinosiExetasis} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
-      )}
-
-      {diploma.apofasiEpitropis && (
-        <p><strong>Απόφαση Επιτροπής:</strong> {diploma.apofasiEpitropis}</p>
-      )}
 
       {diploma.sxolia && (
         <p><strong>Τελικά Σχόλια:</strong> {diploma.sxolia}</p>
