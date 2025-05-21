@@ -121,8 +121,8 @@ const FinishedPhase = () => {
 
       <p><strong>Τελικός Βαθμός:</strong> {diploma.telikosVathmos ?? "—"}</p>
 
-      {diploma.telikokeimenoPdf && (
-        <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.telikokeimenoPdf} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
+      {diploma.telikoKeimenoPdf && (
+        <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.telikoKeimenoPdf} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
       )}
 
 

@@ -43,10 +43,12 @@ router.get("/my", authMiddleware, async (req, res) => {
         troposExetasis: diploma.troposExetasis,
         imerominiaOraExetasis: diploma.imerominiaOraExetasis || null,
         mainKathigitis: diploma.mainKathigitis || {},
-        proigoumenesKatastaseis: diploma.proigoumenesKatastaseis || []
+        proigoumenesKatastaseis: diploma.proigoumenesKatastaseis || [],
+        telikoKeimenoPdf: diploma.telikoKeimenoPdf || [],
+        sxolia: diploma.sxolia || []
       });
     }
-
+``
     // Ανάκτηση και επεξεργασία χρόνου
     let timeSinceAssignment = null;
     if (diploma.imerominiaAnathesis) {
@@ -332,6 +334,21 @@ router.get("/praktiko-data", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
   }
 });
+
+//new
+router.put("/upload-link", authMiddleware, async (req, res) => {
+  const { syndesmos } = req.body;
+  const col = await getCollection();
+  const result = await col.updateOne(
+    { "foititis.arithmosMitroou": parseInt(req.user.am), katastasi: "υπό εξέταση" },
+    { $set: { syndesmos } }
+  );
+  if (result.modifiedCount === 0) {
+    return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική." });
+  }
+  res.json({ message: "Ο σύνδεσμος αποθηκεύτηκε." });
+});
+
 
 
 module.exports = router;
