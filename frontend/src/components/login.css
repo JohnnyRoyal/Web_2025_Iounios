@@ -50,7 +50,13 @@
 
 .public-section {
   margin-top: 50px;
-  font-size: 0.95rem;
+  padding: 0 16px;
+  font-size: 1rem;
+}
+
+.public-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
 }
 
 .public-section ul {
@@ -59,13 +65,38 @@
 }
 
 .public-section li {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+
+.public-section li strong {
+  font-size: 1.05rem;
 }
 
 .public-section a {
   color: #4a90e2;
-  text-decoration: none;
+  text-decoration: underline;
+  font-size: 0.95rem;
+  margin-top: 4px;
+  display: inline-block;
 }
 
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 12px;
+  }
+
+  .public-section {
+    padding: 0 12px;
+  }
+
+  .public-section li {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+}
 

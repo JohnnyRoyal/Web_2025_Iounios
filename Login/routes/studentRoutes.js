@@ -30,7 +30,10 @@ router.get("/me", authMiddleware, async (req, res) => {
         email: student.email || "",
         taxydromikiDieythinsi: student.taxydromikiDieythinsi || "",
         kinito: student.kinito || "",
-        stathero: student.stathero || ""
+        stathero: student.stathero || "",
+        onoma: student.onoma,
+        epitheto: student.epitheto,
+        arithmosMitroou: student.arithmosMitroou
       });
     } catch (err) {
       res.status(500).json({ message: "Σφάλμα", error: err.message });

@@ -1,0 +1,76 @@
+.student-home-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.student-home-container h2 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.student-home-container .am-label {
+  font-size: 1rem;
+  margin-bottom: 24px;
+  color: #555;
+}
+
+.student-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.student-menu button {
+  font-size: 1.1rem;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2; /* ανοιχτό γκρι */
+  color: #333;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.student-menu button:hover {
+  background-color: #e0e0e0;
+}
+
+.logout-button {
+    background-color: #3e4a51; /* σκούρο γκρι */
+    color: #f46d6d; /* κόκκινο */
+    border: none;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #4f5d66;
+}
+
+.logout-icon {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .student-home-container {
+    padding: 12px;
+  }
+
+  .student-menu button {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
