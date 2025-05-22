@@ -1,5 +1,5 @@
 // src/components/LoginForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +7,12 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [diplomas, setDiplomas] = useState([]);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [format, setFormat] = useState("json");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -37,6 +43,28 @@ const LoginForm = () => {
     }
   };
 
+  // Φόρτωση διπλωματικών με φίλτρα
+  const fetchDiplomas = async () => {
+    setLoading(true);
+    try {
+      let url = `http://localhost:4000/api/diplomas/nologin?format=${format}`;
+      if (from) url += `&from=${from}`;
+      if (to) url += `&to=${to}`;
+       console.log("Fetching diplomas from:", url); // Για debugging
+      const res = await axios.get(url);
+      setDiplomas(res.data || []);
+    } catch(e) {
+      setDiplomas([]);
+      console.error("Diplomas fetch error:", e); // Για debugging
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchDiplomas();
+    // eslint-disable-next-line
+  }, [from, to, format]);
+
   return (
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
       <h2>🔐 Σύνδεση </h2>
@@ -64,6 +92,56 @@ const LoginForm = () => {
         <button type="submit">Σύνδεση</button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {/* --- Δημόσια λίστα διπλωματικών --- */}
+      <div style={{ marginTop: 40 }}>
+        <h3>📢 Ανακοινώσεις Διπλωματικών (Δημόσια Πρόσβαση)</h3>
+        <div style={{ marginBottom: 10 }}>
+          <label>Από: </label>
+          <input type="date" value={from} onChange={e => setFrom(e.target.value)} />
+          <label style={{ marginLeft: 10 }}>Έως: </label>
+          <input type="date" value={to} onChange={e => setTo(e.target.value)} />
+          <label style={{ marginLeft: 10 }}>Μορφή: </label>
+          <select value={format} onChange={e => setFormat(e.target.value)}>
+            <option value="json">JSON</option>
+            <option value="xml">XML</option>
+          </select>
+          <button onClick={fetchDiplomas} style={{ marginLeft: 10 }}>Ανανέωση</button>
+        </div>
+        {loading ? (
+          <p>Φόρτωση...</p>
+        ) : (
+          <ul>
+            {diplomas.length === 0 && <li>Δεν βρέθηκαν διπλωματικές.</li>}
+            {diplomas.map((d, idx) => (
+              <li key={idx} style={{ marginBottom: 15 }}>
+                <strong>{d.titlos}</strong>
+                <br />
+                <span>{d.perigrafi}</span>
+                <br />
+                <span>
+                  <b>Ημ/νία ανακοίνωσης εξέτασης:</b> {d.imerominia_anakinosis_diplomatikis}
+                </span>
+                {d.pdf_extra_perigrafi && (
+                  <>
+                    <br />
+                    <a
+                      href={d.pdf_extra_perigrafi}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Προβολή PDF
+                    </a>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+        <p style={{ fontSize: "0.9em", color: "#555", marginTop: 10 }}>
+          * Τα δεδομένα είναι δημόσια και μπορείτε να τα λάβετε ως JSON ή XML, φιλτράροντας με εύρος ημερομηνιών.
+        </p>
+      </div>
     </div>
   );
 };
