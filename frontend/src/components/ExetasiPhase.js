@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 
 const ExetasiPhase = () => {
-  const navigate = useNavigate(); //new
-  const [data, setData] = useState(null);
+  const [syndesmos, setSyndesmos] = useState(""); //new
+  const [linkMsg, setLinkMsg] = useState(""); //new
+  const navigate = useNavigate(); 
+  const [data, setData] = useState(null); 
   const [draftForm, setDraftForm] = useState({
     pdfProxeiroKeimeno: "",
     linkYliko: ""
@@ -37,6 +39,7 @@ const ExetasiPhase = () => {
           aithousaExetasis: res.data.aithousaExetasis || "",
           syndesmosExetasis: res.data.syndesmosExetasis || ""
         });
+        setSyndesmos(res.data.syndesmos || "");
       } catch {
         setMsg({ draft: "Σφάλμα φόρτωσης", exam: "Σφάλμα φόρτωσης" });
       }
@@ -68,6 +71,19 @@ const ExetasiPhase = () => {
     }
   };
 
+  const saveSyndesmos = async () => {
+  setLinkMsg("");
+  try {
+    await axios.put("http://localhost:4000/api/diplomas/upload-link", { syndesmos }, {
+      headers: { Authorization: token }
+    });
+    setLinkMsg("✅ Ο σύνδεσμος αποθηκεύτηκε.");
+  } catch {
+    setLinkMsg("❌ Σφάλμα κατά την αποθήκευση του συνδέσμου.");
+  }
+};
+
+
   if (!data) return <p>Φόρτωση...</p>;
 
   return (
@@ -78,6 +94,17 @@ const ExetasiPhase = () => {
       🧾 Προβολή Πρακτικού Εξέτασης
         </button>
 
+      <hr />
+      <h4>🔗 Τελικός Σύνδεσμος προς Νημερτή</h4>
+      <label>Καταχωρήστε τον τελικό σύνδεσμο προς το αποθετήριο της βιβλιοθήκης (Νημερτής):</label><br />
+      <input
+       type="text"
+        value={syndesmos}
+        onChange={e => setSyndesmos(e.target.value)}
+        style={{ width: "100%", marginBottom: 8 }}
+        /><br />
+        <button onClick={saveSyndesmos}>💾 Αποθήκευση Συνδέσμου</button>
+          {linkMsg && <p style={{ color: linkMsg.includes("❌") ? "red" : "green" }}>{linkMsg}</p>}
 
       <h4>📄 Πρόχειρο Κείμενο</h4>
       <label>PDF link:</label>

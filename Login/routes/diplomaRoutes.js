@@ -37,13 +37,18 @@ router.get("/my", authMiddleware, async (req, res) => {
         status: diploma.katastasi,
         summary: diploma.perigrafi,
         pdf_url: diploma.pdfExtraPerigrafi,
-        committee: diploma.trimeriEpitropi,
+        trimeriEpitropi: diploma.trimeriEpitropi || [],
+        telikosVathmos: diploma.telikosVathmos || null,
         assignment_date: diploma.imerominiaAnathesis,
-        praktikoHTML: diploma.praktikoHTML || null,
-        statusHistory: diploma.proigoumenesKatastaseis || []
+        troposExetasis: diploma.troposExetasis,
+        imerominiaOraExetasis: diploma.imerominiaOraExetasis || null,
+        mainKathigitis: diploma.mainKathigitis || {},
+        proigoumenesKatastaseis: diploma.proigoumenesKatastaseis || [],
+        telikoKeimenoPdf: diploma.telikoKeimenoPdf || [],
+        sxolia: diploma.sxolia || []
       });
     }
-
+``
     // Ανάκτηση και επεξεργασία χρόνου
     let timeSinceAssignment = null;
     if (diploma.imerominiaAnathesis) {
@@ -247,7 +252,7 @@ router.put("/set-exam-info", authMiddleware, async (req, res) => {
 
 
 //new test
-function generatePraktikoHTML(diploma) {
+/*function generatePraktikoHTML(diploma) {
   const { foititis, trimeriEpitropi, mainKathigitis } = diploma;
   const dateStr = diploma.imerominiaOraExetasis
     ? new Date(diploma.imerominiaOraExetasis).toLocaleString("el-GR")
@@ -296,7 +301,55 @@ router.get("/generate-praktiko", authMiddleware, async (req, res) => {
   } catch (err) {
     res.status(500).send("Σφάλμα κατά τη δημιουργία πρακτικού.");
   }
+});*/
+
+router.get("/praktiko-data", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "student") {
+      return res.status(403).json({ message: "Μόνο φοιτητές έχουν πρόσβαση." });
+    }
+
+    const col = await getCollection();
+    const diploma = await col.findOne({
+      "foititis.arithmosMitroou": parseInt(req.user.am),
+      katastasi: { $in: ["υπό εξέταση", "περατωμένη"] }
+    });
+
+    if (!diploma) {
+      return res.status(404).json({ message: "Δεν βρέθηκε η διπλωματική σας." });
+    }
+
+    res.json({
+      onoma: diploma.foititis.onoma,
+      epitheto: diploma.foititis.epitheto,
+      am: diploma.foititis.arithmosMitroou,
+      titlos: diploma.titlos,
+      trimeriEpitropi: diploma.trimeriEpitropi || [],
+      telikosVathmos: diploma.telikosVathmos || null,
+      troposExetasis: diploma.troposExetasis,
+      imerominiaOraExetasis: diploma.imerominiaOraExetasis || null,
+      mainKathigitis: diploma.mainKathigitis || {}
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+  }
 });
+
+//new
+router.put("/upload-link", authMiddleware, async (req, res) => {
+  const { syndesmos } = req.body;
+  const col = await getCollection();
+  const result = await col.updateOne(
+    { "foititis.arithmosMitroou": parseInt(req.user.am), katastasi: "υπό εξέταση" },
+    { $set: { syndesmos } }
+  );
+  if (result.modifiedCount === 0) {
+    return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική." });
+  }
+  res.json({ message: "Ο σύνδεσμος αποθηκεύτηκε." });
+});
+
+
 
 module.exports = router;
 
