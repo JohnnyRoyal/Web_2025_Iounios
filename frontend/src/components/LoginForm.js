@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./login.css";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -66,7 +67,64 @@ const LoginForm = () => {
   }, [from, to, format]);
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
+
+    <div className="login-container">
+  <h2>🔐 Σύνδεση</h2>
+  <form onSubmit={handleSubmit}>
+    <label>Username:</label>
+    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+
+    <label>Password:</label>
+    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+
+    <button type="submit">Σύνδεση</button>
+  </form>
+
+  {error && <p style={{ color: "red" }}>{error}</p>}
+
+  <div className="public-section">
+    <h3>📢 Ανακοινώσεις Διπλωματικών (Δημόσια Πρόσβαση)</h3>
+
+    <label>Από:</label>
+    <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
+
+    <label>Έως:</label>
+    <input type="date" value={to} onChange={(e) => setTo(e.target.value)} />
+
+    <label>Μορφή:</label>
+    <select value={format} onChange={(e) => setFormat(e.target.value)}>
+      <option value="json">JSON</option>
+      <option value="xml">XML</option>
+    </select>
+
+    <button onClick={fetchDiplomas}>Ανανέωση</button>
+
+    {loading ? (
+      <p>Φόρτωση...</p>
+    ) : (
+      <ul>
+        {diplomas.length === 0 && <li>Δεν βρέθηκαν διπλωματικές.</li>}
+        {diplomas.map((d, idx) => (
+          <li key={idx}>
+            <strong>{d.titlos}</strong>
+            <br />
+            {d.perigrafi}
+            <br />
+            <b>Ημ/νία ανακοίνωσης εξέτασης:</b> {d.imerominia_anakinosis_diplomatikis}
+            <br />
+            {d.pdf_extra_perigrafi && (
+              <a href={d.pdf_extra_perigrafi} target="_blank" rel="noopener noreferrer">Προβολή PDF</a>
+            )}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</div>
+);
+};
+
+    /*<div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
       <h2>🔐 Σύνδεση </h2>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 10 }}>
@@ -93,7 +151,7 @@ const LoginForm = () => {
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {/* --- Δημόσια λίστα διπλωματικών --- */}
+       //--- Δημόσια λίστα διπλωματικών --- 
       <div style={{ marginTop: 40 }}>
         <h3>📢 Ανακοινώσεις Διπλωματικών (Δημόσια Πρόσβαση)</h3>
         <div style={{ marginBottom: 10 }}>
@@ -145,5 +203,5 @@ const LoginForm = () => {
     </div>
   );
 };
-
+*/
 export default LoginForm;
