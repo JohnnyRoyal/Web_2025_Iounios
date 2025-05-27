@@ -41,6 +41,31 @@ router.post("/login", async (req, res) => {
       return res.json({ token });
     }
 
+
+    // Έλεγχος στη συλλογή Didaskontes
+    const profCol = await getCollection("Didaskontes");
+    const professor = await profCol.findOne({ username });
+
+    if (professor) {
+      if (professor.password !== password) {
+        return res.status(401).json({ message: "Λάθος κωδικός πρόσβασης" });
+      }
+
+      // Δημιουργία token για διδασκων
+      const token = jwt.sign(
+        {
+          username: professor.username,
+          role: "teacher",
+          id: professor.didaskonId,
+        },
+        "MY_SECRET_KEY",
+        { expiresIn: "2h" }
+      );
+
+      return res.json({ token });
+    }
+
+
     // Έλεγχος στη συλλογή students
     const studentsCol = await getCollection("students");
     const student = await studentsCol.findOne({ username });
