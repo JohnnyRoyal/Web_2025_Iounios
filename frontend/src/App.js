@@ -14,7 +14,10 @@ import ExetasiPhase from "./components/ExetasiPhase";
 import FinishedPhase from "./components/FinishedPhase";
 import PraktikoView from "./components/PraktikoView";
 
-
+import TeacherHome from "./components/TeacherHome";
+import CreateThema from "./components/CreateThema";
+import ThemataView from "./components/ThemataView";
+import TeacherInvites from "./components/TeacherInvites";
 
 
 function App() {
@@ -32,7 +35,10 @@ function App() {
         <Route path="/diplomas" element={<GramateiaView />} /> {/* Κουμπί προβολής διπλωματικών */}
         <Route path="/data-entry" element={<GramateiaInsert />} /> {/* Κουμπί εισαγωγής προσωπικών δεδομένων καθηγητών και φοιτητών */}
 
-        
+        <Route path="/teacher" element={<TeacherHome />} />
+        <Route path="/teacher/CreateThema" element={<CreateThema />} />
+        <Route path="/teacher/themata" element={<ThemataView />} />
+        <Route path="/teacher/invites" element={<TeacherInvites />} />
 
 
       </Routes>
