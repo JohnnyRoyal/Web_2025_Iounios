@@ -83,10 +83,22 @@ router.post("/invite", authMiddleware, async (req, res) => {
     }
 
     const { didaskonId, onoma, epitheto } = req.body;
-    const col = await getCollection();
+    const diplCol = await getCollection(); // Diplomatikes
+    const profCol = client.db("users").collection("Didaskontes");
 
-    // Εντοπισμός διπλωματικής υπό ανάθεση για τον φοιτητή
-    const diploma = await col.findOne({
+    // Αναζήτηση καθηγητή
+    const professor = await profCol.findOne({
+      didaskonId: parseInt(didaskonId),
+      onoma: onoma.trim(),
+      epitheto: epitheto.trim()
+    });
+
+    if (!professor) {
+      return res.status(404).json({ message: "Δεν βρέθηκε διδάσκων με αυτά τα στοιχεία." });
+    }
+
+    // Εντοπισμός διπλωματικής υπό ανάθεση
+    const diploma = await diplCol.findOne({
       "foititis.arithmosMitroou": parseInt(req.user.am),
       katastasi: "υπό ανάθεση"
     });
@@ -95,28 +107,45 @@ router.post("/invite", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Η διπλωματική δεν είναι υπό ανάθεση ή δεν βρέθηκε." });
     }
 
-    // Έλεγχος για διπλή πρόσκληση
-    const alreadyInvited = diploma.proskliseis?.some(p => p.didaskonId === didaskonId);
+    // Έλεγχος αν ο καθηγητής έχει ήδη προσκληθεί σε αυτή τη διπλωματική
+    const alreadyInvited = diploma.proskliseis?.some(
+      (p) => p.didaskonId === parseInt(didaskonId)
+    );
+
     if (alreadyInvited) {
       return res.status(400).json({ message: "Ο διδάσκων έχει ήδη προσκληθεί." });
     }
 
-    // Προσθήκη πρόσκλησης
-    const result = await col.updateOne(
+    // Δημιουργία πρόσκλησης
+    const prosklisiObj = {
+      didaskonId: parseInt(didaskonId),
+      onoma: onoma.trim(),
+      epitheto: epitheto.trim(),
+      apodoxi: null
+    };
+
+    // Ενημέρωση διπλωματικής
+    const diplomaResult = await diplCol.updateOne(
       { _id: diploma._id },
-      {
-        $push: {
-          proskliseis: {
-            didaskonId,
-            onoma,
-            epitheto,
-            apodoxi: null
-          }
-        }
-      }
+      { $push: { proskliseis: prosklisiObj } }
     );
 
-    if (result.modifiedCount === 0) {
+    // Δημιουργία εμπλουτισμένης πρόσκλησης για τον καθηγητή
+    const enrichedProsklisi = {
+      titlos: diploma.titlos,
+      perigrafi: diploma.perigrafi,
+      foititis: `${diploma.foititis.onoma} ${diploma.foititis.epitheto}`,
+      imerominiaProsklisis: new Date().toISOString(),
+      imerominiaApodoxis: null,
+      imerominiaAporripsis: null
+    };
+
+    const professorResult = await profCol.updateOne(
+      { _id: professor._id },
+      { $push: { proskliseis: enrichedProsklisi } }
+    );
+
+    if (diplomaResult.modifiedCount === 0 || professorResult.modifiedCount === 0) {
       return res.status(500).json({ message: "Η πρόσκληση δεν καταχωρήθηκε." });
     }
 
