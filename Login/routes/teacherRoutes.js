@@ -88,6 +88,12 @@ router.post("/themata", authMiddleware, upload.single("pdfPerigrafis"), async (r
         epitheto: professor.epitheto,
         didaskonId: req.user.id
       },
+      trimelisEpitropi: [{
+        onoma: professor.onoma,
+        epitheto: professor.epitheto,
+        didaskonId: req.user.id,
+        vathmos: null
+      }],
       dateCreated: new Date(),
       katastasi: "διαθέσιμη προς ανάθεση"
     };
