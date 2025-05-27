@@ -36,6 +36,8 @@ const LoginForm = () => {
         navigate("/student");
       } else if (role === "secretary") {
         navigate("/secretary");
+      } else if (role === "teacher") {
+        navigate("/teacher");
       } else {
         setError("Μη έγκυρος ρόλος χρήστη");
       }
