@@ -9,7 +9,7 @@ const kataxwrhshAPRoutes = require("./routes/Kataxwrhsh_AP_DE_gramateia_Routes_3
 const peratwshRoutes = require("./routes/Peratwsh_DE_gramateia_Routes_3-3"); // Νέο route για την ολοκλήρωση της διπλωματικής
 const akyrwshAnatheshsRoutes = require("./routes/Akyrwsh_Anatheshs_Gramateia_DE_3-2"); // Νέο route για την ακύρωση ανάθεσης θέματος
 const nologinviewRoutes = require("./routes/No_Login_View"); // Νέο route για την προβολή διπλωματικών χωρίς login
-
+const teacherRoutes = require("./routes/teacherRoutes");
 
 const app = express();
 app.use(express.json());
@@ -24,5 +24,6 @@ app.use("/api/secretary/set-ap", kataxwrhshAPRoutes);   // Προσθήκη rout
 app.use("/api/secretary/complete", peratwshRoutes); // Προσθήκη route για την ολοκλήρωση της διπλωματικής
 app.use("/api/secretary/cancel", akyrwshAnatheshsRoutes); // Προσθήκη route για την ακύρωση ανάθεσης θέματος
 app.use("/api/diplomas/nologin", nologinviewRoutes); // Προσθήκη route για την προβολή διπλωματικών χωρίς login
+app.use("/api/teacher", teacherRoutes);
 
 app.listen(4000, () => console.log("✅ Server running on http://localhost:4000"));
