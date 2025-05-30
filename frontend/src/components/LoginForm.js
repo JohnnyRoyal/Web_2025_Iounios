@@ -53,11 +53,15 @@ const LoginForm = () => {
       let url = `http://localhost:4000/api/diplomas/nologin?format=${format}`;
       if (from) url += `&from=${from}`;
       if (to) url += `&to=${to}`;
-       console.log("Fetching diplomas from:", url); // Για debugging
-      const res = await axios.get(url);
-      setDiplomas(res.data || []);
+      console.log("Fetching diplomas from:", url); // Για debugging
+      const res = await axios.get(url, { responseType: format === "xml" ? "text" : "json" });
+      if (format === "xml") {
+        setDiplomas(res.data); // raw XML string
+      } else {
+        setDiplomas(res.data || []);
+      }
     } catch(e) {
-      setDiplomas([]);
+      setDiplomas(format === "xml" ? "" : []);
       console.error("Diplomas fetch error:", e); // Για debugging
     }
     setLoading(false);
@@ -101,25 +105,32 @@ const LoginForm = () => {
 
     <button onClick={fetchDiplomas}>Ανανέωση</button>
 
+    
     {loading ? (
       <p>Φόρτωση...</p>
     ) : (
-      <ul>
-        {diplomas.length === 0 && <li>Δεν βρέθηκαν διπλωματικές.</li>}
-        {diplomas.map((d, idx) => (
-          <li key={idx}>
-            <strong>{d.titlos}</strong>
-            <br />
-            {d.perigrafi}
-            <br />
-            <b>Ημ/νία ανακοίνωσης εξέτασης:</b> {d.imerominia_anakinosis_diplomatikis}
-            <br />
-            {d.pdf_extra_perigrafi && (
-              <a href={d.pdf_extra_perigrafi} target="_blank" rel="noopener noreferrer">Προβολή PDF</a>
-            )}
-          </li>
-        ))}
-      </ul>
+      format === "xml" ? (
+        <pre style={{ maxHeight: 300, overflow: "auto", background: "#f8f8f8", padding: 10 }}>
+          {diplomas || "Δεν βρέθηκαν διπλωματικές."}
+        </pre>
+      ) : (
+        <ul>
+          {diplomas.length === 0 && <li>Δεν βρέθηκαν διπλωματικές.</li>}
+          {diplomas.map((d, idx) => (
+            <li key={idx}>
+              <strong>{d.titlos}</strong>
+              <br />
+              {d.perigrafi}
+              <br />
+              <b>Ημ/νία ανακοίνωσης εξέτασης:</b> {d.imerominia_anakinosis_diplomatikis}
+              <br />
+              {d.pdf_extra_perigrafi && (
+                <a href={d.pdf_extra_perigrafi} target="_blank" rel="noopener noreferrer">Προβολή PDF</a>
+              )}
+            </li>
+          ))}
+        </ul>
+      )
     )}
   </div>
 </div>

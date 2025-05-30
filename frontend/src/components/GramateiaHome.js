@@ -3,9 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 const GramateiaHome = () => {
   const navigate = useNavigate();
+    
+  
+  const handleLogout = () => {
+    localStorage.removeItem("token"); //καθαρισε token
+    navigate("/"); //γυρνα login page
+  }
 
   return (
     <div style={styles.container}>
+      <div className="logoutContainer">
+        <button onClick={handleLogout} className="logoutButton">🚪 Αποσύνδεση</button>
+      </div>
       <h2 style={styles.heading}>Καλωσήρθατε στη Γραμματεία!</h2>
       <div style={styles.menu}>
         <button onClick={() => navigate("/diplomas")} style={styles.button}>
@@ -14,12 +23,7 @@ const GramateiaHome = () => {
         <button onClick={() => navigate("/data-entry")} style={styles.button}>
           📝 Εισαγωγή Δεδομένων
         </button>
-        <button onClick={() => navigate("/active-thesis")} style={styles.button}>
-          🛠 Διαχείριση Ενεργής Διπλωματικής Εργασίας
-        </button>
-        <button onClick={() => navigate("/under-review-thesis")} style={styles.button}>
-          🔍 Διαχείριση Υπό Εξέτασης Διπλωματικής Εργασίας
-        </button>
+        
       </div>
     </div>
   );

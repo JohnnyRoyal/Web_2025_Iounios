@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { MongoClient } = require("mongodb");
-const { Parser } = require("xml2js");
+const { Builder } = require("xml2js");
 
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
@@ -41,11 +41,9 @@ router.get("/", async (req, res) => {
 
     if (format === "xml") {
       // Επιστροφή ως XML
-      const builder = new Parser({ rootName: "diplomas", headless: true });
-      builder.parseString({ diploma: filteredData }, (err, xml) => {
-        if (err) return res.status(500).send("XML Error");
-        res.type("application/xml").send(xml);
-      });
+      const builder = new Builder({ rootName: "diplomas", headless: true }); // Δημιουργία builder για XML
+      const xml = builder.buildObject({ diploma: filteredData }); // Μετατροπή σε XML
+      res.type("application/xml").send(xml);
     } else {
       // Default JSON
       res.json(filteredData);
