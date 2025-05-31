@@ -26,7 +26,7 @@ const PraktikoView = () => {
   if (error) return <p style={{ color: "red" }}>{error}</p>;
   if (!data) return <p>Φόρτωση...</p>;
 
-  const { onoma, epitheto, am, titlos, trimeriEpitropi, telikosVathmos, imerominiaOraExetasis, mainKathigitis,troposExetasis } = data;
+  const { onoma, epitheto, am, titlos, trimelisEpitropi, telikosVathmos, imerominiaOraExetasis, mainKathigitis,troposExetasis } = data;
 
   const formattedDate = imerominiaOraExetasis
     ? new Date(imerominiaOraExetasis).toLocaleString("el-GR", {
@@ -54,7 +54,7 @@ const PraktikoView = () => {
             </tr>
           </thead>
           <tbody>
-            {trimeriEpitropi.map((m, i) => (
+            {trimelisEpitropi.map((m, i) => (
               <tr key={i}>
                 <td style={{ padding: 8 }}>{m.onoma} {m.epitheto}</td>
                 <td style={{ padding: 8 }}>{m.vathmos ?? "-"}</td>

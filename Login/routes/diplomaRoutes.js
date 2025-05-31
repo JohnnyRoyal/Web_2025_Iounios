@@ -37,7 +37,7 @@ router.get("/my", authMiddleware, async (req, res) => {
         status: diploma.katastasi,
         summary: diploma.perigrafi,
         pdf_url: diploma.pdfExtraPerigrafi,
-        trimeriEpitropi: diploma.trimeriEpitropi || [],
+        trimelisEpitropi: diploma.trimelisEpitropi || [],
         telikosVathmos: diploma.telikosVathmos || null,
         assignment_date: diploma.imerominiaAnathesis,
         troposExetasis: diploma.troposExetasis,
@@ -63,7 +63,7 @@ router.get("/my", authMiddleware, async (req, res) => {
       summary: diploma.perigrafi,
       pdf_url: diploma.pdfExtraPerigrafi,
       status: diploma.katastasi,
-      committee: diploma.trimeriEpitropi,
+      committee: diploma.trimelisEpitropi,
       assignment_date: diploma.imerominiaAnathesis,
       time_since_assignment: timeSinceAssignment,
       pdfProxeiroKeimeno: diploma.pdfProxeiroKeimeno || null,
@@ -282,12 +282,12 @@ router.put("/set-exam-info", authMiddleware, async (req, res) => {
 
 //new test
 /*function generatePraktikoHTML(diploma) {
-  const { foititis, trimeriEpitropi, mainKathigitis } = diploma;
+  const { foititis, trimelisEpitropi, mainKathigitis } = diploma;
   const dateStr = diploma.imerominiaOraExetasis
     ? new Date(diploma.imerominiaOraExetasis).toLocaleString("el-GR")
     : "—";
 
-  const gradesHTML = (trimeriEpitropi || [])
+  const gradesHTML = (trimelisEpitropi || [])
     .map(member => `<li>${member.onoma} ${member.epitheto}: ${member.vathmos ?? "—"}</li>`)
     .join("");
 
@@ -353,7 +353,7 @@ router.get("/praktiko-data", authMiddleware, async (req, res) => {
       epitheto: diploma.foititis.epitheto,
       am: diploma.foititis.arithmosMitroou,
       titlos: diploma.titlos,
-      trimeriEpitropi: diploma.trimeriEpitropi || [],
+      trimelisEpitropi: diploma.trimelisEpitropi || [],
       telikosVathmos: diploma.telikosVathmos || null,
       troposExetasis: diploma.troposExetasis,
       imerominiaOraExetasis: diploma.imerominiaOraExetasis || null,

@@ -199,6 +199,11 @@ router.put("/proskliseis/apodoxi/:index", authMiddleware, async (req, res) => {
     const idx = parseInt(req.params.index);
     const professorsCol = client.db("users").collection("Didaskontes");
     const diplomasCol = client.db("users").collection("Diplomatikes");
+    const professor = await professorsCol.findOne({ didaskonId: req.user.id });
+
+        if (!professor) {
+          return res.status(404).json({ message: "Δεν βρέθηκαν στοιχεία διδάσκοντα." });
+        }
 
     // Ενημέρωση βάσης Διδασκόντων
     const professorUpdate = await professorsCol.updateOne(
@@ -232,6 +237,24 @@ router.put("/proskliseis/apodoxi/:index", authMiddleware, async (req, res) => {
       { $set: { "proskliseis.$.apodoxi": true } }
     );
 
+    //Προσθήκη στην trimelisEpitropi αν δεν υπάρχει ήδη
+    const alreadyExists = (diploma.trimelisEpitropi || []).some(member => member.didaskonId === req.user.id);
+    if (!alreadyExists) {
+      await diplomasCol.updateOne(
+        { _id: diploma._id },
+        {
+          $push: {
+            trimelisEpitropi: {
+              didaskonId: req.user.id,
+              onoma: professor.onoma,
+              epitheto: professor.epitheto,
+              vathmos: null
+            }
+          }
+        }
+      );
+    }
+
     // Πόσες προσκλήσεις έχουν αποδεχτεί;
     const updatedDiploma = await diplomasCol.findOne({ _id: diploma._id });
     const accepted = updatedDiploma.proskliseis.filter(p => p.apodoxi === true);
@@ -245,6 +268,32 @@ router.put("/proskliseis/apodoxi/:index", authMiddleware, async (req, res) => {
           $pull: { proskliseis: { apodoxi: null } } // διαγραφή μόνο των εκκρεμών
         }
       );
+
+      // ✅ Καθάρισε και τις αντίστοιχες προσκλήσεις από τους διδάσκοντες
+      await professorsCol.updateMany(
+        {
+          proskliseis: {
+            $elemMatch: {
+              titlos: diploma.titlos,
+              perigrafi: diploma.perigrafi,
+              imerominiaApodoxis: null
+              
+            }
+          }
+        },
+        {
+          $pull: {
+            proskliseis: {
+            titlos: diploma.titlos,
+            perigrafi: diploma.perigrafi,
+            imerominiaApodoxis: null
+            
+           }
+          }
+        }
+    );
+      
+    
     }
 
     res.json({ message: "Η πρόσκληση αποδεχτήκε" });
@@ -261,15 +310,32 @@ router.put("/proskliseis/aporripsi/:index", authMiddleware, async (req, res) => 
 
     const idx = parseInt(req.params.index);
     const professorsCol = client.db("users").collection("Didaskontes");
+    const diplomasCol = client.db("users").collection("Diplomatikes");
 
     const result = await professorsCol.updateOne(
-      { didaskonId: req.user.id, [`proskliseis.${idx}.imerominiaapodoxis`]: null, [`proskliseis.${idx}.imerominiaAporripsis`]: null },
+      { didaskonId: req.user.id, [`proskliseis.${idx}.imerominiaApodoxis`]: null, [`proskliseis.${idx}.imerominiaAporripsis`]: null },
       { $set: { [`proskliseis.${idx}.imerominiaAporripsis`]: new Date() } }
     );
 
     if (result.modifiedCount === 0) {
       return res.status(400).json({ message: "Η πρόσκληση δεν ενημερώθηκε (πιθανόν έχει ήδη απαντηθεί)" });
     }
+
+    // Βρες όλες τις διπλωματικές που περιέχουν αυτόν τον καθηγητή σε προσκλήσεις
+    const diploma = await diplomasCol.findOne({
+      "proskliseis.didaskonId": req.user.id,
+      "proskliseis.apodoxi": null
+    });
+
+    if (!diploma) {
+      return res.status(404).json({ message: "Δεν βρέθηκε σχετική διπλωματική" });
+    }
+
+    // Ενημέρωση πρόσκλησης μέσα στη διπλωματική
+    await diplomasCol.updateOne(
+      { _id: diploma._id, "proskliseis.didaskonId": req.user.id },
+      { $set: { "proskliseis.$.apodoxi": false } }
+    );
 
     res.json({ message: "Η πρόσκληση απορρίφθηκε" });
   } catch (err) {
