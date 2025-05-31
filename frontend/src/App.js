@@ -18,7 +18,8 @@ import TeacherHome from "./components/TeacherHome";
 import CreateThema from "./components/CreateThema";
 import ThemataView from "./components/ThemataView";
 import TeacherInvites from "./components/TeacherInvites";
-
+import AssignThema from "./components/AssignThema";
+import AnaklisiThematos from "./components/AnaklisiThematos";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
         <Route path="/teacher/CreateThema" element={<CreateThema />} />
         <Route path="/teacher/themata" element={<ThemataView />} />
         <Route path="/teacher/invites" element={<TeacherInvites />} />
+        <Route path="/assign-thema" element={<AssignThema />} />
+        <Route path="/AnaklisiThematos" element={<AnaklisiThematos />} />
 
 
       </Routes>

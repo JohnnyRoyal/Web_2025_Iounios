@@ -344,6 +344,112 @@ router.put("/proskliseis/aporripsi/:index", authMiddleware, async (req, res) => 
 });
 
 
+// Ανάθεση θέματος σε φοιτητή
+router.put("/anathesi", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "teacher") {
+      return res.status(403).json({ message: "Δεν έχετε πρόσβαση" });
+    }
+
+    const { themaId, arithmosMitroou, onoma, epitheto } = req.body;
+    if (!themaId || !arithmosMitroou || !onoma || !epitheto) {
+      return res.status(400).json({ message: "Λείπουν απαιτούμενα πεδία" });
+    }
+
+    const db = client.db("users");
+    const diplomasCol = db.collection("Diplomatikes");
+    const studentsCol = db.collection("students");
+
+    const thema = await diplomasCol.findOne({ _id: new ObjectId(themaId) });
+
+    if (!thema) {
+      return res.status(404).json({ message: "Το θέμα δεν βρέθηκε" });
+    }
+
+    if (thema.katastasi !== "διαθέσιμη προς ανάθεση") {
+      return res.status(400).json({ message: "Το θέμα δεν είναι διαθέσιμο" });
+    }
+
+    if (thema.foititis) {
+      return res.status(400).json({ message: "Το θέμα έχει ήδη ανατεθεί" });
+    }
+
+    //Αναζήτηση φοιτητή
+    const student = await studentsCol.findOne({
+      arithmosMitroou: parseInt(arithmosMitroou),
+      onoma: onoma.trim(),
+      epitheto: epitheto.trim()
+    });
+
+    if (!student) {
+      return res.status(404).json({ message: "Δεν βρέθηκε φοιτητής με αυτά τα στοιχεία" });
+    }
+
+    //Ανάθεση
+    await diplomasCol.updateOne(
+      { _id: thema._id },
+      {
+        $set: {
+          foititis: {
+            arithmosMitroou: parseInt(arithmosMitroou),
+            onoma: onoma.trim(),
+            epitheto: epitheto.trim()
+          },
+          katastasi: "υπό ανάθεση"
+        }
+      }
+    );
+
+    res.json({ message: "Η ανάθεση έγινε επιτυχώς" });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα ανάθεσης", error: err.message });
+  }
+});
+
+/*
+// Ανάκληση ανάθεσης θέματος από καθηγητή
+router.put("/anaklisi", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "teacher") {
+      return res.status(403).json({ message: "Δεν επιτρέπεται" });
+    }
+
+    const { themaId } = req.body;
+    if (!themaId) {
+      return res.status(400).json({ message: "Δεν δόθηκε θέμα" });
+    }
+
+    const diplomasCol = client.db("users").collection("Diplomatikes");
+
+    const thema = await diplomasCol.findOne({ _id: new ObjectId(themaId) });
+
+    if (!thema) {
+      return res.status(404).json({ message: "Το θέμα δεν βρέθηκε" });
+    }
+
+    if (thema.katastasi !== "υπό ανάθεση") {
+      return res.status(400).json({ message: "Η ανάθεση δεν μπορεί να ακυρωθεί" });
+    }
+
+    if (!thema.mainKathigitis || thema.mainKathigitis.didaskonId !== req.user.id) {
+      return res.status(403).json({ message: "Δεν είστε ο υπεύθυνος καθηγητής του θέματος" });
+    }
+
+    await diplomasCol.updateOne(
+      { _id: thema._id },
+      {
+        $unset: { foititis: "" },
+        $set: { katastasi: "διαθέσιμη προς ανάθεση" }
+      }
+    );
+
+    res.json({ message: "Η ανάθεση ακυρώθηκε επιτυχώς" });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα ανάκλησης ανάθεσης", error: err.message });
+  }
+});
+*/
+
 module.exports = router;
 
 

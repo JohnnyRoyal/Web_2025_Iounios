@@ -28,6 +28,10 @@ const TeacherHome = () => {
 
       <button onClick={() => navigate("/teacher/invites")}>📩 Προσκλήσεις Επιτροπής</button>
 
+      <button onClick={() => navigate("/assign-thema")}>📌 Ανάθεση Θέματος σε Φοιτητή</button>
+
+
+
     </div>
   );
 };
