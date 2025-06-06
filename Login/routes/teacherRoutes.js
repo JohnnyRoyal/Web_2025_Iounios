@@ -450,6 +450,64 @@ router.put("/anaklisi", authMiddleware, async (req, res) => {
 });
 */
 
+
+// GET /api/teacher/diplomatikes - προβολή διπλωματικών καθηγητή με φιλτρα αναζητησης 
+router.get("/diplomatikes", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "teacher") {
+      return res.status(403).json({ message: "Δεν έχετε πρόσβαση" });
+    }
+
+    const diplomasCol = client.db("users").collection("Diplomatikes");
+
+    const query = {
+      $or: [
+        { "mainKathigitis.didaskonId": req.user.id },
+        { "trimelisEpitropi.didaskonId": req.user.id }
+      ]
+    };
+
+    // Προαιρετικό φίλτρο κατάστασης
+    if (req.query.katastasi) {
+      query.katastasi = req.query.katastasi;
+    }
+
+    // Φίλτρο ρόλου (με override της $or αν προσδιορίζεται συγκεκριμένος ρόλος)
+    if (req.query.rolos === "epivlepon") {
+      query["mainKathigitis.didaskonId"] = req.user.id;
+      delete query.$or;
+    } else if (req.query.rolos === "melos") {
+      query["trimelisEpitropi.didaskonId"] = req.user.id;
+      query["mainKathigitis.didaskonId"] = { $ne: req.user.id }; // ΔΕΝ είναι επιβλέπων
+      delete query.$or;
+}
+
+
+    const results = await diplomasCol.find(query).toArray();
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα κατά την ανάκτηση", error: err.message });
+  }
+});
+
+
+router.get("/diplomatikes/:id", authMiddleware, async (req, res) => {
+  try {
+    const diplomasCol = client.db("users").collection("Diplomatikes");
+    const id = req.params.id;
+
+    const diploma = await diplomasCol.findOne({ _id: new ObjectId(id) });
+
+    if (!diploma) return res.status(404).json({ message: "Διπλωματική δεν βρέθηκε" });
+
+    res.json(diploma);
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα ανάκτησης διπλωματικής", error: err.message });
+  }
+});
+
+
+
 module.exports = router;
 
 

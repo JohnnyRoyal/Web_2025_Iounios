@@ -30,6 +30,8 @@ const TeacherHome = () => {
 
       <button onClick={() => navigate("/assign-thema")}>📌 Ανάθεση Θέματος σε Φοιτητή</button>
 
+      <button onClick={() => navigate("/ProfessorDiplomas")}> Προβολή λίστας διπλωματικών</button>
+
 
 
     </div>

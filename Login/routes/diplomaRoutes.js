@@ -334,15 +334,32 @@ router.get("/generate-praktiko", authMiddleware, async (req, res) => {
 
 router.get("/praktiko-data", authMiddleware, async (req, res) => {
   try {
-    if (req.user.role !== "student") {
-      return res.status(403).json({ message: "Μόνο φοιτητές έχουν πρόσβαση." });
+    if (req.user.role !== "student" && req.user.role !== "teacher") {
+      return res.status(403).json({ message: "Μόνο φοιτητές και διδάσκοντες έχουν πρόσβαση." });
     }
 
     const col = await getCollection();
-    const diploma = await col.findOne({
+
+    /*const diploma = await col.findOne({
       "foititis.arithmosMitroou": parseInt(req.user.am),
       katastasi: { $in: ["υπό εξέταση", "περατωμένη"] }
-    });
+    }); */
+
+    const query = {
+      katastasi: { $in: ["υπό εξέταση", "περατωμένη"] }
+    };
+
+    if (req.user.role === "student") {
+      query["foititis.arithmosMitroou"] = parseInt(req.user.am);
+  } else if (req.user.role === "teacher") {
+      query.$or = [
+        { "mainKathigitis.didaskonId": req.user.id },
+        { "trimelisEpitropi.didaskonId": req.user.id }
+    ];
+}
+
+const diploma = await col.findOne(query);
+
 
     if (!diploma) {
       return res.status(404).json({ message: "Δεν βρέθηκε η διπλωματική σας." });

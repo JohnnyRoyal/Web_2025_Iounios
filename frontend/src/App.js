@@ -20,6 +20,8 @@ import ThemataView from "./components/ThemataView";
 import TeacherInvites from "./components/TeacherInvites";
 import AssignThema from "./components/AssignThema";
 import AnaklisiThematos from "./components/AnaklisiThematos";
+import TeacherDiplomas from "./components/TeacherDiplomas";
+import TeacherDiplomaDetails from "./components/TeacherDiplomaDetails";
 
 function App() {
   return (
@@ -42,6 +44,9 @@ function App() {
         <Route path="/teacher/invites" element={<TeacherInvites />} />
         <Route path="/assign-thema" element={<AssignThema />} />
         <Route path="/AnaklisiThematos" element={<AnaklisiThematos />} />
+        <Route path="/ProfessorDiplomas" element={<TeacherDiplomas />} />
+        <Route path="/diploma/:id" element={<TeacherDiplomaDetails />} />
+
 
 
       </Routes>
