@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
     if (format === "xml") {
       // Επιστροφή ως XML
       const builder = new Builder({ rootName: "diplomas", headless: true }); // Δημιουργία builder για XML
-      const xml = builder.buildObject({ diploma: filteredData }); // Μετατροπή σε XML
+      const xml = builder.buildObject({ diplomas: filteredData }); // Μετατροπή σε XML
       res.type("application/xml").send(xml);
     } else {
       // Default JSON

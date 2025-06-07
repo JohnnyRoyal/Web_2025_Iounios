@@ -60,7 +60,7 @@ const LoginForm = () => {
       } else {
         setDiplomas(res.data || []);
       }
-    } catch(e) {
+    } catch (e) {
       setDiplomas(format === "xml" ? "" : []);
       console.error("Diplomas fetch error:", e); // Για debugging
     }
