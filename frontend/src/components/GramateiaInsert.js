@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./GramateiaInsert.css"; // Εισαγωγή του νέου CSS
 
 const GramateiaInsert = () => {
   const [file, setFile] = useState(null);
@@ -43,17 +44,15 @@ const GramateiaInsert = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>📥 Εισαγωγή Δεδομένων</h2>
-      <input type="file" accept=".json" onChange={handleFileChange} style={styles.input} />
-      <button onClick={handleUpload} style={styles.button}>
-        Υποβολή
-      </button>
-      {message && <p style={styles.success}>{message}</p>}
-      {error && <p style={styles.error}>{error}</p>}
-      <div style={styles.example}>
+    <div className="insert-container">
+      <h2>📥 Εισαγωγή Δεδομένων</h2>
+      <input type="file" accept=".json" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Υποβολή</button>
+      {message && <p className="success">{message}</p>}
+      {error && <p className="error">{error}</p>}
+      <div>
         <h3>Παράδειγμα JSON Αρχείου:</h3>
-        <pre style={styles.code}>
+        <pre>
           {`{
   "students": [
     {
@@ -76,50 +75,6 @@ const GramateiaInsert = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    padding: 20,
-    maxWidth: 600,
-    margin: "auto",
-    textAlign: "center",
-  },
-  heading: {
-    fontSize: "1.8rem",
-    marginBottom: 20,
-  },
-  input: {
-    marginBottom: 10,
-  },
-  button: {
-    padding: "10px 20px",
-    fontSize: "1rem",
-    cursor: "pointer",
-    backgroundColor: "#4CAF50",
-    color: "white",
-    border: "none",
-    borderRadius: 5,
-  },
-  success: {
-    color: "green",
-    marginTop: 10,
-  },
-  error: {
-    color: "red",
-    marginTop: 10,
-  },
-  example: {
-    marginTop: 20,
-    textAlign: "left",
-  },
-  code: {
-    backgroundColor: "#f4f4f4",
-    padding: 10,
-    borderRadius: 5,
-    fontSize: "0.9rem",
-    overflowX: "auto",
-  },
 };
 
 export default GramateiaInsert;

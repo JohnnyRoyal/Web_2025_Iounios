@@ -1,0 +1,56 @@
+.button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #4CAF50; /* Πράσινο */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Ομαλή μετάβαση */
+}
+
+.button-mazi {
+  display: flex;
+  gap: 10px; /* Προσθήκη κενού 10px ανάμεσα στα κουμπιά */
+}
+
+.button:hover {
+  background-color: #45a049; /* Σκούρο πράσινο όταν το ποντίκι είναι από πάνω */
+}
+
+.list-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.list {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9f9f9;
+}
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.heading {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.lists-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}

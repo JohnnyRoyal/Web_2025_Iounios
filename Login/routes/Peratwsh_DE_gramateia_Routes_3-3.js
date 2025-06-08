@@ -66,7 +66,7 @@ router.post("/", authMiddleware, async (req, res) => {
       { _id: my_objectId, katastasi: "υπό εξέταση" }, // Εύρεση της διπλωματικής με βάση το ID και την κατάσταση
       {
         $set: {
-          katastasi: "Περατωμένη", // Ενημέρωση της κατάστασης
+          katastasi: "περατωμένη", // Ενημέρωση της κατάστασης
         },
         $push: {
           proigoumenesKatastaseis: 3, // Προσθήκη του αριθμού 3 στο array για δήλωση της προηγούμενης κατάστασης
@@ -79,7 +79,7 @@ router.post("/", authMiddleware, async (req, res) => {
         message: `❌ Δεν βρέθηκε διπλωματική με id: ${id}, είτε το ID είναι λάθος είτε η κατάσταση δεν είναι "υπό εξέταση".`,
       });
     } else {
-      res.status(200).json({ message: `✅ Ενημερώθηκε η διπλωματική με id: ${id} σε "Περατωμένη" και προστέθηκε στο array "proigoumenesKatastaseis".` });
+      res.status(200).json({ message: `✅ Ενημερώθηκε η διπλωματική με id: ${id} σε "περατωμένη" και προστέθηκε στο array "proigoumenesKatastaseis".` });
     }
   } catch (error) {
     console.error("❌ Σφάλμα κατά την ενημέρωση:", error);

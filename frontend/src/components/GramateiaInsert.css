@@ -1,0 +1,55 @@
+.insert-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.insert-container h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.insert-container input[type="file"] {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.insert-container button {
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.insert-container button:hover {
+  background-color: #45a049;
+}
+
+.insert-container pre {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  overflow-x: auto;
+  text-align: left;
+}
+
+.insert-container .success {
+  color: green;
+  margin-top: 10px;
+}
+
+.insert-container .error {
+  color: red;
+  margin-top: 10px;
+}

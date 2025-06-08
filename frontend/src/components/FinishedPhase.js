@@ -76,6 +76,7 @@ export default FinishedPhase;
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./DiplomaManager.css";
 
 const FinishedPhase = () => {
   const [diploma, setDiploma] = useState(null);
@@ -108,28 +109,33 @@ const FinishedPhase = () => {
   if (!diploma) return <p>Φόρτωση...</p>;
 
   return (
-    <div style={{ padding: 20, maxWidth: 800, margin: "auto" }}>
+    <div className="container">
       <h2>🎓 Περατωμένη Διπλωματική</h2>
-
       <button onClick={() => navigate("/praktiko")} style={{ marginBottom: 20 }}>
         🧾 Προβολή Πρακτικού Εξέτασης
       </button>
-
-      <p><strong>Τίτλος:</strong> {diploma.title || diploma.titlos || "—"}</p>
-      <p><strong>Περίληψη:</strong> {diploma.summary || diploma.perigrafi || "—"}</p>
-      <p><strong>Κατάσταση:</strong> {diploma.status || diploma.katastasi}</p>
-
-      <p><strong>Τελικός Βαθμός:</strong> {diploma.telikosVathmos ?? "—"}</p>
-
+      <div className="detail-box">
+        <p><strong>Τίτλος:</strong> {diploma.title || diploma.titlos || "—"}</p>
+      </div>
+      <div className="detail-box">
+        <p><strong>Περίληψη:</strong> {diploma.summary || diploma.perigrafi || "—"}</p>
+      </div>
+      <div className="detail-box">
+        <p><strong>Κατάσταση:</strong> {diploma.status || diploma.katastasi}</p>
+      </div>
+      <div className="detail-box">
+        <p><strong>Τελικός Βαθμός:</strong> {diploma.telikosVathmos ?? "—"}</p>
+      </div>
       {diploma.telikoKeimenoPdf && (
-        <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.telikoKeimenoPdf} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
+        <div className="detail-box">
+          <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.telikoKeimenoPdf} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
+        </div>
       )}
-
-
       {diploma.sxolia && (
-        <p><strong>Τελικά Σχόλια:</strong> {diploma.sxolia}</p>
+        <div className="detail-box">
+          <p><strong>Τελικά Σχόλια:</strong> {diploma.sxolia}</p>
+        </div>
       )}
-
       <h3>📜 Προηγούμενες Καταστάσεις</h3>
       <ul>
         {(diploma.proigoumenesKatastaseis || []).map((k, i) => (

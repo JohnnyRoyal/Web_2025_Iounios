@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./GramateiaView.css"; // Εισαγωγή  CSS
 
 const GramateiaView = () => {
   const [diplomas, setDiplomas] = useState([]);
@@ -191,15 +192,15 @@ const GramateiaView = () => {
   const underReviewDiplomas = diplomas.filter((diploma) => diploma.katastasi === "υπό εξέταση");
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>📄 Λίστα Διπλωματικών Εργασιών</h2>
-      {error && <p style={styles.error}>{error}</p>}
-      <div style={styles.listsContainer}>
-        <div style={styles.list}>
+    <div className="container">
+      <h2 className="heading">📄 Λίστα Διπλωματικών Εργασιών</h2>
+      {error && <p className="error">{error}</p>}
+      <div className="lists-container">
+        <div className="list">
           <h3>Ενεργές Διπλωματικές</h3>
           <ul>
             {activeDiplomas.map((diploma, index) => (
-              <li key={index} style={styles.listItem}>
+              <li key={index} className="list-item">
                 <h4>{diploma.titlos}</h4>
                 <p><strong>Περιγραφή:</strong> {diploma.perigrafi}</p>
                 <p><strong>Κατάσταση:</strong> {diploma.katastasi}</p>
@@ -220,11 +221,11 @@ const GramateiaView = () => {
                     </a>
                   </p>
                 )}
-                <div style={styles.buttonGroup}>
-                  <button onClick={() => handleSetAP(diploma._id)} style={styles.button}>
+                <div className="button-mazi">
+                  <button onClick={() => handleSetAP(diploma._id)} className="button">
                     Καταχώρηση ΑΠ
                   </button>
-                  <button onClick={() => handleCancelAssignment(diploma._id)} style={styles.button}>
+                  <button onClick={() => handleCancelAssignment(diploma._id)} className="button">
                     Ακύρωση Ανάθεσης
                   </button>
                 </div>
@@ -232,11 +233,11 @@ const GramateiaView = () => {
             ))}
           </ul>
         </div>
-        <div style={styles.list}>
+        <div className="list">
           <h3>Υπό Εξέταση Διπλωματικές</h3>
           <ul>
             {underReviewDiplomas.map((diploma, index) => (
-              <li key={index} style={styles.listItem}>
+              <li key={index} className="list-item">
                 <h4>{diploma.titlos}</h4>
                 <p><strong>Περιγραφή:</strong> {diploma.perigrafi}</p>
                 <p><strong>Κατάσταση:</strong> {diploma.katastasi}</p>
@@ -257,7 +258,7 @@ const GramateiaView = () => {
                     </a>
                   </p>
                 )}
-                <button onClick={() => handleCompleteDiploma(diploma._id)} style={styles.button}>
+                <button onClick={() => handleCompleteDiploma(diploma._id)} className="button">
                   Ολοκλήρωση Διπλωματικής
                 </button>
               </li>
@@ -267,54 +268,6 @@ const GramateiaView = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    padding: 20,
-    maxWidth: 1200,
-    margin: "auto",
-  },
-  heading: {
-    fontSize: "1.8rem",
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  error: {
-    color: "red",
-    textAlign: "center",
-  },
-  listsContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: 20,
-  },
-  list: {
-    flex: 1,
-    border: "1px solid #ddd",
-    borderRadius: 8,
-    padding: 16,
-    backgroundColor: "#f9f9f9",
-  },
-  listItem: {
-    borderBottom: "1px solid #ddd",
-    padding: 10,
-    marginBottom: 10,
-  },
-  buttonGroup: {
-    display: "flex",
-    gap: 10,
-    marginTop: 10,
-  },
-  button: {
-    padding: "10px 20px",
-    fontSize: "1rem",
-    cursor: "pointer",
-    backgroundColor: "#4CAF50",
-    color: "white",
-    border: "none",
-    borderRadius: 5,
-  },
 };
 
 export default GramateiaView;

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./DiplomaManager.css";
 
 
 const ExetasiPhase = () => {
@@ -86,6 +87,87 @@ const ExetasiPhase = () => {
 
   if (!data) return <p>Φόρτωση...</p>;
 
+
+  return (
+    <div className="container">
+      <h3>📑 Φάση Υπό Εξέταση</h3>
+      <button onClick={() => navigate("/praktiko")} style={{ marginBottom: 20 }}>
+        🧾 Προβολή Πρακτικού Εξέτασης
+      </button>
+      <div className="detail-box">
+        <h4>🔗 Τελικός Σύνδεσμος προς Νημερτή</h4>
+        <label>Καταχωρήστε τον τελικό σύνδεσμο προς το αποθετήριο της βιβλιοθήκης (Νημερτής):</label>
+        <input
+          type="text"
+          value={syndesmos}
+          onChange={(e) => setSyndesmos(e.target.value)}
+          style={{ width: "100%", marginBottom: 8 }}
+        />
+        <button onClick={saveSyndesmos}>💾 Αποθήκευση Συνδέσμου</button>
+        {linkMsg && <p style={{ color: linkMsg.includes("❌") ? "red" : "green" }}>{linkMsg}</p>}
+      </div>
+      <div className="detail-box">
+        <h4>📄 Πρόχειρο Κείμενο</h4>
+        <label>PDF link:</label>
+        <input
+          value={draftForm.pdfProxeiroKeimeno}
+          onChange={(e) => setDraftForm({ ...draftForm, pdfProxeiroKeimeno: e.target.value })}
+        />
+        <label>Σύνδεσμος Υλικού:</label>
+        <input
+          value={draftForm.linkYliko}
+          onChange={(e) => setDraftForm({ ...draftForm, linkYliko: e.target.value })}
+        />
+        <button onClick={handleSaveDraft}>💾 Αποθήκευση Πρόχειρου</button>
+        {msg.draft && <p style={{ color: msg.draft.includes("Σφάλμα") ? "red" : "green" }}>{msg.draft}</p>}
+      </div>
+      <div className="detail-box">
+        <h4>🕒 Στοιχεία Εξέτασης</h4>
+        <label>Ημερομηνία & Ώρα:</label>
+        <input
+          type="datetime-local"
+          value={examForm.imerominiaOraExetasis}
+          onChange={(e) => setExamForm({ ...examForm, imerominiaOraExetasis: e.target.value })}
+        />
+        <label>Τρόπος Εξέτασης:</label>
+        <select
+          value={examForm.troposExetasis}
+          onChange={(e) => setExamForm({ ...examForm, troposExetasis: e.target.value })}
+        >
+          <option value="">-- Επιλέξτε --</option>
+          <option value="από κοντά">Από κοντά</option>
+          <option value="εξ αποστάσεως">Εξ αποστάσεως</option>
+        </select>
+        {examForm.troposExetasis === "από κοντά" && (
+          <>
+            <label>Αίθουσα:</label>
+            <input
+              value={examForm.aithousaExetasis}
+              onChange={(e) => setExamForm({ ...examForm, aithousaExetasis: e.target.value })}
+            />
+          </>
+        )}
+        {examForm.troposExetasis === "εξ αποστάσεως" && (
+          <>
+            <label>Σύνδεσμος Εξέτασης:</label>
+            <input
+              value={examForm.syndesmosExetasis}
+              onChange={(e) => setExamForm({ ...examForm, syndesmosExetasis: e.target.value })}
+            />
+          </>
+        )}
+        <button onClick={handleSaveExam}>💾 Αποθήκευση Εξέτασης</button>
+        {msg.exam && <p style={{ color: msg.exam.includes("Σφάλμα") ? "red" : "green" }}>{msg.exam}</p>}
+      </div>
+    </div>
+  );
+  
+
+
+
+
+
+  /*
   return (
     <div style={{ maxWidth: 800, margin: "auto", padding: 20 }}>
       <h3>📑 Φάση Υπό Εξέταση</h3>
@@ -143,7 +225,8 @@ const ExetasiPhase = () => {
 
     
     </div>
-  );
+  ); 
+*/
 };
 
 export default ExetasiPhase;

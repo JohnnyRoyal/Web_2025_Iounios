@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./ProfileEditor.css"; // Προσθήκη CSS για στυλ
 
 const ProfileEditor = () => {
   const [profile, setProfile] = useState(null);
@@ -42,21 +43,16 @@ const ProfileEditor = () => {
   if (!profile) return <p>Φόρτωση...</p>;
 
   return (
-    <div style={{ maxWidth: 600, margin: "auto", padding: 20 }}>
+    <div className="profile-container">
       <h2>🧾 Επεξεργασία Προφίλ</h2>
-
       <label>Διεύθυνση:</label>
-      <input name="taxydromikiDieythinsi" value={profile.taxydromikiDieythinsi || ""} onChange={handleChange} style={{ width: "100%" }} /><br /><br />
-
+      <input name="taxydromikiDieythinsi" value={profile.taxydromikiDieythinsi || ""} onChange={handleChange} />
       <label>Email:</label>
-      <input name="email" value={profile.email || ""} onChange={handleChange} style={{ width: "100%" }} /><br /><br />
-
+      <input name="email" value={profile.email || ""} onChange={handleChange} />
       <label>Κινητό:</label>
-      <input name="kinito" value={profile.kinito || ""} onChange={handleChange} style={{ width: "100%" }} /><br /><br />
-
+      <input name="kinito" value={profile.kinito || ""} onChange={handleChange} />
       <label>Σταθερό:</label>
-      <input name="stathero" value={profile.stathero || ""} onChange={handleChange} style={{ width: "100%" }} /><br /><br />
-
+      <input name="stathero" value={profile.stathero || ""} onChange={handleChange} />
       <button onClick={handleSave}>💾 Αποθήκευση</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}

@@ -1,6 +1,7 @@
 // src/components/TeacherHome.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./StudentHome.css"; // Χρήση του CSS από το StudentHome.js
 
 const TeacherHome = () => {
   const navigate = useNavigate()
@@ -12,28 +13,19 @@ const TeacherHome = () => {
   
 
   return (
-    <div style={{ maxWidth: 800, margin: "auto", padding: 20 }}>
-      <button onClick={handleLogout} style={{ float: "right", backgroundColor: "#c44", color: "#fff", padding: 10 }}>
-        🚪 Αποσύνδεση
-      </button>
-      <h2>👨‍🏫 Καλωσήρθατε</h2>
-      
-      <button onClick={() => navigate("/teacher/themata")} style={{ marginTop: 20 }}>
-        📘 Τα θέματα σας
-      </button>
-      
-      <button onClick={() => navigate("/teacher/CreateThema")} style={{ marginTop: 20 }}>
-        ➕ Δημιουργία Νέου Θέματος
-      </button>
+    <div className="student-home-container">
+      <div className="logoutContainer">
+        <button onClick={handleLogout} className="logoutButton">🚪 Αποσύνδεση</button>
+      </div>
 
-      <button onClick={() => navigate("/teacher/invites")}>📩 Προσκλήσεις Επιτροπής</button>
-
-      <button onClick={() => navigate("/assign-thema")}>📌 Ανάθεση Θέματος σε Φοιτητή</button>
-
-      <button onClick={() => navigate("/ProfessorDiplomas")}> Προβολή λίστας διπλωματικών</button>
-
-
-
+      <h2>Καλωσήρθατε, Καθηγητή!</h2>
+      <div className="student-menu">
+        <button onClick={() => navigate("/teacher/themata")}>📘 Τα θέματα σας</button>
+        <button onClick={() => navigate("/teacher/CreateThema")}>➕ Δημιουργία Νέου Θέματος</button>
+        <button onClick={() => navigate("/teacher/invites")}>📩 Προσκλήσεις Επιτροπής</button>
+        <button onClick={() => navigate("/assign-thema")}>📌 Ανάθεση Θέματος σε Φοιτητή</button>
+        <button onClick={() => navigate("/ProfessorDiplomas")}>📄 Προβολή λίστας διπλωματικών</button>
+      </div>
     </div>
   );
 };
