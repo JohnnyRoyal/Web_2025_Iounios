@@ -1,0 +1,63 @@
+.create-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.create-container h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.create-container label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  display: block;
+  text-align: left; /* Ευθυγράμμιση στην αριστερή πλευρά */
+}
+
+.create-container input[type="text"],
+.create-container textarea,
+.create-container input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.create-container button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px; /* Μικρότερο κουμπί */
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: left; /* Ευθυγράμμιση στην αριστερή πλευρά */
+}
+
+.create-container button:hover {
+  background-color: #45a049;
+}
+
+.create-container p {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .create-container {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .create-container h2 {
+    font-size: 1.5rem;
+  }
+}

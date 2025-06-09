@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./CreateThema.css"; // Εισαγωγή του νέου CSS
 
 const CreateThema = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const CreateThema = () => {
       setMessage(err.response?.data?.message || "Σφάλμα κατά την αποστολή");
     }
   };
-
+  /*
   return (
     <div style={{ maxWidth: 600, margin: "auto", padding: 20 }}>
       <h2>➕ Δημιουργία Νέου Θέματος</h2>
@@ -65,6 +66,36 @@ const CreateThema = () => {
         <button type="submit" style={{ marginTop: 20 }}>✅ Καταχώρηση</button>
       </form>
       {message && <p style={{ marginTop: 20 }}>{message}</p>}
+    </div>
+  );
+};
+*/
+
+  return (
+    <div className="create-container">
+      <h2>➕ Δημιουργία Νέου Θέματος</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Τίτλος:</label>
+        <input
+          type="text"
+          value={titlos}
+          onChange={(e) => setTitlos(e.target.value)}
+          required
+        />
+
+        <label>Περίγραφή:</label>
+        <textarea
+          value={perigrafi}
+          onChange={(e) => setperigrafi(e.target.value)}
+          required
+        />
+
+        <label>Ανέβασμα PDF (προαιρετικό):</label>
+        <input type="file" accept="application/pdf" onChange={(e) => setPdf(e.target.files[0])} />
+
+        <button type="submit">✅ Καταχώρηση</button>
+      </form>
+      {message && <p style={{ color: message.includes("❌") ? "red" : "green" }}>{message}</p>}
     </div>
   );
 };
