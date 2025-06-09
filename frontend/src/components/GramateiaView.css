@@ -1,6 +1,6 @@
 .button {
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 8px 16px; /* Μικρότερα κουμπιά */
+  font-size: 0.9rem; /* Μείωση μεγέθους γραμματοσειράς */
   cursor: pointer;
   background-color: #4CAF50; /* Πράσινο */
   color: white;
@@ -30,11 +30,12 @@
   border-radius: 8px;
   padding: 16px;
   background-color: #f9f9f9;
+  justify-content: space-between; /* Ευθυγράμμιση περιεχομένου */
 }
 
 .container {
   padding: 20px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: auto;
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./TeacherInvites.css"; //Το στυλ για τις προσκλήσεις διδασκόντων
 
 const TeacherInvites = () => {
   const [invites, setInvites] = useState([]);
@@ -34,25 +35,31 @@ const TeacherInvites = () => {
   };
 
   return (
-    <div style={{ maxWidth: 900, margin: "auto", padding: 20 }}>
-      <h2>📩 Προσκλήσεις για Τριμελείς Επιτροπές</h2>
+    <div>
+      <h2 style={{ textAlign: "center", marginBottom: 20 }}>📩 Προσκλήσεις για Τριμελείς Επιτροπές</h2>
 
       {invites.length === 0 ? (
-        <p>Δεν έχετε ενεργές προσκλήσεις.</p>
+        <p className="message">Δεν έχετε ενεργές προσκλήσεις.</p>
       ) : (
         invites.map((invite, index) => (
-          <div key={index} style={{ border: "1px solid #ccc", padding: 16, marginBottom: 12 }}>
-            <p><strong>Τίτλος:</strong> {invite.titlos}</p>
-            <p><strong>Περιγραφή:</strong> {invite.perigrafi}</p>
-            <p><strong>Φοιτητής:</strong> {invite.foititis}</p>
+          <div key={index} className="invite-box">
+            <div className="invite-detail">
+              <p><strong>Τίτλος:</strong> {invite.titlos}</p>
+            </div>
+            <div className="invite-detail">
+              <p><strong>Περιγραφή:</strong> {invite.perigrafi}</p>
+            </div>
+            <div className="invite-detail">
+              <p><strong>Φοιτητής:</strong> {invite.foititis}</p>
+            </div>
             <button onClick={() => respondToInvite(index, "apodoxi")}>✅ Αποδοχή</button>
-            <button onClick={() => respondToInvite(index, "aporripsi")} style={{ marginLeft: 8 }}>❌ Απόρριψη</button>
+            <button onClick={() => respondToInvite(index, "aporripsi")}>❌ Απόρριψη</button>
           </div>
         ))
       )}
 
-      {msg && <p style={{ color: msg.includes("❌") ? "red" : "green" }}>{msg}</p>}
-      <button onClick={() => navigate("/teacher")} style={{ marginTop: 20 }}>🔙 Επιστροφή</button>
+      {msg && <p className="message" style={{ color: msg.includes("❌") ? "red" : "green" }}>{msg}</p>}
+      <button onClick={() => navigate("/teacher")} className="return-button">🔙 Επιστροφή</button>
     </div>
   );
 };
