@@ -506,7 +506,7 @@ router.get("/diplomatikes/:id", authMiddleware, async (req, res) => {
   }
 });
 
-// Ερωτημα 5 στατιστικα με γραφηματα
+// Ερώτημα 5 - στατιστικά διπλωματικών
 router.get("/statistics", authMiddleware, async (req, res) => {
   try {
     if (req.user.role !== "teacher") {
@@ -516,43 +516,67 @@ router.get("/statistics", authMiddleware, async (req, res) => {
     const col = await getDiplomaCollection();
     const teacherId = req.user.id;
 
-    const diplomas = await col.find({
-      $or: [
-        { "mainKathigitis.didaskonId": teacherId },
-        { "trimelisEpitropi.didaskonId": teacherId }
-      ]
+    // Διπλωματικές όπου είναι επιβλέπων
+    const mainDiplomas = await col.find({ "mainKathigitis.didaskonId": teacherId }).toArray();
+
+    // Διπλωματικές όπου είναι ΜΟΝΟ μέλος
+    const memberDiplomas = await col.find({
+      "trimelisEpitropi.didaskonId": teacherId,
+      "mainKathigitis.didaskonId": { $ne: teacherId }
     }).toArray();
 
-    const finished = diplomas.filter(d => d.katastasi === "περατωμένη");
-    const count = diplomas.length;
-
-    //οταν φτιαξουμε τις προηγουμενες καταστασεις στην βαση εδω θα υπολογιζεται η διαφορα σε μερες απο οταν η διπλωματικη 
-    // εγινε ενεργη με οταν εγινε περατωμενη
-    const avgDays = finished.length > 0
+    // Υπολογισμός για main
+    const finishedMain = mainDiplomas.filter(d => d.katastasi === "περατωμένη");
+    const avgMainDays = finishedMain.length > 0
       ? Math.round(
-          finished.reduce((acc, d) => acc + (
+          finishedMain.reduce((acc, d) => acc + (
             (new Date(d.dateUpdated) - new Date(d.dateCreated)) / (1000 * 60 * 60 * 24)
-          ), 0) / finished.length
+          ), 0) / finishedMain.length
         )
       : 0;
-
-    const avgGrade = finished.length > 0
+    const avgMainGrade = finishedMain.length > 0
       ? (
-          finished
+          finishedMain
             .filter(d => typeof d.telikosVathmos === "number")
-            .reduce((acc, d) => acc + d.telikosVathmos, 0) / finished.length
+            .reduce((acc, d) => acc + d.telikosVathmos, 0) / finishedMain.length
         ).toFixed(2)
       : "0.00";
 
+    // Υπολογισμός για μέλος
+    const finishedMember = memberDiplomas.filter(d => d.katastasi === "περατωμένη");
+    const avgMemberDays = finishedMember.length > 0
+      ? Math.round(
+          finishedMember.reduce((acc, d) => acc + (
+            (new Date(d.dateUpdated) - new Date(d.dateCreated)) / (1000 * 60 * 60 * 24)
+          ), 0) / finishedMember.length
+        )
+      : 0;
+    const avgMemberGrade = finishedMember.length > 0
+      ? (
+          finishedMember
+            .filter(d => typeof d.telikosVathmos === "number")
+            .reduce((acc, d) => acc + d.telikosVathmos, 0) / finishedMember.length
+        ).toFixed(2)
+      : "0.00";
+
+    // Τελική απάντηση
     res.json({
-      count,
-      avgDays,
-      avgGrade
+      main: {
+        count: mainDiplomas.length,
+        avgDays: avgMainDays,
+        avgGrade: avgMainGrade
+      },
+      member: {
+        count: memberDiplomas.length,
+        avgDays: avgMemberDays,
+        avgGrade: avgMemberGrade
+      }
     });
   } catch (err) {
     res.status(500).json({ message: "Σφάλμα στατιστικών", error: err.message });
   }
 });
+
 
 
 
