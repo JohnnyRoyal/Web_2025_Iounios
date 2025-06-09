@@ -506,6 +506,54 @@ router.get("/diplomatikes/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// Ερωτημα 5 στατιστικα με γραφηματα
+router.get("/statistics", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "teacher") {
+      return res.status(403).json({ message: "Δεν επιτρέπεται η πρόσβαση" });
+    }
+
+    const col = await getDiplomaCollection();
+    const teacherId = req.user.id;
+
+    const diplomas = await col.find({
+      $or: [
+        { "mainKathigitis.didaskonId": teacherId },
+        { "trimelisEpitropi.didaskonId": teacherId }
+      ]
+    }).toArray();
+
+    const finished = diplomas.filter(d => d.katastasi === "περατωμένη");
+    const count = diplomas.length;
+
+    //οταν φτιαξουμε τις προηγουμενες καταστασεις στην βαση εδω θα υπολογιζεται η διαφορα σε μερες απο οταν η διπλωματικη 
+    // εγινε ενεργη με οταν εγινε περατωμενη
+    const avgDays = finished.length > 0
+      ? Math.round(
+          finished.reduce((acc, d) => acc + (
+            (new Date(d.dateUpdated) - new Date(d.dateCreated)) / (1000 * 60 * 60 * 24)
+          ), 0) / finished.length
+        )
+      : 0;
+
+    const avgGrade = finished.length > 0
+      ? (
+          finished
+            .filter(d => typeof d.telikosVathmos === "number")
+            .reduce((acc, d) => acc + d.telikosVathmos, 0) / finished.length
+        ).toFixed(2)
+      : "0.00";
+
+    res.json({
+      count,
+      avgDays,
+      avgGrade
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα στατιστικών", error: err.message });
+  }
+});
+
 
 
 module.exports = router;

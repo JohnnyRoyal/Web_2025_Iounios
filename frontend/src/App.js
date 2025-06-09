@@ -22,6 +22,7 @@ import AssignThema from "./components/AssignThema";
 import AnaklisiThematos from "./components/AnaklisiThematos";
 import TeacherDiplomas from "./components/TeacherDiplomas";
 import TeacherDiplomaDetails from "./components/TeacherDiplomaDetails";
+import TeacherStatistics from "./components/TeacherStatistics";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/AnaklisiThematos" element={<AnaklisiThematos />} />
         <Route path="/ProfessorDiplomas" element={<TeacherDiplomas />} />
         <Route path="/diploma/:id" element={<TeacherDiplomaDetails />} />
+        <Route path="/TeacherStatistics" element={<TeacherStatistics/>} />
 
 
 
