@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./TeacherDiplomas.css";
 
 const TeacherDiplomas = () => {
   const [diplomas, setDiplomas] = useState([]);
@@ -67,53 +66,49 @@ const TeacherDiplomas = () => {
 
   
   return (
-    <div className="container">
-      <h2 className="heading">📘 Οι Διπλωματικές μου</h2>
+    <div style={{ padding: 20 }}>
+      <h2>📘 Οι Διπλωματικές μου</h2>
 
-      <div className="filters-container">
-        <div>
-          <label>Κατάσταση:</label>
-          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-            <option value="">-- Όλες --</option>
-            <option value="υπό ανάθεση">Υπό Ανάθεση</option>
-            <option value="Ενεργή">Ενεργή</option>
-            <option value="υπό εξέταση">Υπό Εξέταση</option>
-            <option value="περατωμένη">Περατωμένη</option>
-            <option value="ακυρωμένη">Ακυρωμένη</option>
-          </select>
-        </div>
+      <div style={{ marginBottom: 12 }}>
+        <label>Κατάσταση:</label>
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+          <option value="">-- Όλες --</option>
+          <option value="υπό ανάθεση">Υπό Ανάθεση</option>
+          <option value="Ενεργή">Ενεργή</option>
+          <option value="υπό εξέταση">Υπό Εξέταση</option>
+          <option value="περατωμένη">Περατωμένη</option>
+          <option value="ακυρωμένη">Ακυρωμένη</option>
+        </select>
 
-        <div>
-          <label>Ρόλος:</label>
-          <select value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)}>
-            <option value="">-- Όλοι --</option>
-            <option value="epivlepon">Επιβλέπων</option>
-            <option value="melos">Μέλος Τριμελούς</option>
-          </select>
-        </div>
+        <label style={{ marginLeft: 20 }}>Ρόλος:</label>
+        <select value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)}>
+          <option value="">-- Όλοι --</option>
+          <option value="epivlepon">Επιβλέπων</option>
+          <option value="melos">Μέλος Τριμελούς</option>
+        </select>
       </div>
 
-      <div className="export-buttons">
-        <button onClick={() => exportData("json")} className="button">📄 Εξαγωγή σε JSON</button>
-        <button onClick={() => exportData("csv")} className="button">📑 Εξαγωγή σε CSV</button>
-      </div>
+      <button onClick={() => exportData("json")}>📄 Εξαγωγή σε JSON</button>
+      <button onClick={() => exportData("csv")} style={{ marginLeft: 10 }}>📑 Εξαγωγή σε CSV</button>
 
-      {message && <p className="error">{message}</p>}
 
       {diplomas.length === 0 && <p>Δεν βρέθηκαν διπλωματικές</p>}
 
       {diplomas.map((d) => (
-        <div key={d._id} className="list">
+        <div key={d._id} style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
           <p><strong>Τίτλος:</strong> {d.titlos}</p>
           <p><strong>Κατάσταση:</strong> {d.katastasi}</p>
           {d.foititis && (
             <p><strong>Φοιτητής:</strong> {d.foititis.onoma} {d.foititis.epitheto} ({d.foititis.arithmosMitroou})</p>
           )}
           <p><strong>Επιβλέπων:</strong> {d.mainKathigitis?.onoma} {d.mainKathigitis?.epitheto}</p>
-          <p><strong>Τριμελής:</strong> {d.trimelisEpitropi?.map((m) => `${m.onoma} ${m.epitheto}`).join(", ")}</p>
-          <button onClick={() => navigate(`/diploma/${d._id}`)} className="button">📄 Προβολή Πληροφοριών</button>
+          <p><strong>Τριμελής:</strong> {d.trimelisEpitropi?.map(m => `${m.onoma} ${m.epitheto}`).join(", ")}</p>
+          {/* Προσθήκη κουμπιών για περισσότερες ενέργειες */}
+          <button onClick={() => navigate(`/diploma/${d._id}`)}>📄 Προβολή Πληροφοριών</button>
         </div>
       ))}
+
+      {message && <p style={{ color: "red" }}>{message}</p>}
     </div>
   );
 };
