@@ -61,12 +61,16 @@ router.post("/", authMiddleware, async (req, res) => {
       });
     }
 
+    // Δημιουργία της τρέχουσας ημερομηνίας σε μορφή συμβατή με τη MongoDB
+    const currentDate = new Date();
+
     // Ενημέρωση της διπλωματικής με την κατάσταση "Περατωμένη" και προσθήκη στο array "proigoumenesKatastaseis"
     const result = await collection.updateOne(
       { _id: my_objectId, katastasi: "υπό εξέταση" }, // Εύρεση της διπλωματικής με βάση το ID και την κατάσταση
       {
         $set: {
           katastasi: "περατωμένη", // Ενημέρωση της κατάστασης
+          imerominiaPeratosis: currentDate, // Προσθήκη της ημερομηνίας περάτωσης
         },
         $push: {
           proigoumenesKatastaseis: 3, // Προσθήκη του αριθμού 3 στο array για δήλωση της προηγούμενης κατάστασης

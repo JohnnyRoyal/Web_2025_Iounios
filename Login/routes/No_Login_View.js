@@ -20,12 +20,18 @@ router.get("/", async (req, res) => {
     const { from, to, format } = req.query;
     const diplomas = await getDiplomasCollection();
 
+    // Μετατροπή ημερομηνιών από ευρωπαϊκή μορφή (DD/MM/YYYY) σε ISO 8601
+    const convertToISODate = (date) => {
+      const [day, month, year] = date.split("/");
+      return new Date(`${year}-${month}-${day}`);
+    };
+
     // Φιλτράρισμα με βάση ημερομηνία αν δοθούν παράμετροι
     let filter = {};
     if (from || to) {
       filter.imerominiaOraExetasis = {};
-      if (from) filter.imerominiaOraExetasis.$gte = from;
-      if (to) filter.imerominiaOraExetasis.$lte = to;
+      if (from) filter.imerominiaOraExetasis.$gte = convertToISODate(from);
+      if (to) filter.imerominiaOraExetasis.$lte = convertToISODate(to);
     }
 
     const data = await diplomas.find(filter).toArray();

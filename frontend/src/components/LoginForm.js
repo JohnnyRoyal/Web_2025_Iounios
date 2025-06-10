@@ -46,23 +46,26 @@ const LoginForm = () => {
     }
   };
 
+  
   // Φόρτωση διπλωματικών με φίλτρα
   const fetchDiplomas = async () => {
     setLoading(true);
     try {
-      let url = `http://localhost:4000/api/diplomas/nologin?format=${format}`;
-      if (from) url += `&from=${from}`;
-      if (to) url += `&to=${to}`;
-      console.log("Fetching diplomas from:", url); // Για debugging
-      const res = await axios.get(url, { responseType: format === "xml" ? "text" : "json" });
-      if (format === "xml") {
-        setDiplomas(res.data); // raw XML string
-      } else {
-        setDiplomas(res.data || []);
-      }
+      // Μετατροπή ημερομηνιών σε ευρωπαϊκή μορφή (DD/MM/YYYY)
+      const formatDateToEuropean = (date) => {
+        const [year, month, day] = date.split("-");
+        return `${day}/${month}/${year}`;
+      };
+
+      let url = `http://localhost:4000/api/diplomas/nologin`;
+      if (from) url += `?from=${formatDateToEuropean(from)}`;
+      if (to) url += `&to=${formatDateToEuropean(to)}`;
+
+      const res = await axios.get(url);
+      setDiplomas(res.data || []);
     } catch (e) {
-      setDiplomas(format === "xml" ? "" : []);
-      console.error("Diplomas fetch error:", e); // Για debugging
+      setDiplomas([]);
+      console.error("Diplomas fetch error:", e);
     }
     setLoading(false);
   };
@@ -122,10 +125,13 @@ const LoginForm = () => {
               <br />
               {d.perigrafi}
               <br />
-              <b>Ημ/νία ανακοίνωσης εξέτασης:</b> {d.imerominia_anakinosis_diplomatikis}
+              <b>Ημ/νία ανακοίνωσης εξέτασης:</b>{" "}
+              {new Date(d.imerominia_anakinosis_diplomatikis).toLocaleDateString("el-GR")}
               <br />
               {d.pdf_extra_perigrafi && (
-                <a href={d.pdf_extra_perigrafi} target="_blank" rel="noopener noreferrer">Προβολή PDF</a>
+                <a href={d.pdf_extra_perigrafi} target="_blank" rel="noopener noreferrer">
+                  Προβολή PDF
+                </a>
               )}
             </li>
           ))}
