@@ -100,7 +100,7 @@ const DiplomaManager = () => {
     return <FinishedPhase />;
   }
 
-  return <p>Η κατάσταση "{status}" δεν υποστηρίζεται αυτή τη στιγμή από το frontend.</p>;
+  return <p>Καθώς η διπλωματική βρίσκεται στην κατάσταση "{status}", δεν είναι δυνατή η διαχείριση της απο τον φοιτητή σε αυτό το στάδιο.</p>;
 };
 
 export default DiplomaManager;

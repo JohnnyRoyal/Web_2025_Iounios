@@ -30,26 +30,8 @@ router.get("/my", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική εργασία" });
     }
 
-    //Αν είναι περατωμένη
-    if (diploma.katastasi === "περατωμένη") {
-      return res.json({
-        title: diploma.titlos,
-        status: diploma.katastasi,
-        summary: diploma.perigrafi,
-        pdf_url: diploma.pdfExtraPerigrafi,
-        trimelisEpitropi: diploma.trimelisEpitropi || [],
-        telikosVathmos: diploma.telikosVathmos || null,
-        assignment_date: diploma.imerominiaAnathesis,
-        troposExetasis: diploma.troposExetasis,
-        imerominiaOraExetasis: diploma.imerominiaOraExetasis || null,
-        mainKathigitis: diploma.mainKathigitis || {},
-        proigoumenesKatastaseis: diploma.proigoumenesKatastaseis || [],
-        telikoKeimenoPdf: diploma.telikoKeimenoPdf || [],
-        sxolia: diploma.sxolia || []
-      });
-    }
-``
-    // Ανάκτηση και επεξεργασία χρόνου
+
+    // Υπολογισμός χρόνου από την ανάθεση
     let timeSinceAssignment = null;
     if (diploma.imerominiaAnathesis) {
       const now = new Date();
@@ -57,6 +39,27 @@ router.get("/my", authMiddleware, async (req, res) => {
       const days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
       timeSinceAssignment = `${days} μέρες`;
     }
+
+    //Αν είναι περατωμένη
+    if (diploma.katastasi === "περατωμένη") {
+      return res.json({
+        title: diploma.titlos,
+        status: diploma.katastasi,
+        summary: diploma.perigrafi,
+        pdf_url: diploma.pdfExtraPerigrafi,
+        committee: diploma.trimelisEpitropi || [],
+        telikosVathmos: diploma.telikosVathmos || null,
+        assignment_date: diploma.imerominiaAnathesis,
+        troposExetasis: diploma.troposExetasis,
+        imerominiaOraExetasis: diploma.imerominiaOraExetasis || null,
+        time_since_assignment: timeSinceAssignment,
+        mainKathigitis: diploma.mainKathigitis || {},
+        proigoumenesKatastaseis: diploma.proigoumenesKatastaseis || [],
+        telikoKeimenoPdf: diploma.telikoKeimenoPdf || [],
+        sxolia: diploma.sxolia || []
+      });
+    }
+
 
     res.json({
       title: diploma.titlos,

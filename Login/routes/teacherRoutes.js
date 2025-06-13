@@ -264,7 +264,7 @@ router.put("/proskliseis/apodoxi/:index", authMiddleware, async (req, res) => {
       await diplomasCol.updateOne(
         { _id: diploma._id },
         {
-          $set: { katastasi: "ενεργή" },
+          $set: { katastasi: "ενεργή", imerominiaAnathesis: new Date() },
           $pull: { proskliseis: { apodoxi: null } } // διαγραφή μόνο των εκκρεμών
         }
       );
@@ -525,12 +525,13 @@ router.get("/statistics", authMiddleware, async (req, res) => {
       "mainKathigitis.didaskonId": { $ne: teacherId }
     }).toArray();
 
+
     // Υπολογισμός για main
     const finishedMain = mainDiplomas.filter(d => d.katastasi === "περατωμένη");
     const avgMainDays = finishedMain.length > 0
       ? Math.round(
           finishedMain.reduce((acc, d) => acc + (
-            (new Date(d.dateUpdated) - new Date(d.dateCreated)) / (1000 * 60 * 60 * 24)
+            (new Date(d.imerominiaPeratosis) - new Date(d.imerominiaAnathesis)) / (1000 * 60 * 60 * 24)
           ), 0) / finishedMain.length
         )
       : 0;
@@ -547,7 +548,7 @@ router.get("/statistics", authMiddleware, async (req, res) => {
     const avgMemberDays = finishedMember.length > 0
       ? Math.round(
           finishedMember.reduce((acc, d) => acc + (
-            (new Date(d.dateUpdated) - new Date(d.dateCreated)) / (1000 * 60 * 60 * 24)
+            (new Date(d.imerominiaPeratosis) - new Date(d.imerominiaAnathesis)) / (1000 * 60 * 60 * 24)
           ), 0) / finishedMember.length
         )
       : 0;
