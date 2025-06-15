@@ -1,6 +1,7 @@
 // src/components/ThemataView.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./ThemataView.css"; // Εισαγωγή του νέου CSS
 
 
 const ThemataView = () => {
@@ -61,56 +62,61 @@ const ThemataView = () => {
     }
   };
 
+
   return (
-    <div style={{ maxWidth: 800, margin: "auto", padding: 20 }}>
-      <h2>📚 Τα Θέματά μου</h2>
-
-      {themata.map((thema) => (
-        <div key={thema._id} style={{ border: "1px solid #ccc", padding: 12, marginBottom: 12 }}>
-          {editingId === thema._id ? (
-            <>
-              <input
-                value={editForm.titlos}
-                onChange={(e) => setEditForm({ ...editForm, titlos: e.target.value })}
-                placeholder="Τίτλος"
-                style={{ width: "100%", marginBottom: 8 }}
-              />
-              <textarea
-                value={editForm.perigrafi}
-                onChange={(e) => setEditForm({ ...editForm, perigrafi: e.target.value })}
-                placeholder="Περιγραφή"
-                rows={4}
-                style={{ width: "100%", marginBottom: 8 }}
-              />
-              <input
-                type="file"
-                accept=".pdf"
-                onChange={(e) => setEditForm({ ...editForm, file: e.target.files[0] })}
-              />
-              <br />
-              <button onClick={() => handleUpdate(thema._id)}>💾 Αποθήκευση</button>
-              <button onClick={cancelEdit} style={{ marginLeft: 8 }}>❌ Άκυρο</button>
-            </>
-          ) : (
-            <>
-              <p><strong>Τίτλος:</strong> {thema.titlos}</p>
-              <p><strong>Περιγραφή:</strong> {thema.perigrafi}</p>
-              {thema.pdfPerigrafi && (
-                <a href={`http://localhost:4000/${thema.pdfPath}`} target="_blank" rel="noreferrer">📎 PDF</a>
-              )}
-              <br />
-              <button onClick={() => startEdit(thema)}>✏️ Επεξεργασία</button>
-              {thema.isAssigned && (
-                <p style={{ color: "green", marginTop: 6 }}>
-                  ✅ Ανατεθειμένο σε: {thema.assignedTo?.name} ({thema.assignedTo?.am})
-                </p>
-              )}
-            </>
-          )}
-        </div>
-      ))}
-
-      {msg && <p style={{ color: msg.includes("✅") ? "green" : "red" }}>{msg}</p>}
+    <div className="container">
+      <h2 className="heading">📚 Τα Θέματά μου</h2>
+      <div className="list">
+        {themata.map((thema) => (
+          <div key={thema._id} className="list-item">
+            {editingId === thema._id ? (
+              <>
+                <input
+                  value={editForm.titlos}
+                  onChange={(e) => setEditForm({ ...editForm, titlos: e.target.value })}
+                  placeholder="Τίτλος"
+                  style={{ width: "100%", marginBottom: 8 }}
+                />
+                <textarea
+                  value={editForm.perigrafi}
+                  onChange={(e) => setEditForm({ ...editForm, perigrafi: e.target.value })}
+                  placeholder="Περιγραφή"
+                  rows={4}
+                  style={{ width: "100%", marginBottom: 8 }}
+                />
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={(e) => setEditForm({ ...editForm, file: e.target.files[0] })}
+                />
+                <br />
+                <button className="button" onClick={() => handleUpdate(thema._id)}>💾 Αποθήκευση</button>
+                <button className="button-cancel" onClick={cancelEdit}>❌ Άκυρο</button>
+              </>
+            ) : (
+              <>
+                <p><strong>Τίτλος:</strong> {thema.titlos}</p>
+                <p><strong>Περιγραφή:</strong> {thema.perigrafi}</p>
+                {thema.pdfPerigrafi && (
+                  <p>
+                    <strong>PDF Περιγραφή:</strong>{" "}
+                    <a href={`http://localhost:4000/${thema.pdfPath}`} target="_blank" rel="noreferrer">
+                      Προβολή PDF
+                    </a>
+                  </p>
+                )}
+                <button className="button" onClick={() => startEdit(thema)}>✏️ Επεξεργασία</button>
+                {thema.isAssigned && (
+                  <p style={{ color: "green", marginTop: 6 }}>
+                    ✅ Ανατεθειμένο σε: {thema.assignedTo?.name} ({thema.assignedTo?.am})
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+        ))}
+        {msg && <p className="msg">{msg}</p>}
+      </div>
     </div>
   );
 };
