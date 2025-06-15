@@ -32,7 +32,7 @@ const TeacherInvites = () => {
     } catch {
       setMsg("❌ Αποτυχία απάντησης στην πρόσκληση.");
     }
-  };
+  }; 
 
   return (
     <div>

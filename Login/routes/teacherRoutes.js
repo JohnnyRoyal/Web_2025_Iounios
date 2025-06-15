@@ -213,7 +213,7 @@ router.put("/proskliseis/apodoxi/:index", authMiddleware, async (req, res) => {
         [`proskliseis.${idx}.imerominiaAporripsis`]: null
       },
       {
-        $set: { [`proskliseis.${idx}.imerominiaApodoxis`]: new Date() }
+        $set: { [`proskliseis.${idx}.imerominiaApodoxis`]: new Date()} 
       }
     );
 
@@ -313,7 +313,7 @@ router.put("/proskliseis/aporripsi/:index", authMiddleware, async (req, res) => 
     const diplomasCol = client.db("users").collection("Diplomatikes");
 
     const result = await professorsCol.updateOne(
-      { didaskonId: req.user.id, [`proskliseis.${idx}.imerominiaApodoxis`]: null, [`proskliseis.${idx}.imerominiaAporripsis`]: null },
+     { didaskonId: req.user.id, [`proskliseis.${idx}.imerominiaApodoxis`]: null, [`proskliseis.${idx}.imerominiaAporripsis`]: null },
       { $set: { [`proskliseis.${idx}.imerominiaAporripsis`]: new Date() } }
     );
 
