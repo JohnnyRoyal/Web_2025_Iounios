@@ -124,7 +124,10 @@ router.post("/invite", authMiddleware, async (req, res) => {
       didaskonId: parseInt(didaskonId),
       onoma: onoma.trim(),
       epitheto: epitheto.trim(),
-      apodoxi: null
+      apodoxi: null,
+      imerominiaProsklisis: new Date(),
+      imerominiaApodoxis: null,
+      imerominiaAporripsis: null
     };
 
     // Ενημέρωση διπλωματικής
@@ -158,7 +161,7 @@ router.post("/invite", authMiddleware, async (req, res) => {
   }
 });
 
-//προβολη προσκλησεων που εχει κανει ο ιδιος ο φοιτητης (μπορει να μην χρειαστει)
+//προβολη προσκλησεων που εχει κανει ο ιδιος ο φοιτητης 
 router.get("/my-invites", authMiddleware, async (req, res) => {
   try {
     if (req.user.role !== "student") {
@@ -181,7 +184,10 @@ router.get("/my-invites", authMiddleware, async (req, res) => {
         didaskonId: inv.didaskonId,
         onoma: inv.onoma,
         epitheto: inv.epitheto,
-        apodoxi: inv.apodoxi // true, false ή null
+        apodoxi: inv.apodoxi, // true, false ή null
+        imerominiaProsklisis: inv.imerominiaProsklisis || null,
+        imerominiaApodoxis: inv.imerominiaApodoxis || null,
+        imerominiaAporripsis: inv.imerominiaAporripsis || null
       }))
     });
   } catch (err) {

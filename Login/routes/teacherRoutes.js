@@ -234,7 +234,7 @@ router.put("/proskliseis/apodoxi/:index", authMiddleware, async (req, res) => {
     // Ενημέρωση πρόσκλησης μέσα στη διπλωματική
     await diplomasCol.updateOne(
       { _id: diploma._id, "proskliseis.didaskonId": req.user.id },
-      { $set: { "proskliseis.$.apodoxi": true } }
+      { $set: { "proskliseis.$.apodoxi": true , "proskliseis.$.imerominiaApodoxis": new Date()} }
     );
 
     //Προσθήκη στην trimelisEpitropi αν δεν υπάρχει ήδη
@@ -334,7 +334,7 @@ router.put("/proskliseis/aporripsi/:index", authMiddleware, async (req, res) => 
     // Ενημέρωση πρόσκλησης μέσα στη διπλωματική
     await diplomasCol.updateOne(
       { _id: diploma._id, "proskliseis.didaskonId": req.user.id },
-      { $set: { "proskliseis.$.apodoxi": false } }
+      { $set: { "proskliseis.$.apodoxi": false ,  "proskliseis.$.imerominiaAporripsis": new Date() } }
     );
 
     res.json({ message: "Η πρόσκληση απορρίφθηκε" });
@@ -577,6 +577,32 @@ router.get("/statistics", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Σφάλμα στατιστικών", error: err.message });
   }
 });
+
+
+// Διαχειριση διπλωματικης υπο αναθεση προβολη προσκλησεων
+router.get("/ProskliseisThematos/:id", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "teacher") {
+      return res.status(403).json({ message: "Μη εξουσιοδοτημένο" });
+    }
+
+    const diplomasCol = await getDiplomaCollection();
+    const diploma = await diplomasCol.findOne({
+      _id: new ObjectId(req.params.id),
+      "mainKathigitis.didaskonId": req.user.id,
+      katastasi: "υπό ανάθεση"
+    });
+
+    if (!diploma) {
+      return res.status(404).json({ message: "Δεν βρέθηκε η διπλωματική ή δεν σας ανήκει" });
+    }
+
+    res.json({ proskliseis: diploma.proskliseis || [] });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα διακομιστή", error: err.message });
+  }
+});
+
 
 
 

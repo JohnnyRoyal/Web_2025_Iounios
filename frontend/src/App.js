@@ -23,6 +23,8 @@ import AnaklisiThematos from "./components/AnaklisiThematos";
 import TeacherDiplomas from "./components/TeacherDiplomas";
 import TeacherDiplomaDetails from "./components/TeacherDiplomaDetails";
 import TeacherStatistics from "./components/TeacherStatistics";
+import ViewProskliseis from "./components/ViewProskliseis";
+import ManageDiploma from "./components/ManageDiploma";
 
 function App() {
   return (
@@ -48,6 +50,11 @@ function App() {
         <Route path="/ProfessorDiplomas" element={<TeacherDiplomas />} />
         <Route path="/diploma/:id" element={<TeacherDiplomaDetails />} />
         <Route path="/TeacherStatistics" element={<TeacherStatistics/>} />
+        <Route path="/manage-diploma/:id" element={<ManageDiploma />} />
+        <Route path="/view-proskliseis/:id" element={<ViewProskliseis />} />
+
+
+
 
 
 
