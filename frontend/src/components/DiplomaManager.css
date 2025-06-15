@@ -57,3 +57,19 @@ ul li {
     padding: 10px;
   }
 }
+
+.button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: #4CAF50; /* Πράσινο */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.button:hover {
+  background-color: #388e3c;
+}

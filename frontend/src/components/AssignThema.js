@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./CreateThema.css";
 
 const AssignThema = () => {
   const [themata, setThemata] = useState([]);
@@ -46,36 +47,45 @@ const AssignThema = () => {
   };
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="create-container">
       <h2>📌 Ανάθεση Θέματος σε Φοιτητή</h2>
-
       <label>Επιλογή Θέματος:</label>
-      <select value={selectedThemaId} onChange={e => setSelectedThemaId(e.target.value)}>
+      <select
+        value={selectedThemaId}
+        onChange={e => setSelectedThemaId(e.target.value)}
+        style={{ marginBottom: 20 }}
+      >
         <option value="">-- Επιλέξτε --</option>
         {themata.map(t => (
           <option key={t._id} value={t._id}>{t.titlos}</option>
         ))}
       </select>
 
-      <div style={{ marginTop: 20 }}>
-        <input
-          placeholder="Αριθμός Μητρώου"
-          value={search.arithmosMitroou}
-          onChange={(e) => setSearch({ ...search, arithmosMitroou: e.target.value })}
-        />
-        <input
-          placeholder="Όνομα"
-          value={search.onoma}
-          onChange={(e) => setSearch({ ...search, onoma: e.target.value })}
-        />
-        <input
-          placeholder="Επώνυμο"
-          value={search.epitheto}
-          onChange={(e) => setSearch({ ...search, epitheto: e.target.value })}
-        />
-      </div>
+      <label>Αριθμός Μητρώου:</label>
+      <input
+        type="text"
+        placeholder="Αριθμός Μητρώου"
+        value={search.arithmosMitroou}
+        onChange={(e) => setSearch({ ...search, arithmosMitroou: e.target.value })}
+      />
 
-      <button onClick={handleAssign} style={{ marginTop: 10 }}>📤 Ανάθεση</button>
+      <label>Όνομα:</label>
+      <input
+        type="text"
+        placeholder="Όνομα"
+        value={search.onoma}
+        onChange={(e) => setSearch({ ...search, onoma: e.target.value })}
+      />
+
+      <label>Επώνυμο:</label>
+      <input
+        type="text"
+        placeholder="Επώνυμο"
+        value={search.epitheto}
+        onChange={(e) => setSearch({ ...search, epitheto: e.target.value })}
+      />
+
+      <button type="button" onClick={handleAssign}>📤 Ανάθεση</button>
 
       {message && <p style={{ color: message.startsWith("✅") ? "green" : "red" }}>{message}</p>}
     </div>

@@ -111,7 +111,7 @@ const FinishedPhase = () => {
   return (
     <div className="container">
       <h2>🎓 Περατωμένη Διπλωματική</h2>
-      <button onClick={() => navigate("/praktiko")} style={{ marginBottom: 20 }}>
+      <button onClick={() => navigate("/praktiko")} className="button">
         🧾 Προβολή Πρακτικού Εξέτασης
       </button>
       <div className="detail-box">
