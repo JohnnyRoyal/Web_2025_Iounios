@@ -406,7 +406,6 @@ router.put("/anathesi", authMiddleware, async (req, res) => {
   }
 });
 
-/*
 // Ανάκληση ανάθεσης θέματος από καθηγητή
 router.put("/anaklisi", authMiddleware, async (req, res) => {
   try {
@@ -420,7 +419,6 @@ router.put("/anaklisi", authMiddleware, async (req, res) => {
     }
 
     const diplomasCol = client.db("users").collection("Diplomatikes");
-
     const thema = await diplomasCol.findOne({ _id: new ObjectId(themaId) });
 
     if (!thema) {
@@ -435,11 +433,19 @@ router.put("/anaklisi", authMiddleware, async (req, res) => {
       return res.status(403).json({ message: "Δεν είστε ο υπεύθυνος καθηγητής του θέματος" });
     }
 
+    // Φιλτράρουμε την τριμελή ώστε να κρατήσουμε μόνο τον επιβλέποντα
+    const updatedTrimelis = (thema.trimelisEpitropi || []).filter(
+      (member) => member.didaskonId === req.user.id
+    );
+
     await diplomasCol.updateOne(
       { _id: thema._id },
       {
-        $unset: { foititis: "" },
-        $set: { katastasi: "διαθέσιμη προς ανάθεση" }
+        $unset: { foititis: "" , proskliseis: ""},
+        $set: {
+          katastasi: "διαθέσιμη προς ανάθεση",
+          trimelisEpitropi: updatedTrimelis
+        }
       }
     );
 
@@ -448,7 +454,6 @@ router.put("/anaklisi", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Σφάλμα ανάκλησης ανάθεσης", error: err.message });
   }
 });
-*/
 
 
 // GET /api/teacher/diplomatikes - προβολή διπλωματικών καθηγητή με φιλτρα αναζητησης 

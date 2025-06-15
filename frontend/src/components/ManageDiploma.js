@@ -27,13 +27,43 @@ const ManageDiploma = () => {
       <p><strong>Κατάσταση:</strong> {diploma.katastasi}</p>
 
       {diploma.katastasi === "υπό ανάθεση" && (
-        <button onClick={() => navigate(`/view-proskliseis/${diploma._id}`)}>
-          🧾 Προβολή Προσκλήσεων
-        </button>
-      )}
-    </div>
+  <>
+    <button
+      style={{ marginRight: 10 }}
+      onClick={() => navigate(`/view-proskliseis/${diploma._id}`)}
+    >
+      📄 Προβολή Προσκλήσεων
+    </button>
+
+    <button
+      style={{ backgroundColor: "#d9534f", color: "white" }}
+      onClick={async () => {
+        try {
+          const confirm = window.confirm("Θέλετε σίγουρα να ακυρώσετε την ανάθεση;");
+          if (!confirm) return;
+
+          await axios.put("http://localhost:4000/api/teacher/anaklisi", {
+            themaId: diploma._id
+          }, {
+            headers: { Authorization: localStorage.getItem("token") }
+          });
+
+          alert("✅ Η ανάθεση ακυρώθηκε με επιτυχία.");
+          navigate("/ProfessorDiplomas");
+        } catch (err) {
+          console.error(err);
+          alert("❌ Σφάλμα κατά την ακύρωση της ανάθεσης.");
+        }
+      }}
+    >
+      ❌ Ακύρωση Ανάθεσης Θέματος
+    </button>
+  </>
+  )}
+
+  </div>
   );
-};
+}
 
 
 export default ManageDiploma;
