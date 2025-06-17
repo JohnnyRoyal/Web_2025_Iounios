@@ -9,7 +9,10 @@ const kataxwrhshAPRoutes = require("./routes/Kataxwrhsh_AP_DE_gramateia_Routes_3
 const peratwshRoutes = require("./routes/Peratwsh_DE_gramateia_Routes_3-3"); // Νέο route για την ολοκλήρωση της διπλωματικής
 const akyrwshAnatheshsRoutes = require("./routes/Akyrwsh_Anatheshs_Gramateia_DE_3-2"); // Νέο route για την ακύρωση ανάθεσης θέματος
 const nologinviewRoutes = require("./routes/No_Login_View"); // Νέο route για την προβολή διπλωματικών χωρίς login
-const teacherRoutes = require("./routes/teacherRoutes");
+const teacherRoutes = require("./routes/teacherRoutes"); // Νέο route για τις λειτουργίες του διδάσκοντα
+const teacherDiaxirisiEnergiAkyrwshsRoutes = require("./routes/Teacher_Diaxirisi_Energi_Akyrwsh_6-2-2"); // Νέο route για την ακύρωση ανάθεσης θέματος από τον διδάσκοντα
+const teacherDiaxirisiEnergiAllagiRoutes = require("./routes/Teacher_Diaxirisi_Energi_Allagi_6-2-3");   // Νέο route για την αλλαγή κατάστασης διπλωματικής από τον διδάσκοντα
+const teacherDiaxirisiEnergiSxoliaRoutes = require("./routes/Teacher_Diaxirisi_Energi_Sxolia_6-2-1");  // Νέο route για την προσθήκη σχολίων από τον διδάσκοντα
 
 const app = express();
 app.use(express.json());
@@ -24,6 +27,9 @@ app.use("/api/secretary/set-ap", kataxwrhshAPRoutes);   // Προσθήκη rout
 app.use("/api/secretary/complete", peratwshRoutes); // Προσθήκη route για την ολοκλήρωση της διπλωματικής
 app.use("/api/secretary/cancel", akyrwshAnatheshsRoutes); // Προσθήκη route για την ακύρωση ανάθεσης θέματος
 app.use("/api/diplomas/nologin", nologinviewRoutes); // Προσθήκη route για την προβολή διπλωματικών χωρίς login
-app.use("/api/teacher", teacherRoutes);
+app.use("/api/teacher", teacherRoutes); // Προσθήκη route για τις λειτουργίες του διδάσκοντα
+app.use("/api/teacher/diaxirisi/energi/akyrwsh", teacherDiaxirisiEnergiAkyrwshsRoutes); // Νέο route για την ακύρωση ανάθεσης θέματος από τον διδάσκοντα
+app.use("/api/teacher/diaxirisi/energi/allagi", teacherDiaxirisiEnergiAllagiRoutes); // Νέο route για την αλλαγή κατάστασης διπλωματικής από τον διδάσκοντα
+app.use("/api/teacher/diaxirisi/energi/sxolia", teacherDiaxirisiEnergiSxoliaRoutes); // Νέο route για την προσθήκη σχολίων από τον διδάσκοντα
 
 app.listen(4000, () => console.log("✅ Server running on http://localhost:4000"));

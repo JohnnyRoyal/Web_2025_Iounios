@@ -24,7 +24,11 @@ import TeacherDiplomas from "./components/TeacherDiplomas";
 import TeacherDiplomaDetails from "./components/TeacherDiplomaDetails";
 import TeacherStatistics from "./components/TeacherStatistics";
 import ViewProskliseis from "./components/ViewProskliseis";
-import ManageDiploma from "./components/ManageDiploma";
+import TeacherManageDiplomaYpoAnathesi from "./components/TeacherManageDiplomaYpoAnathesi";
+import TeacherManageDiplomaEnergi from "./components/TeacherManageDiplomaEnergi"; // Διαχείριση διπλωματικής από τον διδάσκοντα για ενεργές διπλωματικές
+
+// Το App.js είναι το κύριο αρχείο της εφαρμογής που περιέχει τις διαδρομές (routes) για κάθε σελίδα της εφαρμογής.
+// Χρησιμοποιεί το React Router για να καθορίσει ποιο συστατικό θα εμφανίζεται ανάλογα με τη διαδρομή URL.
 
 function App() {
   return (
@@ -50,8 +54,9 @@ function App() {
         <Route path="/ProfessorDiplomas" element={<TeacherDiplomas />} />
         <Route path="/diploma/:id" element={<TeacherDiplomaDetails />} />
         <Route path="/TeacherStatistics" element={<TeacherStatistics/>} />
-        <Route path="/manage-diploma/:id" element={<ManageDiploma />} />
-        <Route path="/view-proskliseis/:id" element={<ViewProskliseis />} />
+        <Route path="/teacher-manage-diploma-ypo-anathesi/:id" element={<TeacherManageDiplomaYpoAnathesi />} />
+        <Route path="/view-proskliseis/:id" element={<ViewProskliseis />} /> {/* Το /:id στο τέλος γίνεται για να αλλάζει η σελίδα δυναμικά ανάλογα το id της διπλωματικής και να μεταφέρεται, για να πειράζουμε στην σελίδα μόνο την διπλωματική αυτή*/}
+        <Route path="/teacher-manage-diploma-energi/:id" element={<TeacherManageDiplomaEnergi />} /> {/* Διαχείριση διπλωματικής από τον διδάσκοντα για ενεργές διπλωματικές */}
 
 
 

@@ -112,8 +112,34 @@ const TeacherDiplomas = () => {
           <p><strong>Επιβλέπων:</strong> {d.mainKathigitis?.onoma} {d.mainKathigitis?.epitheto}</p>
           <p><strong>Τριμελής:</strong> {d.trimelisEpitropi?.map((m) => `${m.onoma} ${m.epitheto}`).join(", ")}</p>
           <button onClick={() => navigate(`/diploma/${d._id}`)} className="button">📄 Προβολή Πληροφοριών</button>
-          <button onClick={() => navigate(`/manage-diploma/${d._id}`)}> 🛠️ Διαχείριση Διπλωματικής Εργασίας</button>
-  
+          {d.katastasi === "υπό ανάθεση" && (
+            <button
+              onClick={() => navigate(`/teacher-manage-diploma-ypo-anathesi/${d._id}`)}
+              className="button"
+            >
+              🛠️ Διαχείριση Διπλωματικής Εργασίας
+            </button>
+          )}
+
+          {d.katastasi === "Ενεργή" && (
+            <button
+              onClick={() => navigate(`/teacher-manage-diploma-energi/${d._id}`)}
+              className="button"
+            >
+              🛠️ Διαχείριση Διπλωματικής Εργασίας
+            </button>
+          )}
+
+          {d.katastasi === "υπό εξέταση" && (
+            <button
+              onClick={() => navigate(`/teacher-manage-diploma-ypo-eksetasi/${d._id}`)}
+              className="button"
+            >
+              🛠️ Διαχείριση Διπλωματικής Εργασίας
+            </button>
+          )}
+
+    
 
         </div>
       ))}

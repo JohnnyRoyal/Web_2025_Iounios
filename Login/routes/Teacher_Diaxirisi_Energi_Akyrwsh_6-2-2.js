@@ -9,15 +9,15 @@ const client = new MongoClient(uri);
 
 // Route για ακύρωση ανάθεσης θέματος
 router.post("/", authMiddleware, async (req, res) => {
-  const { id, logosAkyrosis, imerominiaGenikisSyneleysis, arithmosGenikhsSynelefsisAkyrwshs} = req.body; // Λήψη δεδομένων από το σώμα του αιτήματος
+  const { id, imerominiaGenikisSyneleysis, arithmosGenikhsSynelefsisAkyrwshs} = req.body; // Λήψη δεδομένων από το σώμα του αιτήματος
 
   try {
     console.log("User from Token:", req.user); // Εμφανίζει τα δεδομένα του χρήστη από το token
-    console.log("Received request:", { id,logosAkyrosis,imerominiaGenikisSyneleysis,arithmosGenikhsSynelefsisAkyrwshs}); // Για debugging
+    console.log("Received request:", { id, imerominiaGenikisSyneleysis, arithmosGenikhsSynelefsisAkyrwshs}); // Για debugging
 
-    // Ελέγχουμε αν ο χρήστης έχει δικαιώματα (π.χ., είναι γραμματεία)
-    if (req.user.role !== "secretary") {
-      return res.status(403).json({ message: "Μόνο η γραμματεία έχει πρόσβαση εδώ." });
+    // Ελέγχουμε αν ο χρήστης έχει δικαιώματα (π.χ., είναι διδάσκων)
+    if (req.user.role !== "teacher") {
+      return res.status(403).json({ message: "Μόνο ο διδάσκων έχει πρόσβαση εδώ." });
     }
 
     // Σύνδεση στη βάση δεδομένων
@@ -46,6 +46,14 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: `❌ Δεν βρέθηκε διπλωματική με ID: ${id}.` });
     }
 
+    // Έλεγχος αν ο χρήστης είναι ο κύριος καθηγητής της διπλωματικής (με βάση το didaskonId) το έχουμε στο token
+    if (
+    !diploma.mainKathigitis ||
+    diploma.mainKathigitis.didaskonId !== req.user.id
+    ) {
+    return res.status(403).json({ message: "❌ Μόνο ο κύριος καθηγητής της διπλωματικής μπορεί να αλλάξει την κατάστασή της." });
+    }
+
     // Μετατροπή της ημερομηνίας σε μορφή ISODate
     const isoDate = new Date(imerominiaGenikisSyneleysis);
 
@@ -55,7 +63,7 @@ router.post("/", authMiddleware, async (req, res) => {
       {
         $set: {
           katastasi: "διαθέσιμη προς ανάθεση", // Ενημέρωση της κατάστασης
-          logosAkyrosis:  logosAkyrosis,    // Καταχώρηση του λόγου ακύρωσης
+          logosAkyrosis:  "από Διδάσκοντα",    // Καταχώρηση του λόγου ακύρωσης
           imerominiaAkyrosis: isoDate,  // Καταχώρηση της ημερομηνίας της Γενικής Συνέλευσης
           arithmosGenikhsSynelefsisAkyrwshs: arithmosGenikhsSynelefsisAkyrwshs,  // Καταχώρηση του αριθμού της Γενικής Συνέλευσης
         },

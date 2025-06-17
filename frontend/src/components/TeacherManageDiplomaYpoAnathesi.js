@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const ManageDiploma = () => {
+const TeacherManageDiplomaYpoAnathesi = () => {
   const { id } = useParams();
   const [diploma, setDiploma] = useState(null);
   const [error, setError] = useState("");
@@ -66,4 +66,4 @@ const ManageDiploma = () => {
 }
 
 
-export default ManageDiploma;
+export default TeacherManageDiplomaYpoAnathesi;
