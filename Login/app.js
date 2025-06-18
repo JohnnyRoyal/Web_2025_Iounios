@@ -13,6 +13,9 @@ const teacherRoutes = require("./routes/teacherRoutes"); // Νέο route για 
 const teacherDiaxirisiEnergiAkyrwshsRoutes = require("./routes/Teacher_Diaxirisi_Energi_Akyrwsh_6-2-2"); // Νέο route για την ακύρωση ανάθεσης θέματος από τον διδάσκοντα
 const teacherDiaxirisiEnergiAllagiRoutes = require("./routes/Teacher_Diaxirisi_Energi_Allagi_6-2-3");   // Νέο route για την αλλαγή κατάστασης διπλωματικής από τον διδάσκοντα
 const teacherDiaxirisiEnergiSxoliaRoutes = require("./routes/Teacher_Diaxirisi_Energi_Sxolia_6-2-1");  // Νέο route για την προσθήκη σχολίων από τον διδάσκοντα
+const teacherDiaxirisiYpoEksetasiAnakoinwshRoutes = require("./routes/Teacher_Diaxirisi_YpoEksetasi_Anakoinwsh_6-3-2"); // Νέο route για την ανακοίνωση της εξέτασης διπλωματικής από τον διδάσκοντα
+const teacherDiaxirisiYpoEksetasiProxeiroRoutes = require("./routes/Teacher_Diaxirisi_YpoEksetasi_Proxeiro_6-3-1"); // Νέο route για την αλλαγή κατάστασης σε "υπό εξέταση" από τον διδάσκοντα
+const teacherDiaxirisiYpoEksetasiBathmosRoutes = require("./routes/Teacher_Diaxirisi_YpoEksetasi_Bathmos_6-3-3"); // Νέο route για την καταχώρηση βαθμών από τον διδάσκοντα
 
 const app = express();
 app.use(express.json());
@@ -31,5 +34,8 @@ app.use("/api/teacher", teacherRoutes); // Προσθήκη route για τις 
 app.use("/api/teacher/diaxirisi/energi/akyrwsh", teacherDiaxirisiEnergiAkyrwshsRoutes); // Νέο route για την ακύρωση ανάθεσης θέματος από τον διδάσκοντα
 app.use("/api/teacher/diaxirisi/energi/allagi", teacherDiaxirisiEnergiAllagiRoutes); // Νέο route για την αλλαγή κατάστασης διπλωματικής από τον διδάσκοντα
 app.use("/api/teacher/diaxirisi/energi/sxolia", teacherDiaxirisiEnergiSxoliaRoutes); // Νέο route για την προσθήκη σχολίων από τον διδάσκοντα
+app.use("/api/teacher/diaxirisi/ypoeksetasi/anakoinwsh", teacherDiaxirisiYpoEksetasiAnakoinwshRoutes); // Νέο route για την ανακοίνωση της εξέτασης διπλωματικής από τον διδάσκοντα
+app.use("/api/teacher/diaxirisi/ypoeksetasi/proxeiro", teacherDiaxirisiYpoEksetasiProxeiroRoutes); // Νέο route για την αλλαγή κατάστασης σε "υπό εξέταση" από τον διδάσκοντα
+app.use("/api/teacher/diaxirisi/ypoeksetasi/bathmos", teacherDiaxirisiYpoEksetasiBathmosRoutes); // Νέο route για την καταχώρηση βαθμών από τον διδάσκοντα
 
 app.listen(4000, () => console.log("✅ Server running on http://localhost:4000"));
