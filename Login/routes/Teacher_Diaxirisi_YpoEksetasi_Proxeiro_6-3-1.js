@@ -56,7 +56,7 @@ router.post("/", authMiddleware, async (req, res) => {
     // Ενημέρωση της διπλωματικής με την κατάσταση "Περατωμένη" και προσθήκη στο array "proigoumenesKatastaseis"
     const result = await collection.findOne(
         { _id: my_objectId, katastasi: "υπό εξέταση" }, // Εύρεση της διπλωματικής με βάση το ID και την κατάσταση
-        { projection: { prdfProxeiroKeimeno: 1} } // Επιστρέφει μόνο το πεδίο prdfProxeiroKeimeno και το _id από προεπιλογή
+        { projection: { pdfProxeiroKeimeno: 1} } // Επιστρέφει μόνο το πεδίο pdfProxeiroKeimeno και το _id από προεπιλογή
     );
 
     if (!result) {
@@ -65,7 +65,7 @@ router.post("/", authMiddleware, async (req, res) => {
       });
     } else {
         res.status(200).json({
-            prdfProxeiroKeimeno: result.prdfProxeiroKeimeno,
+            pdfProxeiroKeimeno: result.pdfProxeiroKeimeno,
             id: result._id
         });
     }
