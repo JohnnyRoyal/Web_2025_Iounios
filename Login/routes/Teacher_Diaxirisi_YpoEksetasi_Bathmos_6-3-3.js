@@ -19,6 +19,39 @@ function calculateTimeSinceSubmission(imerominiaAnathesis) {
 router.post("/", authMiddleware, async (req, res) => {
   const { id, quality, duration, text, presentation } = req.body; // id = id διπλωματικής
 
+
+  // Αν ΔΕΝ στέλνονται βαθμοί, απλά επιστρέφει τα δεδομένα της τριμελούς και τον τελικό βαθμό ,για πριν πατηθεί το κουμπί καταχώρησης βαθμών
+  // Αυτό γίνεται για να μπορεί ο διδάσκων να δει τα δεδομένα της τριμελούς επιτροπής και τον τελικό βαθμό πριν καταχωρήσει τους βαθμούς
+  // Αν δεν στέλνονται βαθμοί, τότε δεν χρειάζεται να γίνει έλεγχος για το αν είναι αριθμοί 0-10
+  if (
+    quality === undefined &&
+    duration === undefined &&
+    text === undefined &&
+    presentation === undefined
+  ) {
+    try {
+      await client.connect();
+      const db = client.db("users");
+      const collection = db.collection("Diplomatikes");
+
+      const diploma = await collection.findOne(
+        { _id: new ObjectId(id) },
+        { projection: { trimeriEpitropi: 1, telikosVathmos: 1 } }
+      );
+      if (!diploma) {
+        return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική." });
+      }
+      return res.status(200).json({
+        trimeriEpitropi: diploma.trimeriEpitropi || [],
+        telikosVathmos: diploma.telikosVathmos ?? null
+      });
+    } catch (err) {
+      return res.status(500).json({ message: "Σφάλμα κατά την ανάκτηση βαθμών." });
+    } finally {
+      await client.close();
+    }
+  }
+
   // Έλεγχος τιμών
   if (
     [quality, duration, text, presentation].some(
@@ -63,9 +96,9 @@ router.post("/", authMiddleware, async (req, res) => {
     text * 0.15 +
     presentation * 0.1;
 
-    // Πέρνω το id του διδάσκοντα από το token
+    // Πέρνω το id του διδάσκοντα από το token  για να το συγκρίνω με το didaskonId της τριμελούς επιτροπής
     const didaskonId = req.user.id;
-    
+
     const result = await collection.updateOne(
         { 
             _id: new ObjectId(id), // Βρες τη διπλωματική με το id
