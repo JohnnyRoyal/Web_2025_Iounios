@@ -135,10 +135,10 @@ const ExetasiPhase = () => {
           onChange={(e) => setExamForm({ ...examForm, troposExetasis: e.target.value })}
         >
           <option value="">-- Επιλέξτε --</option>
-          <option value="από κοντά">Από κοντά</option>
+          <option value="δια ζώσης">Δια ζώσης</option>
           <option value="εξ αποστάσεως">Εξ αποστάσεως</option>
         </select>
-        {examForm.troposExetasis === "από κοντά" && (
+        {examForm.troposExetasis === "δια ζώσης" && (
           <>
             <label>Αίθουσα:</label>
             <input
@@ -203,11 +203,11 @@ const ExetasiPhase = () => {
       <label>Τρόπος Εξέτασης:</label>
       <select value={examForm.troposExetasis} onChange={e => setExamForm({ ...examForm, troposExetasis: e.target.value })}>
         <option value="">-- Επιλέξτε --</option>
-        <option value="από κοντά">Από κοντά</option>
+        <option value="δια ζώσης">δια ζώσης</option>
         <option value="εξ αποστάσεως">Εξ αποστάσεως</option>
       </select><br /><br />
 
-      {examForm.troposExetasis === "από κοντά" && (
+      {examForm.troposExetasis === "δια ζώσης" && (
         <>
           <label>Αίθουσα:</label>
           <input value={examForm.aithousaExetasis} onChange={e => setExamForm({ ...examForm, aithousaExetasis: e.target.value })} /><br /><br />

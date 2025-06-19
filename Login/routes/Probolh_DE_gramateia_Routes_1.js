@@ -48,7 +48,7 @@ router.get("/", authMiddleware, async (req, res) => {
       perigrafi: doc.perigrafi,
       katastasi: doc.katastasi,
       pdf_extra_perigrafh: doc.pdfExtraPerigrafi,
-      trimerisEpitropi: doc.trimeriEpitropi?.map((member) => ({
+      trimelisEpitropi: doc.trimelisEpitropi?.map((member) => ({
         onoma: member.onoma,
         epitheto: member.epitheto,
         vathmos: member.vathmos || null, // Προαιρετικά, αν θέλεις να συμπεριλάβεις τον βαθμό

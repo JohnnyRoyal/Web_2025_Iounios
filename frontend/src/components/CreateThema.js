@@ -22,7 +22,7 @@ const CreateThema = () => {
     const formData = new FormData();
     formData.append("titlos", titlos);
     formData.append("perigrafi", perigrafi);
-    if (pdf) formData.append("pdfPerigrafis", pdf);
+    if (pdf) formData.append("pdfExtraPerigrafi", pdf);
 
     try {
       const res = await axios.post("http://localhost:4000/api/teacher/themata", formData, {

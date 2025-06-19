@@ -61,7 +61,7 @@ router.get("/themata", authMiddleware, async (req, res) => {
 });
 
 // POST /api/teacher/themata - Δημιουργία νέου θέματος
-router.post("/themata", authMiddleware, upload.single("pdfPerigrafis"), async (req, res) => {
+router.post("/themata", authMiddleware, upload.single("pdfExtraPerigrafi"), async (req, res) => {
   try {
     if (req.user.role !== "teacher") {
       return res.status(403).json({ message: "Δεν έχετε πρόσβαση" });
@@ -100,7 +100,7 @@ router.post("/themata", authMiddleware, upload.single("pdfPerigrafis"), async (r
 
     if (req.file) {
       newDiploma.pdfPath = req.file.path;
-      newDiploma.pdfPerigrafi = req.file.filename;
+      newDiploma.pdfExtraPerigrafi = req.file.filename;
     }
 
     const result = await collection.insertOne(newDiploma);
@@ -115,7 +115,7 @@ router.post("/themata", authMiddleware, upload.single("pdfPerigrafis"), async (r
 });
 
 // PUT /api/teacher/themata/:id - Επεξεργασία υπάρχοντος θέματος
-router.put("/themata/:id", authMiddleware, upload.single("pdfPerigrafis"), async (req, res) => {
+router.put("/themata/:id", authMiddleware, upload.single("pdfExtraPerigrafi"), async (req, res) => {
   try {
     if (req.user.role !== "teacher") {
       return res.status(403).json({ message: "Δεν έχετε πρόσβαση" });
@@ -155,7 +155,7 @@ router.put("/themata/:id", authMiddleware, upload.single("pdfPerigrafis"), async
         });
       }
       updateDoc.$set.pdfPath = req.file.path;
-      updateDoc.$set.pdfPerigrafi = req.file.filename;
+      updateDoc.$set.pdfExtraPerigrafi = req.file.filename;
     }
 
     const result = await collection.updateOne({ _id: new ObjectId(themaId) }, updateDoc);

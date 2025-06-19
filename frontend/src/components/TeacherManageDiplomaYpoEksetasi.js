@@ -176,7 +176,7 @@ const TeacherManageDiplomaYpoEksetasi = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.trimeriEpitropi?.map((m, i) => (
+                  {data.trimelisEpitropi?.map((m, i) => (
                     <tr key={i}>
                       <td style={{ padding: 8 }}>{m.onoma} {m.epitheto}</td>
                       <td style={{ padding: 8 }}>

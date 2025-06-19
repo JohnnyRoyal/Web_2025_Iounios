@@ -36,13 +36,13 @@ router.post("/", authMiddleware, async (req, res) => {
 
       const diploma = await collection.findOne(
         { _id: new ObjectId(id) },
-        { projection: { trimeriEpitropi: 1, telikosVathmos: 1 } }
+        { projection: { trimelisEpitropi: 1, telikosVathmos: 1 } }
       );
       if (!diploma) {
         return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική." });
       }
       return res.status(200).json({
-        trimeriEpitropi: diploma.trimeriEpitropi || [],
+        trimelisEpitropi: diploma.trimelisEpitropi || [],
         telikosVathmos: diploma.telikosVathmos ?? null
       });
     } catch (err) {
@@ -102,18 +102,18 @@ router.post("/", authMiddleware, async (req, res) => {
     const result = await collection.updateOne(
         { 
             _id: new ObjectId(id), // Βρες τη διπλωματική με το id
-            "trimeriEpitropi.didaskonId": didaskonId // Βρες το μέλος με το σωστό didaskonId ανάμεσα στα μέλη της τριμελούς επιτροπής (αυτός που καταχωρεί τους βαθμούς που το δίχνει το token)
+            "trimelisEpitropi.didaskonId": didaskonId // Βρες το μέλος με το σωστό didaskonId ανάμεσα στα μέλη της τριμελούς επιτροπής (αυτός που καταχωρεί τους βαθμούς που το δίχνει το token)
         },
         { 
             $set: { 
-            "trimeriEpitropi.$[elem].vathmosAnalytika": {
+            "trimelisEpitropi.$[elem].vathmosAnalytika": {
                 quality,
                 duration,
                 text,
                 presentation
             },
             // Ενημέρωση του ζυγισμένου βαθμού για το μέλος της τριμελούς επιτροπής που καταχωρεί τους βαθμούς πάλι σύμφωνα με το didaskonId
-            "trimeriEpitropi.$[elem].vathmos": Number(finalGrade.toFixed(2)), // toFixed Στρογγυλοποιώ τον ζυγισμένο βαθμό σε 2 δεκαδικά ψηφία , το Number() τον μετατρέπει σε αριθμό
+            "trimelisEpitropi.$[elem].vathmos": Number(finalGrade.toFixed(2)), // toFixed Στρογγυλοποιώ τον ζυγισμένο βαθμό σε 2 δεκαδικά ψηφία , το Number() τον μετατρέπει σε αριθμό
             }
         },
         {
@@ -136,19 +136,19 @@ router.post("/", authMiddleware, async (req, res) => {
     // Φέρε το ανανεωμένο array τριμελούς και βάλτο στην μεταβλητή updated
     const updated = await collection.findOne(
       { _id: new ObjectId(id) },
-      { projection: { trimeriEpitropi: 1, _id: 0 } }
+      { projection: { trimelisEpitropi: 1, _id: 0 } }
     );
 
     // Έλεγχος αν όλα τα μέλη έχουν βάλει βαθμό με το every επιστρέφει true αν όλα τα στοιχεία του array πληρούν την συνθήκη ,
-    // εδώ για κάθε member του trimeriEpitropi ελέγχει αν το vathmos είναι αριθμός (το null δεν είναι αριθμός) και δεν είναι NaN
-    const allHaveGrade = updated.trimeriEpitropi.every(
+    // εδώ για κάθε member του trimelisEpitropi ελέγχει αν το vathmos είναι αριθμός (το null δεν είναι αριθμός) και δεν είναι NaN
+    const allHaveGrade = updated.trimelisEpitropi.every(
       member => typeof member.vathmos === "number" && !isNaN(member.vathmos)
     );
 
     if (allHaveGrade) {
       // Υπολογισμός μέσου όρου
-      const sum = updated.trimeriEpitropi.reduce((acc, member) => acc + member.vathmos, 0); // με το redduce μπαίνουν όλα σε ένα σύνολο και μετά τα προσθέτει αρχικά από 0
-      const avg = Number((sum / updated.trimeriEpitropi.length).toFixed(2)); // Υπολογίζει τον μέσο όρο και τον στρογγυλοποιεί σε 2 δεκαδικά ψηφία
+      const sum = updated.trimelisEpitropi.reduce((acc, member) => acc + member.vathmos, 0); // με το redduce μπαίνουν όλα σε ένα σύνολο και μετά τα προσθέτει αρχικά από 0
+      const avg = Number((sum / updated.trimelisEpitropi.length).toFixed(2)); // Υπολογίζει τον μέσο όρο και τον στρογγυλοποιεί σε 2 δεκαδικά ψηφία
 
       // Κάνε set το telikosVathmos
       await collection.updateOne(
@@ -160,13 +160,13 @@ router.post("/", authMiddleware, async (req, res) => {
     // μετά το update του telikosVathmos  ξαναφέρνω το ανανεωμένο array τριμελούς επιτροπής και τον τελικό βαθμό
     const updatedfinal = await collection.findOne(
       { _id: new ObjectId(id) },
-      { projection: { trimeriEpitropi: 1, telikosVathmos: 1 } }
+      { projection: { trimelisEpitropi: 1, telikosVathmos: 1 } }
     );
 
     // Επιστρέφω το ανανεωμένο array τριμελούς επιτροπής και τον τελικό βαθμό
     res.status(200).json({
       message: "✅ Οι βαθμοί καταχωρήθηκαν.",
-      trimeriEpitropi: updatedfinal.trimeriEpitropi,
+      trimelisEpitropi: updatedfinal.trimelisEpitropi,
       telikosVathmos: updatedfinal.telikosVathmos,
       _id: updatedfinal._id,
       errorType: null // Πλήρης βαθμός, δεν υπάρχει σφάλμα

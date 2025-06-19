@@ -254,7 +254,7 @@ router.put("/set-exam-info", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Η ημερομηνία και ο τρόπος εξέτασης είναι υποχρεωτικά." });
     }
 
-    if (troposExetasis === "από κοντά" && !aithousaExetasis) {
+    if (troposExetasis === "δια ζώσης" && !aithousaExetasis) {
       return res.status(400).json({ message: "Απαιτείται αίθουσα εξέτασης για δια ζώσης." });
     }
 
@@ -272,7 +272,7 @@ router.put("/set-exam-info", authMiddleware, async (req, res) => {
         $set: {
           imerominiaOraExetasis,
           troposExetasis,
-          aithousaExetasis: troposExetasis === "από κοντά" ? aithousaExetasis : null,
+          aithousaExetasis: troposExetasis === "δια ζώσης" ? aithousaExetasis : null,
           syndesmosExetasis: troposExetasis === "εξ αποστάσεως" ? syndesmosExetasis : null
         }
       }
@@ -289,57 +289,7 @@ router.put("/set-exam-info", authMiddleware, async (req, res) => {
 });
 
 
-//new test
-/*function generatePraktikoHTML(diploma) {
-  const { foititis, trimelisEpitropi, mainKathigitis } = diploma;
-  const dateStr = diploma.imerominiaOraExetasis
-    ? new Date(diploma.imerominiaOraExetasis).toLocaleString("el-GR")
-    : "—";
 
-  const gradesHTML = (trimelisEpitropi || [])
-    .map(member => `<li>${member.onoma} ${member.epitheto}: ${member.vathmos ?? "—"}</li>`)
-    .join("");
-
-  const avg = diploma.telikosVathmos ?? "—";
-
-  return `
-    <div style="font-family: Arial, sans-serif; line-height: 1.5;">
-      <h2 style="text-align:center;">ΠΡΑΚΤΙΚΟ ΕΞΕΤΑΣΗΣ ΔΙΠΛΩΜΑΤΙΚΗΣ ΕΡΓΑΣΙΑΣ</h2>
-      <p>Ο φοιτητής/η φοιτήτρια <strong>${foititis?.onoma || "-"} ${foititis?.epitheto || "-"}</strong>, με Αριθμό Μητρώου <strong>${foititis?.arithmosMitroou || "-"}</strong>, παρουσίασε τη διπλωματική εργασία με τίτλο <em>"${diploma.titlos || "-"}"</em>.</p>
-      <p>Η εξέταση έλαβε χώρα: <strong>${dateStr}</strong></p>
-      <h3>Βαθμολογία Επιτροπής:</h3>
-      <ul>${gradesHTML}</ul>
-      <p><strong>Μέσος Όρος:</strong> ${avg}</p>
-      <br/>
-      <p style="text-align:right;">Ο Επιβλέπων Καθηγητής: ${mainKathigitis?.onoma || ""} ${mainKathigitis?.epitheto || ""}</p>
-    </div>
-  `;
-}
-
-router.get("/generate-praktiko", authMiddleware, async (req, res) => {
-  try {
-    if (req.user.role !== "student") {
-      return res.status(403).json({ message: "Μόνο φοιτητές έχουν πρόσβαση." });
-    }
-
-    const col = await getCollection();
-
-    const diploma = await col.findOne({
-      "foititis.arithmosMitroou": parseInt(req.user.am),
-      katastasi: "υπό εξέταση"
-    });
-
-    if (!diploma) {
-      return res.status(404).json({ message: "Η διπλωματική δεν βρέθηκε ή δεν είναι υπό εξέταση." });
-    }
-
-    const html = generatePraktikoHTML(diploma);
-
-    res.send(html);
-  } catch (err) {
-    res.status(500).send("Σφάλμα κατά τη δημιουργία πρακτικού.");
-  }
-});*/
 
 router.get("/praktiko-data", authMiddleware, async (req, res) => {
   try {

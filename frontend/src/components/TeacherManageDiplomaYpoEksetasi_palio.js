@@ -193,7 +193,7 @@ const TeacherManageDiplomaYpoEksetasi = () => {
               </tr>
             </thead>
             <tbody>
-              {data.trimeriEpitropi?.map((m, i) => (
+              {data.trimelisEpitropi?.map((m, i) => (
                 <tr key={i}>
                   <td style={{ padding: 8 }}>{m.onoma} {m.epitheto}</td>
                   <td style={{ padding: 8 }}>
@@ -225,7 +225,7 @@ const TeacherManageDiplomaYpoEksetasi = () => {
 
           {/* Έλεγχος αν έχει ήδη καταχωρηθεί βαθμός */}
           {data && (() => {
-            const hasVoted = !!data.trimeriEpitropi.find(
+            const hasVoted = !!data.trimelisEpitropi.find(
               m => m.didaskonId === didaskonId && m.vathmos !== undefined && m.vathmos !== null
             );
             if (hasVoted) {
