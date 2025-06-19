@@ -6,20 +6,6 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 
-// Συνάρτηση για τη μορφοποίηση ημερομηνίας σε ευρωπαϊκή μορφή
-// Η μορφή είναι: 01/01/2023, 12:00
-// όπου η ημερομηνία είναι σε μορφή DD/MM/YYYY και η ώρα σε μορφή HH:MM
-function formatDateEU(isoString) {
-  if (!isoString) return "";
-  const date = new Date(isoString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  return `${day}/${month}/${year}, ${hours}:${minutes}`;
-}
-
 router.post("/", authMiddleware, async (req, res) => {
   const { id } = req.body;
 
@@ -46,22 +32,8 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(403).json({ message: "❌ Μόνο ο κύριος καθηγητής της διπλωματικής μπορεί να δει την ανακοίνωση." });
     }
 
-    // Πάρε τα πεδία παρουσίασης και τα επιπλέον στοιχεία
-    const {
-      imerominiaOraExetasis,
-      troposExetasis,
-      aithousaExetasis,
-      syndesmosExetasis,
-      titlos,
-      perigrafi,
-      foititis,
-      mainKathigitis
-    } = diploma;
-
-    // Μετατροπή ημερομηνίας σε ευρωπαϊκή μορφή
-    const imerominiaOraExetasisEU = formatDateEU(imerominiaOraExetasis);
-
-    console.log("📄 Πληροφορίες διπλωματικής:", {diploma})
+    // Πάρε τα πεδία παρουσίασης
+    const { imerominiaOraExetasis, troposExetasis, aithousaExetasis, syndesmosExetasis } = diploma;
 
     // Έλεγχος αν υπάρχουν όλα τα απαραίτητα πεδία
     if (!imerominiaOraExetasis || !troposExetasis || (!aithousaExetasis && !syndesmosExetasis)) {
@@ -81,17 +53,12 @@ router.post("/", authMiddleware, async (req, res) => {
       anakoinosi += `Η εξέταση θα γίνει στην αίθουσα: ${aithousaExetasis}.`;
     }
 
-    // στελνουμε την ανακοίνωση μαζί με τα υπόλοιπα στοιχεία
     res.status(200).json({
       anakoinosiExetasis: anakoinosi,
-      imerominiaOraExetasis: imerominiaOraExetasisEU,
+      imerominiaOraExetasis,
       troposExetasis,
       aithousaExetasis,
-      syndesmosExetasis,
-      titlos,
-      perigrafi,
-      foititis,
-      mainKathigitis
+      syndesmosExetasis
     });
 
   } catch (error) {

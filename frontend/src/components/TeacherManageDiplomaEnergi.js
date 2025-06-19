@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams , useNavigate} from "react-router-dom"; // Χρησιμοποιείται για να πάρουμε το id της διπλωματικής από το URL και για να πλοηγηθούμε στην προηγούμενη σελίδα μετά την αλλαγή κατάστασης ή την ακύρωση ανάθεσης
+import { useParams , useNavigate } from "react-router-dom"; // Χρησιμοποιείται για να πάρουμε το id της διπλωματικής από το URL και για να πλοηγηθούμε στην προηγούμενη σελίδα μετά την αλλαγή κατάστασης ή την ακύρωση ανάθεσης
+import "./TeacherDiplomas.css";
 
 const TeacherManageDiplomaEnergi = () => {
   const { id } = useParams(); // παίρνει το id από το URL
@@ -9,9 +10,19 @@ const TeacherManageDiplomaEnergi = () => {
   const [date, setDate] = useState("");
   const [assemblyNumber, setAssemblyNumber] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate(); // Χρησιμοποιείται για πλοήγηση στην προηγούμενη σελίδα για μετά την αλλαγή κατάστασης και την ακύρωση ανάθεσης
+  const [diploma, setDiploma] = useState(null);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();// Χρησιμοποιείται για πλοήγηση στην προηγούμενη σελίδα για μετά την αλλαγή κατάστασης και την ακύρωση ανάθεσης
 
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    axios.get(`http://localhost:4000/api/teacher/diplomatikes/${id}`, {
+      headers: { Authorization: token }
+    }).then(res => {
+      setDiploma(res.data);
+    }).catch(() => setError("❌ Σφάλμα φόρτωσης"));
+  }, [id, token]);
 
   const formatDateEU = (dateStr) => {
     if (!dateStr) return "";
@@ -51,7 +62,6 @@ const TeacherManageDiplomaEnergi = () => {
       );
       setMessage(res.data.message);
 
-      // Αναμονή 5 δευτερόλεπτα και μετά επιστροφή στην προηγούμενη σελίδα
       setTimeout(() => {
         navigate(-1);
       }, 5000);
@@ -72,8 +82,7 @@ const TeacherManageDiplomaEnergi = () => {
         { headers: { Authorization: token } }
       );
       setMessage(res.data.message);
-      
-      // Αναμονή 5 δευτερόλεπτα και μετά επιστροφή στην προηγούμενη σελίδα
+
       setTimeout(() => {
         navigate(-1);
       }, 5000);
@@ -92,16 +101,19 @@ const TeacherManageDiplomaEnergi = () => {
     setMessage("");
   };
 
+  if (error) return <p className="error">{error}</p>;
+  if (!diploma) return <p className="msg">⏳ Φόρτωση...</p>;
+
   return (
-    <div style={{
-      maxWidth: 500,
-      margin: "40px auto",
-      padding: 24,
-      border: "1px solid #ddd",
-      borderRadius: 8,
-      background: "#f9f9f9"
-    }}>
-      <h2 style={{ textAlign: "center", marginBottom: 24 }}>Ενέργειες Διδάσκοντα</h2>
+    <div className="container" style={{ maxWidth: 600, marginTop: 40 }}>
+      <h2 className="heading">🔧 Διαχείριση Διπλωματικής</h2>
+      <div className="list">
+        <div className="list-item">
+          <p><strong>Τίτλος:</strong> {diploma.titlos}</p>
+          <p><strong>Κατάσταση:</strong> {diploma.katastasi}</p>
+        </div>
+      </div>
+
       <div style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: 24 }}>
         <button className="button" onClick={() => handleSetActive("sxolio")}>➕ Καταχώρηση Σχολίου</button>
         <button className="button" onClick={() => handleSetActive("akyrwsh")}>❌ Ακύρωση Ανάθεσης</button>
@@ -136,11 +148,11 @@ const TeacherManageDiplomaEnergi = () => {
             required
             style={{ width: "100%", marginBottom: 12 }}
           />
-              {date && (
-                <div style={{ marginBottom: 8, color: "#555" }}>
-                    Επιλεγμένη ημερομηνία: {formatDateEU(date)}
-                </div>
-              )}
+          {date && (
+            <div style={{ marginBottom: 8, color: "#555" }}>
+              Επιλεγμένη ημερομηνία: {formatDateEU(date)}
+            </div>
+          )}
           <label>Αριθμός Γενικής Συνέλευσης:</label>
           <input
             type="text"

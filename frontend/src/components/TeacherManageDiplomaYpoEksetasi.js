@@ -52,7 +52,121 @@ const TeacherManageDiplomaYpoEksetasi = () => {
           { id },
           { headers: { Authorization: token } }
         );
-        setData(res.data);
+        if (res.data.message) {
+          setError(res.data.message);
+          return;
+        }
+
+        const {
+          anakoinosiExetasis,
+          imerominiaOraExetasis,
+          troposExetasis,
+          aithousaExetasis,
+          syndesmosExetasis,
+          titlos,
+          perigrafi,
+          foititis,
+          mainKathigitis
+        } = res.data;
+
+        const foititisFullName = foititis?.epitheto && foititis?.onoma
+          ? `${foititis.epitheto} ${foititis.onoma}`
+          : "";
+        const kathigitisFullName = mainKathigitis?.epitheto && mainKathigitis?.onoma
+          ? `${mainKathigitis.epitheto} ${mainKathigitis.onoma}`
+          : "";
+
+        // Επίσημο κείμενο ανακοίνωσης
+        const mainText = `
+      Σας ενημερώνουμε ότι η εξέταση της Διπλωματικής Εργασίας με τίτλο: "${titlos}", η οποία εκπονήθηκε από τον/την προπτυχιακό/ή φοιτητή/τρια: ${foititisFullName} υπό την επίβλεψη του/της καθηγητή/τριας: ${kathigitisFullName}, 
+θα πραγματοποιηθεί την ${imerominiaOraExetasis || "-"}.
+
+      Η διαδικασία της εξέτασης θα διεξαχθεί ${troposExetasis || "-"}${
+          troposExetasis && troposExetasis.toLowerCase().includes("εξ αποστάσεως") && syndesmosExetasis
+            ? `, μέσω του ακόλουθου συνδέσμου: ${syndesmosExetasis}.`
+            : aithousaExetasis
+              ? `, στην ${aithousaExetasis}.`
+              : "."
+        }
+        `;
+
+        // Δημιουργία HTML για νέο tab (A4 διάσταση)
+        const html = `
+          <html>
+            <head>
+              <title>Ανακοίνωση Εξέτασης</title>
+              <meta charset="UTF-8" />
+              <style>
+                body {
+                  font-family: Georgia, serif;
+                  background: #fff;
+                  margin: 0;
+                  padding: 0;
+                }
+                .a4-container {
+                  width: 210mm;
+                  min-height: 297mm;
+                  margin: 0 auto;
+                  background: #f8f8f8;
+                  border-radius: 8px;
+                  box-shadow: 0 0 10px #bbb;
+                  padding: 40px 32px;
+                  box-sizing: border-box;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                }
+                h2 {
+                  text-align: center;
+                  font-weight: bold;
+                  margin-bottom: 32px;
+                  font-size: 2.1rem;
+                }
+                .main-text {
+                  font-size: 20px;
+                  margin-bottom: 48px;
+                  white-space: pre-line;
+                }
+                .details {
+                  margin-top: 24px;
+                  font-size: 18px;
+                  text-align: left;
+                }
+                .details p {
+                  margin: 4px 0;
+                }
+                .details strong {
+                  display: inline-block;
+                  width: 140px;
+                }
+                @media print {
+                  body, .a4-container {
+                    box-shadow: none;
+                    background: #fff;
+                  }
+                }
+              </style>
+            </head>
+            <body>
+              <div class="a4-container">
+                <h2>ΑΝΑΚΟΙΝΩΣΗ ΕΞΕΤΑΣΗΣ</h2>
+                <div class="main-text">${mainText}</div>
+                <div class="details">
+                  <p><strong>Θέμα:</strong> ${perigrafi || ""}</p>
+                  <p><strong>Ημερομηνία/Ώρα:</strong> ${imerominiaOraExetasis || "-"}</p>
+                  <p><strong>Τρόπος:</strong> ${troposExetasis || "-"}</p>
+                  ${aithousaExetasis ? `<p><strong>Αίθουσα:</strong> ${aithousaExetasis}</p>` : ""}
+                  ${syndesmosExetasis ? `<p><strong>Σύνδεσμος:</strong> ${syndesmosExetasis}</p>` : ""}
+                </div>
+              </div>
+            </body>
+          </html>
+        `;
+
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(html);
+        newWindow.document.close();
+        return;
       } else if (type === "bathmos") {
         res = await axios.post(
           "http://localhost:4000/api/teacher/diaxirisi/ypoeksetasi/bathmos",
@@ -116,46 +230,6 @@ const TeacherManageDiplomaYpoEksetasi = () => {
         <button className="button" onClick={() => handleFetch("anakoinosi")}>📢 Προβολή Ανακοίνωσης Εξέτασης</button>
         <button className="button" onClick={() => handleFetch("bathmos")}>📝 Προβολή Βαθμολογίας Τριμελούς</button>
       </div>
-
-      {/* Προβολή Ανακοίνωσης Εξέτασης */}
-      {active === "anakoinosi" && (
-        <div style={{ marginTop: 24 }}>
-          {!data && <div>Φόρτωση...</div>}
-          {data && (
-            <div style={{
-              fontFamily: "Georgia, serif",
-              fontSize: "17px",
-              lineHeight: "1.6",
-              background: "#f8f8f8",
-              padding: 24,
-              borderRadius: 8
-            }}>
-              <h3 style={{ textAlign: "center", fontWeight: "bold" }}>ΑΝΑΚΟΙΝΩΣΗ ΕΞΕΤΑΣΗΣ</h3>
-              <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit" }}>
-                {data.anakoinosiExetasis}
-              </pre>
-              <div style={{ marginTop: 16 }}>
-                <strong>Ημερομηνία/Ώρα:</strong> {data.imerominiaOraExetasis || "-"}
-                <br />
-                <strong>Τρόπος:</strong> {data.troposExetasis || "-"}
-                <br />
-                {data.aithousaExetasis && (
-                  <>
-                    <strong>Αίθουσα:</strong> {data.aithousaExetasis}
-                    <br />
-                  </>
-                )}
-                {data.syndesmosExetasis && (
-                  <>
-                    <strong>Σύνδεσμος:</strong> {data.syndesmosExetasis}
-                    <br />
-                  </>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Λίστα τριμελούς και κουμπί καταχώρησης βαθμού */}
       {active === "bathmos" && (
