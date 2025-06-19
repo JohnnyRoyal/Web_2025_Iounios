@@ -45,7 +45,7 @@ const ThemataView = () => {
       const formData = new FormData();
       formData.append("titlos", editForm.titlos);
       formData.append("perigrafi", editForm.perigrafi);
-      if (editForm.file) formData.append("pdfPerigrafis", editForm.file);
+      if (editForm.file) formData.append("pdfExtraPerigrafi", editForm.file);
 
       await axios.put(`http://localhost:4000/api/teacher/themata/${id}`, formData, {
         headers: {
@@ -97,7 +97,7 @@ const ThemataView = () => {
               <>
                 <p><strong>Τίτλος:</strong> {thema.titlos}</p>
                 <p><strong>Περιγραφή:</strong> {thema.perigrafi}</p>
-                {thema.pdfPerigrafi && (
+                {thema.pdfExtraPerigrafi && (
                   <p>
                     <strong>PDF Περιγραφή:</strong>{" "}
                     <a href={`http://localhost:4000/${thema.pdfPath}`} target="_blank" rel="noreferrer">
@@ -169,7 +169,7 @@ const ThemataView = () => {
                 ? `Ανατεθειμένο στον/στην ${thema.assignedTo.name} (ΑΜ: ${thema.assignedTo.am})`
                 : "Διαθέσιμο"}{" "}
               <br />
-              {thema.pdfPerigrafi && (
+              {thema.pdfExtraPerigrafi && (
                 <a
                   href={`http://localhost:4000/${thema.pdfPath}`}
                   target="_blank"
