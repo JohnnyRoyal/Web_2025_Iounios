@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
     };
 
     // Φιλτράρισμα με βάση ημερομηνία αν δοθούν παράμετροι
-    let filter = {};
+    let filter = { katastasi: "υπό εξέταση" };
     if (from || to) {
       filter.imerominiaOraExetasis = {};
       if (from) filter.imerominiaOraExetasis.$gte = convertToISODate(from);
@@ -41,6 +41,9 @@ router.get("/", async (req, res) => {
       perigrafi: doc.perigrafi,
       pdf_extra_perigrafi: doc.pdfExtraPerigrafi,
       imerominia_anakinosis_diplomatikis: doc.imerominiaOraExetasis,
+      tropos_exetasis: doc.troposExetasis,
+      aithousaExetasis: doc.troposExetasis === "διά ζώσης" ? doc.aithousaExetasis : null, // για ασφάλεια ούτος η άλλως το αίθουσα εξέτασης θα είναι null αν δεν είναι διά ζώσης
+      syndesmosExetasis: doc.troposExetasis === "εξ αποστάσεως" ? doc.syndesmosExetasis : null, //το ίδιο και για το σύνδεσμο εξέτασης
     }));
 
     console.log("Filtered Data:", filteredData);

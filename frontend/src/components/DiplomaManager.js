@@ -3,6 +3,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ExetasiPhase from "./ExetasiPhase";
 import FinishedPhase from "./FinishedPhase";
+import "./DiplomaManager.css"; // Προσθήκη CSS για στυλ
+
+// Το DiplomaManager είναι το κύριο συστατικό για τη διαχείριση της διπλωματικής εργασίας του φοιτητή. Και ανάλογα με την κατάσταση της διπλωματικής, εμφανίζει διαφορετικά υποσυστήματα:
+
+// 1. **Υπό Ανάθεση**: Επιτρέπει στον φοιτητή να στείλει προσκλήσεις σε διδάσκοντες για την επιτροπή.
+// 2. **Υπό Εξέταση**: Εμφανίζει τη σελίδα ExetasiPhase για τη διαχείριση της εξέτασης της διπλωματικής.
+// 3. **Περατωμένη**: Εμφανίζει τη σελίδα FinishedPhase με τις τελικές πληροφορίες της διπλωματικής.
 
 const DiplomaManager = () => {
   const [status, setStatus] = useState("");
@@ -58,35 +65,51 @@ const DiplomaManager = () => {
 
   if (!status) return <p>Φόρτωση...</p>;
 
+
   if (status.trim() === "υπό ανάθεση") {
     return (
-      <div style={{ padding: 20, maxWidth: 800, margin: "auto" }}>
+      <div className="container">
         <h2>📨 Διαχείριση Προσκλήσεων Επιτροπής</h2>
 
-        <div style={{ marginBottom: 20 }}>
+        <div className="detail-box" style={{ marginBottom: 20 }}>
           <label>ID Διδάσκοντα:</label>
-          <input value={form.didaskonId} onChange={(e) => setForm({ ...form, didaskonId: e.target.value })} />
-          <br />
+          <input
+            value={form.didaskonId}
+            onChange={(e) => setForm({ ...form, didaskonId: e.target.value })}
+            style={{ width: "100%", marginBottom: 8 }}
+          />
           <label>Όνομα:</label>
-          <input value={form.onoma} onChange={(e) => setForm({ ...form, onoma: e.target.value })} />
-          <br />
+          <input
+            value={form.onoma}
+            onChange={(e) => setForm({ ...form, onoma: e.target.value })}
+            style={{ width: "100%", marginBottom: 8 }}
+          />
           <label>Επίθετο:</label>
-          <input value={form.epitheto} onChange={(e) => setForm({ ...form, epitheto: e.target.value })} />
-          <br />
-          <button onClick={handleInvite}>➕ Αποστολή Πρόσκλησης</button>
+          <input
+            value={form.epitheto}
+            onChange={(e) => setForm({ ...form, epitheto: e.target.value })}
+            style={{ width: "100%", marginBottom: 8 }}
+          />
+          <button className="button" onClick={handleInvite}>➕ Αποστολή Πρόσκλησης</button>
         </div>
 
         <h3>📋 Απεσταλμένες Προσκλήσεις</h3>
         <ul>
           {invites.map((inv, idx) => (
-            <li key={idx}>
-              {inv.onoma} {inv.epitheto} ({inv.didaskonId}) -
-              {inv.apodoxi === null ? "Εκκρεμεί" : inv.apodoxi ? "Αποδεκτή" : "Απορρίφθηκε"}
+            <li key={idx} className="detail-box" style={{ marginBottom: 10 }}>
+              {inv.onoma} {inv.epitheto} ({inv.didaskonId}) -{" "}
+              {inv.apodoxi === null
+                ? "Εκκρεμεί"
+                : inv.apodoxi
+                ? "Αποδεκτή"
+                : "Απορρίφθηκε"}
             </li>
           ))}
         </ul>
 
-        {message && <p style={{ color: message.includes("Σφάλμα") ? "red" : "green" }}>{message}</p>}
+        {message && (
+          <p style={{ color: message.includes("Σφάλμα") ? "red" : "green" }}>{message}</p>
+        )}
       </div>
     );
   }
