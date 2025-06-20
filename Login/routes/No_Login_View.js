@@ -30,8 +30,8 @@ router.get("/", async (req, res) => {
     let filter = { katastasi: "υπό εξέταση" };
     if (from || to) {
       filter.imerominiaOraExetasis = {};
-      if (from) filter.imerominiaOraExetasis.$gte = convertToISODate(from);
-      if (to) filter.imerominiaOraExetasis.$lte = convertToISODate(to);
+      if (from) filter.imerominiaOraExetasis.$gte = new Date(from + "T00:00:00.000Z"); // Προσθήκη ώρας για να είναι ακριβής η σύγκριση μέσα στην ΒΔ γιατί χωρίς ώρα δεν γύρναγε τίποτα
+      if (to) filter.imerominiaOraExetasis.$lte = new Date(to + "T23:59:59.999Z"); // Τέλος της ημέρας για να συμπεριλάβει όλες τις εγγραφές της ημέρας εαν ψάξω για μέσα σε μία μέρα
     }
 
     const data = await diplomas.find(filter).toArray();
@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
       pdf_extra_perigrafi: doc.pdfExtraPerigrafi,
       imerominia_anakinosis_diplomatikis: doc.imerominiaOraExetasis,
       tropos_exetasis: doc.troposExetasis,
-      aithousaExetasis: doc.troposExetasis === "διά ζώσης" ? doc.aithousaExetasis : null, // για ασφάλεια ούτος η άλλως το αίθουσα εξέτασης θα είναι null αν δεν είναι διά ζώσης
+      aithousaExetasis: doc.troposExetasis === "δια ζώσης" ? doc.aithousaExetasis : null, // για ασφάλεια ούτος η άλλως το αίθουσα εξέτασης θα είναι null αν δεν είναι διά ζώσης
       syndesmosExetasis: doc.troposExetasis === "εξ αποστάσεως" ? doc.syndesmosExetasis : null, //το ίδιο και για το σύνδεσμο εξέτασης
     }));
 

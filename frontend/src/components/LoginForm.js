@@ -58,8 +58,8 @@ const LoginForm = () => {
       };
 
       let url = `http://localhost:4000/api/diplomas/nologin`;
-      if (from) url += `?from=${formatDateToEuropean(from)}`;
-      if (to) url += `&to=${formatDateToEuropean(to)}`;
+      if (from) url += `?from=${from}`;
+      if (to) url += `&to=${to}`;
 
       const res = await axios.get(url);
       setDiplomas(res.data || []);
@@ -125,14 +125,32 @@ const LoginForm = () => {
               <br />
               {d.perigrafi}
               <br />
-              <b>Ημ/νία ανακοίνωσης εξέτασης:</b>{" "}
-              {new Date(d.imerominia_anakinosis_diplomatikis).toLocaleDateString("el-GR")}
-              <br />
               {d.pdf_extra_perigrafi && (
                 <a href={d.pdf_extra_perigrafi} target="_blank" rel="noopener noreferrer">
                   Προβολή PDF
                 </a>
               )}
+              <br />              
+              <b>Ημ/νία ανακοίνωσης εξέτασης:</b>{" "}
+              {new Date(d.imerominia_anakinosis_diplomatikis).toLocaleDateString("el-GR")}
+              <br />
+              <b>Τρόπος εξέτασης:</b> {d.tropos_exetasis}
+              <br />
+              {d.tropos_exetasis === "δια ζώσης" && d.aithousaExetasis && (
+                <>
+                  <b>Τοποθεσία:</b> {d.aithousaExetasis}
+                  <br />
+                </>
+              )}
+              {d.tropos_exetasis === "εξ αποστάσεως" && d.syndesmosExetasis && (
+                <>
+                  <b>Σύνδεσμος:</b>{" "}
+                  <a href={d.syndesmosExetasis} target="_blank" rel="noopener noreferrer">
+                    {d.syndesmosExetasis}
+                  </a>
+                  <br />
+                </>
+              )}             
             </li>
           ))}
         </ul>
@@ -143,84 +161,4 @@ const LoginForm = () => {
 );
 };
 
-    /*<div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
-      <h2>🔐 Σύνδεση </h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 10 }}>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            style={{ width: "100%" }}
-          />
-        </div>
-        <div style={{ marginBottom: 10 }}>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ width: "100%" }}
-          />
-        </div>
-        <button type="submit">Σύνδεση</button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-       //--- Δημόσια λίστα διπλωματικών --- 
-      <div style={{ marginTop: 40 }}>
-        <h3>📢 Ανακοινώσεις Διπλωματικών (Δημόσια Πρόσβαση)</h3>
-        <div style={{ marginBottom: 10 }}>
-          <label>Από: </label>
-          <input type="date" value={from} onChange={e => setFrom(e.target.value)} />
-          <label style={{ marginLeft: 10 }}>Έως: </label>
-          <input type="date" value={to} onChange={e => setTo(e.target.value)} />
-          <label style={{ marginLeft: 10 }}>Μορφή: </label>
-          <select value={format} onChange={e => setFormat(e.target.value)}>
-            <option value="json">JSON</option>
-            <option value="xml">XML</option>
-          </select>
-          <button onClick={fetchDiplomas} style={{ marginLeft: 10 }}>Ανανέωση</button>
-        </div>
-        {loading ? (
-          <p>Φόρτωση...</p>
-        ) : (
-          <ul>
-            {diplomas.length === 0 && <li>Δεν βρέθηκαν διπλωματικές.</li>}
-            {diplomas.map((d, idx) => (
-              <li key={idx} style={{ marginBottom: 15 }}>
-                <strong>{d.titlos}</strong>
-                <br />
-                <span>{d.perigrafi}</span>
-                <br />
-                <span>
-                  <b>Ημ/νία ανακοίνωσης εξέτασης:</b> {d.imerominia_anakinosis_diplomatikis}
-                </span>
-                {d.pdf_extra_perigrafi && (
-                  <>
-                    <br />
-                    <a
-                      href={d.pdf_extra_perigrafi}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Προβολή PDF
-                    </a>
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-        <p style={{ fontSize: "0.9em", color: "#555", marginTop: 10 }}>
-          * Τα δεδομένα είναι δημόσια και μπορείτε να τα λάβετε ως JSON ή XML, φιλτράροντας με εύρος ημερομηνιών.
-        </p>
-      </div>
-    </div>
-  );
-};
-*/
 export default LoginForm;
