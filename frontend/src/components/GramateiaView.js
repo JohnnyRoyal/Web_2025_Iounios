@@ -207,7 +207,7 @@ const GramateiaView = () => {
                 <p><strong>Χρόνος από Ανάθεση:</strong> {diploma.xronosApoAnathesi}</p>
                 <p><strong>Τριμελής Επιτροπή:</strong></p>
                 <ul>
-                  {diploma.trimerisEpitropi.map((member, idx) => (
+                  {diploma.trimelisEpitropi.map((member, idx) => (
                     <li key={idx}>
                       {member.onoma} {member.epitheto} {member.vathmos && `(Βαθμός: ${member.vathmos})`}
                     </li>
@@ -244,7 +244,7 @@ const GramateiaView = () => {
                 <p><strong>Χρόνος από Ανάθεση:</strong> {diploma.xronosApoAnathesi}</p>
                 <p><strong>Τριμελής Επιτροπή:</strong></p>
                 <ul>
-                  {diploma.trimerisEpitropi.map((member, idx) => (
+                  {diploma.trimelisEpitropi.map((member, idx) => (
                     <li key={idx}>
                       {member.onoma} {member.epitheto} {member.vathmos && `(Βαθμός: ${member.vathmos})`}
                     </li>

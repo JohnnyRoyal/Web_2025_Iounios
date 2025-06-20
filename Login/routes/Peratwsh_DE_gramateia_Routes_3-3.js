@@ -73,7 +73,7 @@ router.post("/", authMiddleware, async (req, res) => {
           imerominiaPeratosis: currentDate, // Προσθήκη της ημερομηνίας περάτωσης
         },
         $push: {
-          proigoumenesKatastaseis: 3, // Προσθήκη του αριθμού 3 στο array για δήλωση της προηγούμενης κατάστασης
+          proigoumenesKatastaseis: "υπό εξέταση", // Προσθήκη της προηγούμενης κατάστασης "υπό εξέταση" στο array
         },
       }
     );

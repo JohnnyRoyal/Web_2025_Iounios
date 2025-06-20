@@ -45,13 +45,6 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: `❌ Δεν βρέθηκε διπλωματική με ID: ${id}.` });
     }
 
-    // Έλεγχος αν ο χρήστης είναι ο κύριος καθηγητής της διπλωματικής (με βάση το didaskonId) το έχουμε στο token
-    if (
-    !diploma.mainKathigitis ||
-    diploma.mainKathigitis.didaskonId !== req.user.id
-    ) {
-    return res.status(403).json({ message: "❌ Μόνο ο κύριος καθηγητής της διπλωματικής μπορεί να αλλάξει την κατάστασή της." });
-    }
 
     // Ενημέρωση της διπλωματικής με την κατάσταση "Περατωμένη" και προσθήκη στο array "proigoumenesKatastaseis"
     const result = await collection.findOne(

@@ -54,13 +54,13 @@ router.post("/", authMiddleware, async (req, res) => {
       { _id: my_objectId }, // Εύρεση της διπλωματικής με βάση το ID
       {
         $set: {
-          katastasi: "διαθέσιμη προς ανάθεση", // Ενημέρωση της κατάστασης
+          katastasi: "ακυρωμένη", // Ενημέρωση της κατάστασης σε ακυρωμένη
           logosAkyrosis:  logosAkyrosis,    // Καταχώρηση του λόγου ακύρωσης
           imerominiaAkyrosis: isoDate,  // Καταχώρηση της ημερομηνίας της Γενικής Συνέλευσης
           arithmosGenikhsSynelefsisAkyrwshs: arithmosGenikhsSynelefsisAkyrwshs,  // Καταχώρηση του αριθμού της Γενικής Συνέλευσης
         },
         $push: {
-          proigoumenesKatastaseis: 0, // Ενημέρωση του array  με την κατάσταση "διαθέσιμη προς ανάθεση"
+          proigoumenesKatastaseis: "Ενεργή", // Ενημέρωση του array  με την κατάσταση "Ενεργή"
         },
       }
     );

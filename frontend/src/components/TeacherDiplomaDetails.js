@@ -71,7 +71,7 @@ const TeacherDiplomaDetails = () => {
           <ul>
             {diploma.proigoumenesKatastaseis.map((k, idx) => (
               <li key={idx}>
-                ➤ {k.katastasi} στις {new Date(k.date).toLocaleString()}
+                ➤ {k} 
               </li>
             ))}
           </ul>

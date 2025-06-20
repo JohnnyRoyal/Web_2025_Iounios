@@ -11,7 +11,7 @@ const client = new MongoClient(uri);
 // Middleware για έλεγχο αυθεντικοποίησης 
 const authMiddleware = require("../middlewares/authMiddleware");
 
-/* Example JSON data for students and professors
+/* Example JSON data for students and Didaskontes
 
  students = [
     {
@@ -30,7 +30,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
     }
 ];
 
- professors = [
+ Didaskontes = [
     {
         id: "1",
         name: "Andreas",
@@ -52,8 +52,8 @@ const authMiddleware = require("../middlewares/authMiddleware");
 
 const fs = require("fs");
 
-// Το fs.readFileSync διαβάζει το αρχείο students.json και professors.json και επιστρέφει το περιεχόμενο του αρχείου ως string
-// Το "utf8" είναι η κωδικοποίηση που χρησιμοποιείται για να διαβάσουμε το αρχείο ως κείμενο και το students.json και professors.json είναι τα ονόματα των αρχείων που περιέχουν τα δεδομένα των φοιτητών και καθηγητών αντίστοιχα
+// Το fs.readFileSync διαβάζει το αρχείο students.json και Didaskontes.json και επιστρέφει το περιεχόμενο του αρχείου ως string
+// Το "utf8" είναι η κωδικοποίηση που χρησιμοποιείται για να διαβάσουμε το αρχείο ως κείμενο και το students.json και Didaskontes.json είναι τα ονόματα των αρχείων που περιέχουν τα δεδομένα των φοιτητών και καθηγητών αντίστοιχα
 // Το fs.readFileSync είναι μια συγχρονισμένη μέθοδος, πράγμα που σημαίνει ότι θα περιμένει να ολοκληρωθεί η ανάγνωση του αρχείου πριν προχωρήσει στην επόμενη γραμμή κώδικα
 // Το JSON.parse μετατρέπει το string σε JavaScript αντικείμενο, το κάνει πίνακα
 //Αν η fs.readFIleSync επιστρεψει το string '[{"id":"1","name":"Makis","surname":"Makopoulos","student_number":"10433999"}]'
@@ -87,10 +87,10 @@ router.post("/", authMiddleware, async (req, res) => {
     // Επιλογή βάσης δεδομένων και συλλογών
     const database = client.db("users");
     const studentsCollection = database.collection("students");
-    const professorsCollection = database.collection("professors");
+    const DidaskontesCollection = database.collection("Didaskontes");
 
     // Δεδομένα από το σώμα του αιτήματος (body)
-    const { students, professors } = req.body;
+    const { students, Didaskontes } = req.body;
 
     // Εισαγωγή δεδομένων φοιτητών
     if (students && students.length > 0) {
@@ -100,9 +100,9 @@ router.post("/", authMiddleware, async (req, res) => {
     }
 
     // Εισαγωγή δεδομένων καθηγητών
-    if (professors && professors.length > 0) {
-      const professorResult = await professorsCollection.insertMany(professors);
-      console.log("📥 Καθηγητές προς εισαγωγή:", professors);
+    if (Didaskontes && Didaskontes.length > 0) {
+      const professorResult = await DidaskontesCollection.insertMany(Didaskontes);
+      console.log("📥 Καθηγητές προς εισαγωγή:", Didaskontes);
       console.log(`✅ Εισήχθησαν ${professorResult.insertedCount} καθηγητές.`);
     }
 

@@ -1,0 +1,44 @@
+ΒΡΕΣ ΔΙΠΛΩΜΑΤΙΚΕΣ ΜΕ ΙΔΙΟ ΦΟΙΤΗΤΗ
+
+db.getCollection('Diplomatikes').aggregate([
+  {
+    $group: {
+      _id: "$foititis.arithmosMitroou",
+      count: { $sum: 1 },
+      diplomas: { $push: { _id: "$_id", titlos: "$titlos" } }
+    }
+  },
+  { $match: { _id: { $ne: null }, count: { $gt: 1 } } }
+])
+
+ΒΡΕΣ ΦΟΙΤΗΤΕΣ ΧΩΡΙΣ ΔΙΠΛΩΜΑΤΙΚΗ
+
+db.getCollection('students').aggregate([
+  {
+    $lookup: {
+      from: "Diplomatikes",
+      localField: "arithmosMitroou",
+      foreignField: "foititis.arithmosMitroou",
+      as: "diplomas"
+    }
+  },
+  { $match: { diplomas: { $size: 0 } } }
+]).forEach(printjson)
+
+ΒΡΕΣ ΔΙΠΛΩΜΑΤΙΚΕΣ ΜΕ ΔΥΟ ΙΔΙΟΥΣ ΚΑΘΗΓΗΤΕΣ ΣΤΗΝ ΤΡΙΜΕΛΗ ΕΠΙΤΡΟΠΗ
+
+db.getCollection('Diplomatikes').aggregate([
+  {
+    $project: {
+      titlos: 1,
+      trimelisEpitropi: 1,
+      duplicateMembers: {
+        $gt: [
+          { $size: "$trimelisEpitropi" },
+          { $size: { $setUnion: "$trimelisEpitropi.didaskonId" } }
+        ]
+      }
+    }
+  },
+  { $match: { duplicateMembers: true } }
+])

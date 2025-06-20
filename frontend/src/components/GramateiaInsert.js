@@ -54,22 +54,29 @@ const GramateiaInsert = () => {
         <h3>Παράδειγμα JSON Αρχείου:</h3>
         <pre>
           {`{
-  "students": [
-    {
-      "onoma": "MakisTest",
-      "epitheto": "MakopoulosTestopoulos",
-      "username": "test.testopoulos",
-      "email": "10433999@students.upatras.gr"
-    }
-  ],
-  "professors": [
-    {
-      "onoma": "AndreasTest",
-      "epitheto": "KomninosTestopoulos",
-      "email": "akomninos@ceid.upatras.gr",
-      "username": "testakis.testaras"
-    }
-  ]
+    "students": [
+        {
+            "username": "test.testaki",
+            "password": "hashed_testaki",
+            "email": "test.testaki@example.com",
+            "taxydromikiDieythinsi": "Τεστ 5, Λάρισα",
+            "kinito": "6900000019",
+            "stathero": "2410000019",
+            "arithmosMitroou": 12345678,
+            "onoma": "Τεστ",
+            "epitheto": "Τεστακης"
+        }
+    ],
+    "Didaskontes": [
+        {
+        "username": "a.testopoulou",
+        "password": "hashed_pass_test",
+        "proskliseis": [],
+        "didaskonId": 12345,
+        "epitheto": "Τεστοπούλου",
+        "onoma": "Τεστά"
+        }
+    ]
 }`}
         </pre>
       </div>
