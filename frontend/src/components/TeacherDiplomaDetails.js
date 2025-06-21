@@ -45,7 +45,7 @@ const TeacherDiplomaDetails = () => {
       </div>
 
       {/* Κουτί: Τελικό Κείμενο */}
-      {(diploma.katastasi === "περατωμένη" || diploma.katastasi === "υπό εξέταση") && diploma.telikoKeimenoPdf && (
+      {(diploma.katastasi === "περατωμένη" || diploma.katastasi === "υπό εξέταση") && diploma.syndesmos && (
         <div className="list">
           <p><strong>Τελικός Βαθμός:</strong> {diploma.telikosVathmos ?? "—"}</p>
           <p>

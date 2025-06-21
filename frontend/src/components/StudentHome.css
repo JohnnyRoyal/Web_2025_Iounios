@@ -39,6 +39,18 @@
   background-color: #e0e0e0;
 }
 
+.button-cancel {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: #e53935;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-right: 8px;
+}
+
 .logout-button {
     background-color: #3e4a51; /* σκούρο γκρι */
     color: #f46d6d; /* κόκκινο */

@@ -15,7 +15,7 @@ const TeacherHome = () => {
   return (
     <div className="student-home-container">
       <div className="logoutContainer">
-        <button onClick={handleLogout} className="logoutButton">🚪 Αποσύνδεση</button>
+        <button onClick={handleLogout} className="button-cancel">🚪 Αποσύνδεση</button>
       </div>
 
       <h2>Καλωσήρθατε, Καθηγητή!</h2>
