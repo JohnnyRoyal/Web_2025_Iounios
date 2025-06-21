@@ -73,3 +73,14 @@ ul li {
 .button:hover {
   background-color: #388e3c;
 }
+
+/* Για το exetasiPhase */
+.input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}

@@ -91,7 +91,7 @@ const ExetasiPhase = () => {
   return (
     <div className="container">
       <h3>📑 Φάση Υπό Εξέταση</h3>
-      <button onClick={() => navigate("/praktiko")} style={{ marginBottom: 20 }}>
+      <button onClick={() => navigate("/praktiko")} className="button">
         🧾 Προβολή Πρακτικού Εξέτασης
       </button>
       <div className="detail-box">
@@ -101,9 +101,10 @@ const ExetasiPhase = () => {
           type="text"
           value={syndesmos}
           onChange={(e) => setSyndesmos(e.target.value)}
+          className="input"
           style={{ width: "100%", marginBottom: 8 }}
         />
-        <button onClick={saveSyndesmos}>💾 Αποθήκευση Συνδέσμου</button>
+        <button className="button" type="button" onClick={saveSyndesmos}>💾 Αποθήκευση Συνδέσμου</button>
         {linkMsg && <p style={{ color: linkMsg.includes("❌") ? "red" : "green" }}>{linkMsg}</p>}
       </div>
       <div className="detail-box">
@@ -112,13 +113,15 @@ const ExetasiPhase = () => {
         <input
           value={draftForm.pdfProxeiroKeimeno}
           onChange={(e) => setDraftForm({ ...draftForm, pdfProxeiroKeimeno: e.target.value })}
+          className="input"
         />
         <label>Σύνδεσμος Υλικού:</label>
         <input
           value={draftForm.linkYliko}
           onChange={(e) => setDraftForm({ ...draftForm, linkYliko: e.target.value })}
+          className="input"
         />
-        <button onClick={handleSaveDraft}>💾 Αποθήκευση Πρόχειρου</button>
+        <button className="button" type="button" onClick={handleSaveDraft}>💾 Αποθήκευση Πρόχειρου</button>
         {msg.draft && <p style={{ color: msg.draft.includes("Σφάλμα") ? "red" : "green" }}>{msg.draft}</p>}
       </div>
       <div className="detail-box">
@@ -128,11 +131,13 @@ const ExetasiPhase = () => {
           type="datetime-local"
           value={examForm.imerominiaOraExetasis}
           onChange={(e) => setExamForm({ ...examForm, imerominiaOraExetasis: e.target.value })}
+          className="input"
         />
         <label>Τρόπος Εξέτασης:</label>
         <select
           value={examForm.troposExetasis}
           onChange={(e) => setExamForm({ ...examForm, troposExetasis: e.target.value })}
+          className="input"
         >
           <option value="">-- Επιλέξτε --</option>
           <option value="δια ζώσης">Δια ζώσης</option>
@@ -144,6 +149,7 @@ const ExetasiPhase = () => {
             <input
               value={examForm.aithousaExetasis}
               onChange={(e) => setExamForm({ ...examForm, aithousaExetasis: e.target.value })}
+              className="input"
             />
           </>
         )}
@@ -153,10 +159,11 @@ const ExetasiPhase = () => {
             <input
               value={examForm.syndesmosExetasis}
               onChange={(e) => setExamForm({ ...examForm, syndesmosExetasis: e.target.value })}
+              className="input"
             />
           </>
         )}
-        <button onClick={handleSaveExam}>💾 Αποθήκευση Εξέτασης</button>
+        <button className="button" type="button" onClick={handleSaveExam}>💾 Αποθήκευση Εξέτασης</button>
         {msg.exam && <p style={{ color: msg.exam.includes("Σφάλμα") ? "red" : "green" }}>{msg.exam}</p>}
       </div>
     </div>
