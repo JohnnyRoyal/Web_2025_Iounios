@@ -44,8 +44,8 @@ const FinishedPhase = () => {
 
       <p><strong>Τελικός Βαθμός:</strong> {diploma.telikosVathmos ?? "—"}</p>
 
-      {diploma.telikokeimenoPdf && (
-        <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.telikokeimenoPdf} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
+      {diploma.syndesmos && (
+        <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.syndesmos} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
       )}
 
       {diploma.anakoinosiExetasis && (
@@ -126,9 +126,9 @@ const FinishedPhase = () => {
       <div className="detail-box">
         <p><strong>Τελικός Βαθμός:</strong> {diploma.telikosVathmos ?? "—"}</p>
       </div>
-      {diploma.telikoKeimenoPdf && (
+      {diploma.syndesmos && (
         <div className="detail-box">
-          <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.telikoKeimenoPdf} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
+          <p><strong>Τελικό Κείμενο:</strong> <a href={diploma.syndesmos} target="_blank" rel="noreferrer">Άνοιγμα</a></p>
         </div>
       )}
       {diploma.sxolia && (
