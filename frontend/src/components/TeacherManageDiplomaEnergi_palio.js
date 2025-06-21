@@ -12,7 +12,6 @@ const TeacherManageDiplomaEnergi = () => {
   const [message, setMessage] = useState("");
   const [diploma, setDiploma] = useState(null);
   const [error, setError] = useState("");
-  const [myComments, setMyComments] = useState([]); //Για να φορτώνει αυτόματα τα σχόλια του καθηγητή 
   const navigate = useNavigate();// Χρησιμοποιείται για πλοήγηση στην προηγούμενη σελίδα για μετά την αλλαγή κατάστασης και την ακύρωση ανάθεσης
 
   const token = localStorage.getItem("token");
@@ -25,31 +24,10 @@ const TeacherManageDiplomaEnergi = () => {
     }).catch(() => setError("❌ Σφάλμα φόρτωσης"));
   }, [id, token]);
 
-  // Κάθε φορά που ανοίγει η φόρμα σχολίου, φέρε τα σχόλια
-  useEffect(() => {
-    if (active === "sxolio") {
-      fetchMyComments();
-    }
-    // eslint-disable-next-line
-  }, [active, id, token]);
-
   const formatDateEU = (dateStr) => {
     if (!dateStr) return "";
     const [year, month, day] = dateStr.split("-");
     return `${day}/${month}/${year}`;
-  };
-
-  // Φόρτωση σχολίων του καθηγητή για αυτή τη διπλωματική , πάντα πριν πατίσει ο καθηγητής να καταχωρήσει νέο σχόλιο χρειάζομαι νέο route :( μπλιαχ
-  const fetchMyComments = async () => {
-    try {
-      const res = await axios.get(
-        `http://localhost:4000/api/teacher/diaxirisi/energi/sxolia/${id}`,
-        { headers: { Authorization: token } }
-      );
-      setMyComments(res.data.myComments || []);
-    } catch {
-      setMyComments([]);
-    }
   };
 
   // Υποβολή σχολίου
@@ -63,8 +41,6 @@ const TeacherManageDiplomaEnergi = () => {
         { headers: { Authorization: token } }
       );
       setMessage(res.data.message);
-      setComment("");
-      setMyComments(res.data.myComments || []); // ανανέωση λίστας σχολίων
     } catch (err) {
       setMessage(err.response?.data?.message || "Σφάλμα.");
     }
@@ -158,24 +134,9 @@ const TeacherManageDiplomaEnergi = () => {
           />
           <button className="button" type="submit">Υποβολή Σχολίου</button>
           {message && <p style={{ marginTop: 10, color: message.startsWith("✅") ? "green" : "red" }}>{message}</p>}
-          {/* Λίστα σχολίων του καθηγητή */}
-          <div style={{ marginTop: 18 }}>
-            <b>Τα σχόλιά σας για αυτή τη διπλωματική:</b>
-            <ul style={{ marginTop: 8, background: "#f8f8f8", padding: 10, borderRadius: 6 }}>
-              {myComments.length === 0 && <li>Δεν έχετε καταχωρήσει σχόλια.</li>}
-              {myComments.map((sx, idx) => (
-                <li key={idx} style={{ marginBottom: 6 }}>
-                  <span className="comment-text">{sx.keimeno}</span>
-                  <br />
-                  <span style={{ fontSize: "0.9em", color: "#888" }}>
-                    {new Date(sx.createdAt).toLocaleString("el-GR")}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </form>
       )}
+
       {/* Φόρμα ακύρωσης ανάθεσης */}
       {active === "akyrwsh" && (
         <form onSubmit={handleSubmitCancel} style={{ marginBottom: 16 }}>

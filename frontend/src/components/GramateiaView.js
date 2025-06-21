@@ -134,9 +134,13 @@ const GramateiaView = () => {
       );
 
     }
-     catch (err) {
+    catch (err) {
       console.error(err);
-      alert("❌ Σφάλμα κατά την ακύρωση της ανάθεσης.");
+      if (err.response && err.response.data && err.response.data.message) {
+        alert(err.response.data.message); // Εμφάνιση του μηνύματος λάθους από το backend
+      } else {
+        alert("❌ Σφάλμα κατά την ακύρωση της ανάθεσης.");
+      }
     }
   };
 

@@ -7,6 +7,15 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 
+// Υπολογισμός χρόνου από την ανάθεση
+function calculateTimeSinceSubmission(imerominiaAnathesis) {
+  if (!imerominiaAnathesis) return "Δεν υπάρχει ημερομηνία ανάθεσης.";
+  const currentDate = new Date();
+  const submissionDate = new Date(imerominiaAnathesis);
+  const timeDifference = currentDate - submissionDate; // Διαφορά σε milliseconds
+  return daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24)); // Μετατροπή σε ημέρες
+}
+
 // Route για ακύρωση ανάθεσης θέματος
 router.post("/", authMiddleware, async (req, res) => {
   const { id, imerominiaGenikisSyneleysis, arithmosGenikhsSynelefsisAkyrwshs} = req.body; // Λήψη δεδομένων από το σώμα του αιτήματος
@@ -53,6 +62,13 @@ router.post("/", authMiddleware, async (req, res) => {
     ) {
     return res.status(403).json({ message: "❌ Μόνο ο κύριος καθηγητής της διπλωματικής μπορεί να αλλάξει την κατάστασή της." });
     }
+
+    // Ἐλεγχος εαν έχουν περάσει 2 χρόνια από την ανάθεση της διπλωματικής
+    const daysPassed = calculateTimeSinceSubmission(diploma.imerominiaAnathesis);
+    if (daysPassed < 731) {
+      return res.status(400).json({ message: "❌ Η διπλωματική δεν μπορεί να ακυρωθεί πριν περάσουν 2 χρόνοι από την ανάθεση." });
+    }
+
 
     // Μετατροπή της ημερομηνίας σε μορφή ISODate
     const isoDate = new Date(imerominiaGenikisSyneleysis);

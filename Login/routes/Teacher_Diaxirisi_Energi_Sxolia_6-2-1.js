@@ -43,9 +43,44 @@ router.post("/", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική." });
     }
 
-    res.status(200).json({ message: "✅ Το σχόλιο προστέθηκε επιτυχώς." });
+    // Βρες τα σχόλια του συγκεκριμένου διδάσκοντα για αυτή τη διπλωματική
+    const diploma = await collection.findOne({ _id: new ObjectId(id) }, { projection: { sxolia: 1 } });
+    const myComments = (diploma.sxolia || []).filter(s => s.didaskonId === req.user.id);
+
+
+    res.status(200).json({ message: "✅ Το σχόλιο προστέθηκε επιτυχώς.",myComments });
   } catch (err) {
     res.status(500).json({ message: "Σφάλμα κατά την προσθήκη σχολίου." });
+  } finally {
+    await client.close();
+  }
+});
+
+
+
+//Το extra route για την προβολή των σχολίων του διδάσκοντα
+router.get("/:id", authMiddleware, async (req, res) => {
+  const { id } = req.params;
+  try {
+    await client.connect();
+    const database = client.db("users");
+    const collection = database.collection("Diplomatikes");
+
+    // Βρες τη διπλωματική και φέρε μόνο τα σχόλια του συγκεκριμένου καθηγητή
+    const diploma = await collection.findOne(
+      { _id: new ObjectId(id) },
+      { projection: { sxolia: 1 } }
+    );
+    if (!diploma) {
+      return res.status(404).json({ message: "Δεν βρέθηκε διπλωματική." });
+    }
+    // Φιλτράρω τα σχόλια για να κρατήσω μόνο αυτά του συγκεκριμένου διδάσκοντα που είναι στο token το req.user.id
+    const myComments = (diploma.sxolia || []).filter(
+      s => s.didaskonId === req.user.id
+    );
+    res.json({ myComments });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα κατά την ανάκτηση σχολίων." });
   } finally {
     await client.close();
   }

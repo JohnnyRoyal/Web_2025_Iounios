@@ -66,6 +66,13 @@
   text-align: center;
 }
 
+/* Στυλ για τα σχόλια για να μην πανε βζηηηηηηηην μακριά και να κατεβαίνει από κάτω */
+.comment-text {
+  color: #444;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
 /* Responsive Design */
 @media (max-width: 600px) {
   .filters-container {

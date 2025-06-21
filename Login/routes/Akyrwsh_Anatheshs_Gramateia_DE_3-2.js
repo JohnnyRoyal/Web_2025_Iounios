@@ -7,6 +7,15 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 
+// Υπολογισμός χρόνου από την ανάθεση
+function calculateTimeSinceSubmission(imerominiaAnathesis) {
+  if (!imerominiaAnathesis) return "Δεν υπάρχει ημερομηνία ανάθεσης.";
+  const currentDate = new Date();
+  const submissionDate = new Date(imerominiaAnathesis);
+  const timeDifference = currentDate - submissionDate; // Διαφορά σε milliseconds
+  return daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24)); // Μετατροπή σε ημέρες
+}
+
 // Route για ακύρωση ανάθεσης θέματος
 router.post("/", authMiddleware, async (req, res) => {
   const { id, logosAkyrosis, imerominiaGenikisSyneleysis, arithmosGenikhsSynelefsisAkyrwshs} = req.body; // Λήψη δεδομένων από το σώμα του αιτήματος
@@ -44,6 +53,12 @@ router.post("/", authMiddleware, async (req, res) => {
     // Έλεγχος αν η διπλωματική υπάρχει, ψιλοαχρείαστο γιατί το ελέγχω παρακάτω και στο updateOne αλλά και καλά εδώ γλειτώνεις και ένα updateOne πριν το προσπαθήσει
     if (!diploma) {
       return res.status(404).json({ message: `❌ Δεν βρέθηκε διπλωματική με ID: ${id}.` });
+    }
+    
+    // Ἐλεγχος εαν έχουν περάσει 2 χρόνια από την ανάθεση της διπλωματικής
+    const daysPassed = calculateTimeSinceSubmission(diploma.imerominiaAnathesis);
+    if (daysPassed < 731) {
+      return res.status(400).json({ message: "❌ Η διπλωματική δεν μπορεί να ακυρωθεί πριν περάσουν 2 χρόνοι από την ανάθεση." });
     }
 
     // Μετατροπή της ημερομηνίας σε μορφή ISODate
