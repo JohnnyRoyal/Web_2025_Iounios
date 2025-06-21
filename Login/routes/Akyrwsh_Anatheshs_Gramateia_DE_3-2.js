@@ -58,7 +58,7 @@ router.post("/", authMiddleware, async (req, res) => {
     // Ἐλεγχος εαν έχουν περάσει 2 χρόνια από την ανάθεση της διπλωματικής
     const daysPassed = calculateTimeSinceSubmission(diploma.imerominiaAnathesis);
     if (daysPassed < 731) {
-      return res.status(400).json({ message: "❌ Η διπλωματική δεν μπορεί να ακυρωθεί πριν περάσουν 2 χρόνοι από την ανάθεση." });
+      return res.status(400).json({ message: "❌ Η διπλωματική δεν μπορεί να ακυρωθεί πριν περάσουν 2 χρόνια από την ανάθεση." });
     }
 
     // Μετατροπή της ημερομηνίας σε μορφή ISODate
