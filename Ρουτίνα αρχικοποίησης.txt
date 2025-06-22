@@ -4,5 +4,5 @@ node "path του app.js στο Login"
 
 cd frontend
 
-(npm install) εαν δεν έχεις την ρεακτ ήδη
+(npm install) εαν δεν έχεις την react ήδη
 npm start
