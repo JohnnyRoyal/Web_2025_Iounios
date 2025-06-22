@@ -16,10 +16,13 @@ const teacherDiaxirisiEnergiSxoliaRoutes = require("./routes/Teacher_Diaxirisi_E
 const teacherDiaxirisiYpoEksetasiAnakoinwshRoutes = require("./routes/Teacher_Diaxirisi_YpoEksetasi_Anakoinwsh_6-3-2"); // Νέο route για την ανακοίνωση της εξέτασης διπλωματικής από τον διδάσκοντα
 const teacherDiaxirisiYpoEksetasiProxeiroRoutes = require("./routes/Teacher_Diaxirisi_YpoEksetasi_Proxeiro_6-3-1"); // Νέο route για την αλλαγή κατάστασης σε "υπό εξέταση" από τον διδάσκοντα
 const teacherDiaxirisiYpoEksetasiBathmosRoutes = require("./routes/Teacher_Diaxirisi_YpoEksetasi_Bathmos_6-3-3"); // Νέο route για την καταχώρηση βαθμών από τον διδάσκοντα
+const cacheControl = require("./middlewares/cacheHeaders");
+
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(cacheControl);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/diplomas", diplomaRoutes); // περιέχει το protected /my
@@ -37,5 +40,7 @@ app.use("/api/teacher/diaxirisi/energi/sxolia", teacherDiaxirisiEnergiSxoliaRout
 app.use("/api/teacher/diaxirisi/ypoeksetasi/anakoinwsh", teacherDiaxirisiYpoEksetasiAnakoinwshRoutes); // Νέο route για την ανακοίνωση της εξέτασης διπλωματικής από τον διδάσκοντα
 app.use("/api/teacher/diaxirisi/ypoeksetasi/proxeiro", teacherDiaxirisiYpoEksetasiProxeiroRoutes); // Νέο route για την αλλαγή κατάστασης σε "υπό εξέταση" από τον διδάσκοντα
 app.use("/api/teacher/diaxirisi/ypoeksetasi/bathmos", teacherDiaxirisiYpoEksetasiBathmosRoutes); // Νέο route για την καταχώρηση βαθμών από τον διδάσκοντα
+
+
 
 app.listen(4000, () => console.log("✅ Server running on http://localhost:4000"));

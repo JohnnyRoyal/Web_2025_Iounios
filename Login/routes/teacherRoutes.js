@@ -40,6 +40,26 @@ const upload = multer({
   }
 });
 
+//Παίρνω με get όνομα,επώνυμο διδάσκων
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    const db = client.db("users");
+    const col = db.collection("Didaskontes");
+
+    const teacher = await col.findOne({ didaskonId: req.user.id });
+
+    if (!teacher) return res.status(404).json({ message: "Δεν βρέθηκε καθηγητής" });
+
+    res.json({
+      onoma: teacher.onoma,
+      epitheto: teacher.epitheto
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Σφάλμα", error: err.message });
+  }
+});
+
+
 // GET /api/teacher/themata - Προβολή θεμάτων διδάσκοντα
 router.get("/themata", authMiddleware, async (req, res) => {
   try {
@@ -372,6 +392,18 @@ router.put("/anathesi", authMiddleware, async (req, res) => {
 
     if (thema.foititis) {
       return res.status(400).json({ message: "Το θέμα έχει ήδη ανατεθεί" });
+    }
+
+    // Έλεγχος αν ο φοιτητής έχει ήδη διπλωματική
+    const existingDiploma = await diplomasCol.findOne({
+      "foititis.arithmosMitroou": parseInt(arithmosMitroou),
+      katastasi: { $in: ["υπό ανάθεση", "Ενεργή", "υπό εξέταση", "περατωμένη"] }
+    });
+
+    if (existingDiploma) {
+      return res.status(400).json({
+        message: "Ο φοιτητής έχει ήδη αναλάβει διπλωματική εργασία"
+      });
     }
 
     //Αναζήτηση φοιτητή
