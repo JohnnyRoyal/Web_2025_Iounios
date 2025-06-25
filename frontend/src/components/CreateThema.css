@@ -51,9 +51,10 @@
 }
 
 /* Responsive Design */
+/*Όταν αυτό μέσα στην παρένθεση είναι αληθές τότε κάνει overwrite στις κλάσεις τα attributes (που αναγράφονται μέσα κλάσεις/attributes*/
 @media (max-width: 600px) {
   .create-container {
-    padding: 10px;
+    padding: 10px; /* Κάνω overwrite το padding στο create container με αυτήν την τιμή και το κληρονομούν μετά όλα τα άλλα στοιχεία που δεν δηλώνουν padding */
     font-size: 0.9rem;
   }
 
