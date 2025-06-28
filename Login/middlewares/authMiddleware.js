@@ -13,7 +13,7 @@ const authMiddleware = (req, res, next) => {
     const decoded = jwt.verify(token, "MY_SECRET_KEY"); // Χρησιμοποίησε το ίδιο SECRET_KEY που χρησιμοποιείς στο login
     console.log("Decoded Token:", decoded); // Εμφανίζει το περιεχόμενο του token
     req.user = decoded; // Αποθηκεύει τα δεδομένα του χρήστη στο req.user
-    next();
+    next(); // Προχωρά στην επόμενη middleware ή route handler οπότε αφού κάνει verify το token πάμε επόμενο middleware ή στο route που το έχουμε βάλει
   } catch (err) {
     return res.status(401).json({ message: "Μη έγκυρο token" });
   }

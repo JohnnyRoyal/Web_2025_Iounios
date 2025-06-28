@@ -20,7 +20,7 @@ const TeacherManageDiplomaEnergi = () => {
   useEffect(() => {
     axios.get(`http://localhost:4000/api/teacher/diplomatikes/${id}`, {
       headers: { Authorization: token }
-    }).then(res => {
+    }).then(res => { /*σημαφόρος σαν το await περιμένει να ολοκληρωθεί η async μέσα στο get*/
       setDiploma(res.data);
     }).catch(() => setError("❌ Σφάλμα φόρτωσης"));
   }, [id, token]);

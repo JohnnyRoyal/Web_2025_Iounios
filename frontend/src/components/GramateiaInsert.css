@@ -1,7 +1,7 @@
 .insert-container {
   text-align: center;
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 600px; /* Μέγιστο πλάτος του περιεχομένου  βάζω maxwidth για να μπορέι να μικρίνει εν δυνάμι εαν μικρίνω την σελίδα , την στενέψω, max height γιατί πέρνει αυτόματα τιμή για όσο περιεχόμενο έχει*/
+  margin: 40px auto; /* Κεντράρει το div γιατί έχει auto στο δέυτερη τιμή (left right) */
   padding: 20px;
   font-family: "Segoe UI", sans-serif;
 }
@@ -15,7 +15,7 @@
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 6px; /* Στρογγυλεμένες γωνίες */
   font-size: 1rem;
 }
 
@@ -28,10 +28,10 @@
   color: white;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease; /* Προσθήκη μετάβασης για ομαλή αλλαγή χρώματος */
 }
 
-.insert-container button:hover {
+.insert-container button:hover { /* Αλλαγή χρώματος όταν ο χρήστης περνάει το ποντίκι πάνω από το κουμπί */
   background-color: #45a049;
 }
 
