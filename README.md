@@ -1,7 +1,7 @@
 # Web_2025_Iounios
 This is a project developed for "Προγραμματισμός και Συστήματα στον Παγκόσμιο Ιστό".
 The source code for the frontend can be found at "frontend/src/components", while the backend is at "Login".
-The database .json files are at "".
+The database .json files are at "DataBase".
 Technologies used, javascript, nodejs, mongoDB, react.
 
 To run the server first get the correct uri for the mongoDB database (was tested with localhost).
