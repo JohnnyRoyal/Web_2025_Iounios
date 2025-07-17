@@ -1,0 +1,294 @@
+[{
+  "_id": {
+    "$oid": "68060d72559442cb251b0f25"
+  },
+  "username": "anna.karamitrou",
+  "password": "hashed_anna",
+  "email": "anna.k@example.comm",
+  "taxydromikiDieythinsi": "Παλαιά Οδός 99, Αθήνα",
+  "kinito": "6900000003",
+  "stathero": "2100000005",
+  "arithmosMitroou": 20241001,
+  "onoma": "Άννα",
+  "epitheto": "Καραμήτρου"
+},
+{
+  "_id": {
+    "$oid": "68060d72559442cb251b0f26"
+  },
+  "username": "dimitra.panagiotou",
+  "password": "hashed_dimitra",
+  "email": "d.panagiotou@example.com",
+  "taxydromikiDieythinsi": "Νίκης 50, Πάτρα",
+  "kinito": "690000000699",
+  "stathero": "261000000699",
+  "arithmosMitroou": 20241002,
+  "onoma": "Δήμητρα",
+  "epitheto": "Παναγιώτου"
+},
+{
+  "_id": {
+    "$oid": "68060d72559442cb251b0f27"
+  },
+  "username": "kostas.georgiou",
+  "password": "hashed_kostas",
+  "email": "kostas.g@example.comm",
+  "taxydromikiDieythinsi": "Πανεπιστημίου 100, Θεσσαλονίκηηηηηη",
+  "kinito": "69000000069",
+  "stathero": "231000000369",
+  "arithmosMitroou": 20241003,
+  "onoma": "Κώστας",
+  "epitheto": "Γεωργίου"
+},
+{
+  "_id": {
+    "$oid": "683b2c9b6735a127ff9cc278"
+  },
+  "username": "nikos.papadakis",
+  "password": "hashed_nikos",
+  "email": "n.papadakis@example.com",
+  "taxydromikiDieythinsi": "Αριστοτέλους 10, Θεσσαλονίκη",
+  "kinito": "6900000010",
+  "stathero": "2310000010",
+  "onoma": "Νίκος",
+  "epitheto": "Παπαδάκης",
+  "arithmosMitroou": 20241004
+},
+{
+  "_id": {
+    "$oid": "683b2cc36735a127ff9cc27a"
+  },
+  "username": "giorgos.karalis",
+  "password": "hashed_giorgos",
+  "email": "g.karalis@example.com",
+  "taxydromikiDieythinsi": "Οδός Ειρήνης 45, Ηράκλειο",
+  "kinito": "6900000033",
+  "stathero": "2810000033",
+  "onoma": "Γιώργος",
+  "epitheto": "Καράλης",
+  "arithmosMitroou": 20241005
+},
+{
+  "_id": {
+    "$oid": "6853d98ca8e66a0337031eed"
+  },
+  "username": "maria.tsoukala",
+  "password": "hashed_maria",
+  "email": "maria.tsoukala@example.com",
+  "taxydromikiDieythinsi": "Αλεξάνδρας 33, Αθήνα",
+  "kinito": "6900000011",
+  "stathero": "2100000011",
+  "arithmosMitroou": 20241006,
+  "onoma": "Μαρία",
+  "epitheto": "Τσουκαλά"
+},
+{
+  "_id": {
+    "$oid": "6853d98ca8e66a0337031eee"
+  },
+  "username": "giannis.michail",
+  "password": "hashed_giannis",
+  "email": "giannis.m@example.com",
+  "taxydromikiDieythinsi": "Βενιζέλου 12, Χανιά",
+  "kinito": "6900000012",
+  "stathero": "2821000012",
+  "arithmosMitroou": 20241007,
+  "onoma": "Γιάννης",
+  "epitheto": "Μιχαήλ"
+},
+{
+  "_id": {
+    "$oid": "6853d98ca8e66a0337031eef"
+  },
+  "username": "eleni.konstantinopoulou",
+  "password": "hashed_eleni",
+  "email": "eleni.k@example.com",
+  "taxydromikiDieythinsi": "Αγίου Νικολάου 55, Λάρισα",
+  "kinito": "6900000013",
+  "stathero": "2410000013",
+  "arithmosMitroou": 20241008,
+  "onoma": "Ελένη",
+  "epitheto": "Κωνσταντινοπούλου"
+},
+{
+  "_id": {
+    "$oid": "6853d98ca8e66a0337031ef0"
+  },
+  "username": "petros.stergiou",
+  "password": "hashed_petros",
+  "email": "petros.st@example.com",
+  "taxydromikiDieythinsi": "Κεντρική Πλατεία 8, Καλαμάτα",
+  "kinito": "6900000014",
+  "stathero": "2721000014",
+  "arithmosMitroou": 20241009,
+  "onoma": "Πέτρος",
+  "epitheto": "Στεργίου"
+},
+{
+  "_id": {
+    "$oid": "6853d98ca8e66a0337031ef1"
+  },
+  "username": "vaso.christou",
+  "password": "hashed_vaso",
+  "email": "vaso.ch@example.com",
+  "taxydromikiDieythinsi": "Εθνικής Αντιστάσεως 20, Ιωάννινα",
+  "kinito": "6900000015",
+  "stathero": "2651000015",
+  "arithmosMitroou": 20241010,
+  "onoma": "Βάσω",
+  "epitheto": "Χρήστου"
+},
+{
+  "_id": {
+    "$oid": "6853d98ca8e66a0337031ef2"
+  },
+  "username": "theodoros.anagnostou",
+  "password": "hashed_theodoros",
+  "email": "theo.anag@example.com",
+  "taxydromikiDieythinsi": "Λεωφ. Κηφισίας 200, Μαρούσι",
+  "kinito": "6900000016",
+  "stathero": "2100000016",
+  "arithmosMitroou": 20241011,
+  "onoma": "Θεόδωρος",
+  "epitheto": "Αναγνώστου"
+},
+{
+  "_id": {
+    "$oid": "6853d98ca8e66a0337031ef3"
+  },
+  "username": "sofia.danilidou",
+  "password": "hashed_sofia",
+  "email": "sofia.d@example.com",
+  "taxydromikiDieythinsi": "Φλέμινγκ 17, Βόλος",
+  "kinito": "6900000017",
+  "stathero": "2421000017",
+  "arithmosMitroou": 20241012,
+  "onoma": "Σοφία",
+  "epitheto": "Δανιηλίδου"
+},
+{
+  "_id": {
+    "$oid": "685517a5b835cb1da662415f"
+  },
+  "username": "katerina.daskalaki",
+  "password": "hashed_katerina",
+  "email": "k.daskalaki@gmail.com",
+  "taxydromikiDieythinsi": "Θράκης 15, Πάτρα",
+  "kinito": "6998472518",
+  "stathero": "2310000020",
+  "arithmosMitroou": 20241013,
+  "onoma": "Κατερίνα",
+  "epitheto": "Δασκαλάκη"
+},
+{
+  "_id": {
+    "$oid": "685517a5b835cb1da6624160"
+  },
+  "username": "nikos.alexiou",
+  "password": "hashed_nikos",
+  "email": "nikos.alexiou@example.com",
+  "taxydromikiDieythinsi": "Ομήρου 5, Λάρισα",
+  "kinito": "6900000019",
+  "stathero": "2410000019",
+  "arithmosMitroou": 20241014,
+  "onoma": "Νίκος",
+  "epitheto": "Αλεξίου"
+},
+{
+  "_id": {
+    "$oid": "685517a5b835cb1da6624161"
+  },
+  "username": "irene.vasileiou",
+  "password": "hashed_irene",
+  "email": "irene.vas@example.com",
+  "taxydromikiDieythinsi": "Ηρώων Πολυτεχνείου 77, Πειραιάς",
+  "kinito": "6900000020",
+  "stathero": "2100000020",
+  "arithmosMitroou": 20241015,
+  "onoma": "Ειρήνη",
+  "epitheto": "Βασιλείου"
+},
+{
+  "_id": {
+    "$oid": "685517a5b835cb1da6624162"
+  },
+  "username": "panos.triantafyllou",
+  "password": "hashed_panos",
+  "email": "panos.tri@example.com",
+  "taxydromikiDieythinsi": "Σταδίου 23, Αθήνα",
+  "kinito": "6900000021",
+  "stathero": "2100000021",
+  "arithmosMitroou": 20241016,
+  "onoma": "Πάνος",
+  "epitheto": "Τριανταφύλλου"
+},
+{
+  "_id": {
+    "$oid": "685517a5b835cb1da6624163"
+  },
+  "username": "zoi.anagnostaki",
+  "password": "hashed_zoi",
+  "email": "z.anagnostaki@example.com",
+  "taxydromikiDieythinsi": "Κύπρου 101, Ηράκλειο",
+  "kinito": "6900000022",
+  "stathero": "2810000022",
+  "arithmosMitroou": 20241017,
+  "onoma": "Ζωή",
+  "epitheto": "Αναγνωστάκη"
+},
+{
+  "_id": {
+    "$oid": "685517a5b835cb1da6624164"
+  },
+  "username": "dimitris.kyriakou",
+  "password": "hashed_dimitris",
+  "email": "d.kyriakou@example.com",
+  "taxydromikiDieythinsi": "Ιωνίας 8, Βόλος",
+  "kinito": "6900000023",
+  "stathero": "2421000023",
+  "arithmosMitroou": 20241018,
+  "onoma": "Δημήτρης",
+  "epitheto": "Κυριακού"
+},
+{
+  "_id": {
+    "$oid": "6856740695eca093812c0b51"
+  },
+  "username": "stella.markou",
+  "password": "hashed_stella",
+  "email": "stella.markou@example.com",
+  "taxydromikiDieythinsi": "Λεωφ. Βουλιαγμένης 112, Αθήνα",
+  "kinito": "6900000018",
+  "stathero": "2100000018",
+  "arithmosMitroou": 20241019,
+  "onoma": "Στέλλα",
+  "epitheto": "Μάρκου"
+},
+{
+  "_id": {
+    "$oid": "6856740695eca093812c0b52"
+  },
+  "username": "dionysis.rizos",
+  "password": "hashed_dionysis",
+  "email": "d.rizos@example.com",
+  "taxydromikiDieythinsi": "Αγ. Δημητρίου 45, Θεσσαλονίκη",
+  "kinito": "6900000019",
+  "stathero": "2310000019",
+  "arithmosMitroou": 20241020,
+  "onoma": "Διονύσης",
+  "epitheto": "Ρίζος"
+},
+{
+  "_id": {
+    "$oid": "6857bc438a743b94283faad3"
+  },
+  "username": "thanos.metaxas",
+  "password": "hashed_thanos",
+  "email": "t.metaxas@example.com",
+  "taxydromikiDieythinsi": "Παρνασσού 40, Αθήνα",
+  "kinito": "6900000020",
+  "stathero": "2310000020",
+  "arithmosMitroou": 20241021,
+  "onoma": "Θάνος",
+  "epitheto": "Μεταξάς"
+}]

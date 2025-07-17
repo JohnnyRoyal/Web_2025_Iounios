@@ -1,0 +1,122 @@
+[{
+  "_id": {
+    "$oid": "680a4636ac921c4ccad642c3"
+  },
+  "username": "g.papadopoulos",
+  "password": "hashed_pass_1",
+  "proskliseis": [
+    {
+      "titlos": "Κατάταξη Εικόνων με Χρήση Transformers",
+      "perigrafi": "Εφαρμογή μοντέλων Vision Transformers σε ταξινόμηση εικόνων.",
+      "foititis": "Άννα Καραμήτρου",
+      "imerominiaProsklisis": "2025-06-21T16:41:23.057Z",
+      "imerominiaApodoxis": {
+        "$date": "2025-06-21T16:48:10.483Z"
+      },
+      "imerominiaAporripsis": null
+    }
+  ],
+  "didaskonId": 10001,
+  "epitheto": "Παπαδόπουλος",
+  "onoma": "Γιώργος"
+},
+{
+  "_id": {
+    "$oid": "680a4636ac921c4ccad642c4"
+  },
+  "username": "m.ioannou",
+  "password": "hashed_pass_2",
+  "proskliseis": [
+    {
+      "titlos": "Test Energh Akyrwsh Ana8eshs",
+      "perigrafi": "Ανάπτυξη μοντέλων για ιατρική πρόγνωση.",
+      "foititis": "Νίκος Παπαδάκης",
+      "imerominiaProsklisis": "2025-06-15T17:57:05.570Z",
+      "imerominiaApodoxis": {
+        "$date": "2025-06-15T17:58:32.607Z"
+      },
+      "imerominiaAporripsis": {
+        "$date": "2025-06-21T16:57:07.455Z"
+      }
+    }
+  ],
+  "didaskonId": 10002,
+  "epitheto": "Ιωάννου",
+  "onoma": "Μαρία"
+},
+{
+  "_id": {
+    "$oid": "6835f1185a1c8ae1012fe250"
+  },
+  "username": "k.konstantinou",
+  "password": "hashed_pass_3",
+  "proskliseis": [
+    {
+      "titlos": "Κατάταξη Εικόνων με Χρήση Transformers",
+      "perigrafi": "Εφαρμογή μοντέλων Vision Transformers σε ταξινόμηση εικόνων.",
+      "foititis": "Άννα Καραμήτρου",
+      "imerominiaProsklisis": {
+        "$date": "2025-06-21T16:42:16.256Z"
+      },
+      "imerominiaApodoxis": {
+        "$date": "2025-06-21T17:26:25.986Z"
+      },
+      "imerominiaAporripsis": null
+    }
+  ],
+  "didaskonId": 10003,
+  "epitheto": "Κωνσταντίνου",
+  "onoma": "Κώστας"
+},
+{
+  "_id": {
+    "$oid": "6835f1305a1c8ae1012fe252"
+  },
+  "username": "e.panagiotou",
+  "password": "hashed_pass_4",
+  "proskliseis": [
+    {
+      "titlos": "Ανάπτυξη Εφαρμογής με Flutter",
+      "perigrafi": "Mobile εφαρμογή για event tracking.",
+      "foititis": "Κώστας Γεωργίου",
+      "imerominiaProsklisis": "2025-05-31T09:11:54.166Z",
+      "imerominiaApodoxis": null,
+      "imerominiaAporripsis": null
+    },
+    {
+      "titlos": "dokimi",
+      "perigrafi": "dokimii",
+      "foititis": "Γιώργος Καράλης",
+      "imerominiaProsklisis": "2025-06-15T16:25:11.056Z",
+      "imerominiaApodoxis": {
+        "$date": "2025-06-15T18:00:43.572Z"
+      },
+      "imerominiaAporripsis": null
+    }
+  ],
+  "didaskonId": 10004,
+  "epitheto": "Παναγιώτου",
+  "onoma": "Ελένη"
+},
+{
+  "_id": {
+    "$oid": "6853d81ea8e66a0337031ee6"
+  },
+  "username": "n.papadakis",
+  "password": "hashed_pass_5",
+  "proskliseis": [],
+  "didaskonId": 10005,
+  "epitheto": "Παπαδάκης",
+  "onoma": "Νικόλας"
+},
+{
+  "_id": {
+    "$oid": "68551833b835cb1da6624165"
+  },
+  "username": "a.karathanasis",
+  "password": "hashed_pass_6",
+  "proskliseis": [],
+  "didaskonId": 10006,
+  "epitheto": "Καραθανάσης",
+  "onoma": "Ανδρέας"
+}]

@@ -1,0 +1,1496 @@
+[{
+  "_id": {
+    "$oid": "680a43c49a73c7c21dd56310"
+  },
+  "titlos": "AI στην Ιατρική Διάγνωση",
+  "perigrafi": "Ανάπτυξη μοντέλων για ιατρική πρόγνωση.",
+  "mainKathigitis": {
+    "onoma": "Γιώργος",
+    "epitheto": "Παπαδόπουλος",
+    "didaskonId": 10001
+  },
+  "pdfExtraPerigrafi": "link_to_pdf1.pdf",
+  "foititis": {
+    "onoma": "Σοφία",
+    "epitheto": "Δανιηλίδου",
+    "arithmosMitroou": 20241012
+  },
+  "katastasi": "περατωμένη",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή",
+    "υπό εξέταση"
+  ],
+  "telikosVathmos": 8.7,
+  "vathmosEpiBlepon": 9,
+  "syndesmos": "https://diplomatiki.gr/ai-iatriki",
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": "link_to_draft1.pdf",
+  "AP": 10501,
+  "sxolia": [
+    {
+      "didaskonId": 10001,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "καλή αρχή",
+      "createdAt": {
+        "$date": "2025-06-17T11:49:56.094Z"
+      }
+    },
+    {
+      "didaskonId": 10001,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "προχωράμε με καλό ρυθμό",
+      "createdAt": {
+        "$date": "2025-06-17T11:51:27.297Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "vathmos": 9,
+      "didaskonId": 10001,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 7,
+        "text": 8,
+        "presentation": 9
+      }
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": 8.5,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 10,
+        "text": 8,
+        "presentation": 7
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": 8.8,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 10,
+        "text": 5,
+        "presentation": 9
+      }
+    }
+  ],
+  "imerominiaPeratosis": "2025-06-15T00:00:00Z",
+  "linkYliko": "https://youtube.com/gianhs",
+  "imerominiaOraExetasis": "2025-05-30T08:30",
+  "aithousaExetasis": null,
+  "syndesmosExetasis": "https://www.zoom.com/lobby13532",
+  "troposExetasis": "εξ αποστάσεως"
+},
+{
+  "_id": {
+    "$oid": "680a43c49a73c7c21dd56311"
+  },
+  "titlos": "Σύστημα Συστάσεων Βιβλίων",
+  "perigrafi": "Χρήση recommendation engines για βιβλία.",
+  "mainKathigitis": {
+    "onoma": "Μαρία",
+    "epitheto": "Ιωάννου",
+    "didaskonId": 10002
+  },
+  "pdfExtraPerigrafi": "link_to_pdf2.pdf",
+  "foititis": {
+    "onoma": "Κατερίνα",
+    "epitheto": "Δασκαλάκη",
+    "arithmosMitroou": 20241013
+  },
+  "katastasi": "περατωμένη",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή",
+    "υπό εξέταση"
+  ],
+  "telikosVathmos": 9.5,
+  "vathmosEpiBlepon": 9,
+  "syndesmos": "https://diplomatiki.gr/SysthmaSystasewn",
+  "imerominiaAnathesis": "2025-01-15T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "imerominiaOraExetasis": "2025-06-28T18:46",
+  "troposExetasis": "δια ζώσης",
+  "aithousaExetasis": "ΑΙΘΟΥΣΑ Γ",
+  "syndesmosExetasis": null,
+  "linkYliko": "https://youtube.com/diploma",
+  "pdfProxeiroKeimeno": "link_to_pdf100.pdf",
+  "AP": 10502,
+  "sxolia": [],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": 9,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 9,
+        "text": 9,
+        "presentation": 9
+      }
+    },
+    {
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "vathmos": 10,
+      "didaskonId": 10001,
+      "vathmosAnalytika": {
+        "quality": 10,
+        "duration": 10,
+        "text": 10,
+        "presentation": 10
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": 9.2,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "duration": 9,
+        "presentation": 7,
+        "quality": 7,
+        "text": 8
+      }
+    }
+  ],
+  "imerominiaPeratosis": {
+    "$date": "2025-06-21T16:23:54.220Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "680a43c49a73c7c21dd56312"
+  },
+  "titlos": "Ανάπτυξη Εφαρμογής με Flutter",
+  "perigrafi": "Mobile εφαρμογή για event tracking.",
+  "mainKathigitis": {
+    "onoma": "Γιώργος",
+    "epitheto": "Παπαδόπουλος",
+    "didaskonId": 10001
+  },
+  "proskliseis": [
+    {
+      "didaskonId": 10004,
+      "onoma": "Ελένη",
+      "epitheto": "Παναγιώτου",
+      "apodoxi": false,
+      "imerominiaAporripsis": {
+        "$date": "2025-06-15T14:34:24.184Z"
+      }
+    }
+  ],
+  "pdfExtraPerigrafi": "link_to_pdf3.pdf",
+  "foititis": {
+    "onoma": "Νίκος",
+    "epitheto": "Αλεξίου",
+    "arithmosMitroou": 20241014
+  },
+  "katastasi": "υπό ανάθεση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": "https://diplomatiki.gr/flutter-app",
+  "imerominiaAnathesis": null,
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": null,
+  "telikoKeimenoPdf": null,
+  "AP": 10503,
+  "sxolia": "",
+  "trimelisEpitropi": [
+    {
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "vathmos": null,
+      "didaskonId": 10001
+    },
+    {
+      "didaskonId": 10002,
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": null
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6853dad0a8e66a0337031ef6"
+  },
+  "titlos": "Ανάλυση Κλιματικών Δεδομένων με Python",
+  "perigrafi": "Χρήση μηχανικής μάθησης για πρόβλεψη καιρού.",
+  "mainKathigitis": {
+    "onoma": "Ελένη",
+    "epitheto": "Παναγιώτου",
+    "didaskonId": 10004
+  },
+  "pdfExtraPerigrafi": "link_to_pdf2.pdf",
+  "foititis": {
+    "onoma": "Ειρήνη",
+    "epitheto": "Βασιλείου",
+    "arithmosMitroou": 20241015
+  },
+  "katastasi": "περατωμένη",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή",
+    "υπό εξέταση"
+  ],
+  "telikosVathmos": 8.7,
+  "vathmosEpiBlepon": 8.4,
+  "syndesmos": "https://diplomatiki.gr/climate-python",
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": "link_to_draft2.pdf",
+  "AP": 10511,
+  "sxolia": [
+    {
+      "didaskonId": 10004,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "καλή δουλειά",
+      "createdAt": {
+        "$date": "2025-06-19T09:36:54.658Z"
+      }
+    },
+    {
+      "didaskonId": 10004,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "ολοκληρώθηκε με επιτυχία",
+      "createdAt": {
+        "$date": "2025-06-19T09:36:54.658Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Ελένη",
+      "epitheto": "Παναγιώτου",
+      "vathmos": 8.4,
+      "didaskonId": 10004,
+      "vathmosAnalytika": {
+        "quality": 10,
+        "duration": 8,
+        "text": 5,
+        "presentation": 7
+      }
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": 9.4,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 10,
+        "text": 10,
+        "presentation": 10
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": 8.3,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "quality": 10,
+        "duration": 5,
+        "text": 7,
+        "presentation": 6
+      }
+    }
+  ],
+  "imerominiaPeratosis": "2025-06-15T00:00:00Z",
+  "linkYliko": "https://youtube.com/video_link",
+  "imerominiaOraExetasis": "2025-05-30T08:30",
+  "troposExetasis": "δια ζώσης",
+  "aithousaExetasis": "Αίθουσα Γ",
+  "syndesmosExetasis": null
+},
+{
+  "_id": {
+    "$oid": "6853dad0a8e66a0337031ef7"
+  },
+  "titlos": "Βελτιστοποίηση Δικτύων Διανομής Ενέργειας",
+  "perigrafi": "Προσομοίωση και ανάλυση ενεργειακών δικτύων.",
+  "mainKathigitis": {
+    "onoma": "Νικόλας",
+    "epitheto": "Παπαδάκης",
+    "didaskonId": 10005
+  },
+  "pdfExtraPerigrafi": "link_to_pdf3.pdf",
+  "foititis": {
+    "onoma": "Πάνος",
+    "epitheto": "Τριανταφύλλου",
+    "arithmosMitroou": 20241016
+  },
+  "katastasi": "περατωμένη",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή",
+    "υπό εξέταση"
+  ],
+  "telikosVathmos": 8.8,
+  "vathmosEpiBlepon": 9.3,
+  "syndesmos": "https://diplomatiki.gr/energy-networks",
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": "link_to_draft3.pdf",
+  "AP": 10521,
+  "sxolia": [
+    {
+      "didaskonId": 10005,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "καλή δουλειά",
+      "createdAt": {
+        "$date": "2025-06-19T09:36:54.658Z"
+      }
+    },
+    {
+      "didaskonId": 10005,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "ολοκληρώθηκε με επιτυχία",
+      "createdAt": {
+        "$date": "2025-06-19T09:36:54.658Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Νικόλας",
+      "epitheto": "Παπαδάκης",
+      "vathmos": 9.3,
+      "didaskonId": 10005,
+      "vathmosAnalytika": {
+        "quality": 10,
+        "duration": 9,
+        "text": 7,
+        "presentation": 6
+      }
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": 8.6,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 10,
+        "text": 5,
+        "presentation": 8
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": 8.5,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "quality": 10,
+        "duration": 9,
+        "text": 5,
+        "presentation": 9
+      }
+    }
+  ],
+  "imerominiaPeratosis": "2025-06-15T00:00:00Z",
+  "linkYliko": "https://youtube.com/video_link",
+  "imerominiaOraExetasis": "2025-05-30T08:30",
+  "troposExetasis": "εξ αποστάσεως",
+  "aithousaExetasis": null,
+  "syndesmosExetasis": "https://zoom.us/j/98765432"
+},
+{
+  "_id": {
+    "$oid": "6853dfb0a8e66a0337031efd"
+  },
+  "titlos": "Ανάπτυξη Chatbot με NLP",
+  "perigrafi": "Χρήση φυσικής γλώσσας και μηχανικής μάθησης για δημιουργία διαλόγου.",
+  "mainKathigitis": {
+    "onoma": "Γιώργος",
+    "epitheto": "Παπαδόπουλος",
+    "didaskonId": 10001
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_10.pdf",
+  "foititis": {
+    "onoma": "Ζωή",
+    "epitheto": "Αναγνωστάκη",
+    "arithmosMitroou": 20241017
+  },
+  "katastasi": "υπό εξέταση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": 7.4,
+  "syndesmos": "https://diplomatiki.gr/project_10",
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": "link_to_draft_10.pdf",
+  "AP": 10530,
+  "sxolia": [
+    {
+      "didaskonId": 10001,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "καλή αρχή",
+      "createdAt": {
+        "$date": "2025-06-19T09:53:44.357Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "vathmos": 7.4,
+      "didaskonId": 10001,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 8,
+        "text": 4,
+        "presentation": 2
+      }
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": 5,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": 5,
+        "duration": 5,
+        "text": 5,
+        "presentation": 5
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "quality": null,
+        "duration": null,
+        "text": null,
+        "presentation": null
+      }
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": "https://youtube.com/video_link",
+  "imerominiaOraExetasis": {
+    "$date": "2025-08-19T09:00:00.000Z"
+  },
+  "troposExetasis": "εξ αποστάσεως",
+  "aithousaExetasis": null,
+  "syndesmosExetasis": "https://zoom.us/j/11111111"
+},
+{
+  "_id": {
+    "$oid": "6853dfb0a8e66a0337031efe"
+  },
+  "titlos": "Αλγόριθμοι Αναζήτησης σε Γράφους",
+  "perigrafi": "Υλοποίηση και ανάλυση DFS, BFS, A* και άλλων αλγορίθμων.",
+  "mainKathigitis": {
+    "onoma": "Μαρία",
+    "epitheto": "Ιωάννου",
+    "didaskonId": 10002
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_11.pdf",
+  "foititis": {
+    "onoma": "Δημήτρης",
+    "epitheto": "Κυριακού",
+    "arithmosMitroou": 20241018
+  },
+  "katastasi": "υπό εξέταση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": "https://diplomatiki.gr/project_11",
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": "link_to_draft_11.pdf",
+  "AP": 10531,
+  "sxolia": [
+    {
+      "didaskonId": 10002,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "καλή αρχή",
+      "createdAt": {
+        "$date": "2025-06-19T09:53:44.357Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": null,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": null,
+        "duration": null,
+        "text": null,
+        "presentation": null
+      }
+    },
+    {
+      "onoma": "Νικόλας",
+      "epitheto": "Παπαδάκης",
+      "vathmos": 6,
+      "didaskonId": 10005,
+      "vathmosAnalytika": {
+        "quality": 3,
+        "duration": 9,
+        "text": 5,
+        "presentation": 8
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "quality": null,
+        "duration": null,
+        "text": null,
+        "presentation": null
+      }
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": "https://youtube.com/video_link",
+  "imerominiaOraExetasis": {
+    "$date": "2025-06-21T09:00:00.000Z"
+  },
+  "troposExetasis": "εξ αποστάσεως",
+  "aithousaExetasis": null,
+  "syndesmosExetasis": "https://zoom.us/j/22222222"
+},
+{
+  "_id": {
+    "$oid": "6853dfb0a8e66a0337031eff"
+  },
+  "titlos": "Σύστημα Πρόβλεψης Κυκλοφορίας",
+  "perigrafi": "Μοντέλο πρόβλεψης κυκλοφοριακού φόρτου βασισμένο σε δεδομένα IoT.",
+  "mainKathigitis": {
+    "onoma": "Κώστας",
+    "epitheto": "Κωνσταντίνου",
+    "didaskonId": 10003
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_12.pdf",
+  "foititis": {
+    "onoma": "Κώστας",
+    "epitheto": "Γεωργίου",
+    "arithmosMitroou": 20241003
+  },
+  "katastasi": "υπό εξέταση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή"
+  ],
+  "telikosVathmos": 7.75,
+  "vathmosEpiBlepon": 8.25,
+  "syndesmos": null,
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": "link_to_draft_12.pdf",
+  "AP": 10532,
+  "sxolia": [
+    {
+      "didaskonId": 10003,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "καλή αρχή",
+      "createdAt": {
+        "$date": "2025-06-19T09:53:44.357Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": 8.25,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "quality": 8,
+        "duration": 8,
+        "text": 9,
+        "presentation": 9
+      }
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": 8,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": 7,
+        "duration": 8,
+        "text": 9,
+        "presentation": 10
+      }
+    },
+    {
+      "onoma": "Νικόλας",
+      "epitheto": "Παπαδάκης",
+      "vathmos": 7,
+      "didaskonId": 10005,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 6,
+        "text": 5,
+        "presentation": 5
+      }
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": "https://youtube.com/video_link",
+  "imerominiaOraExetasis": {
+    "$date": "2025-08-28T09:00:00.000Z"
+  },
+  "troposExetasis": "εξ αποστάσεως",
+  "aithousaExetasis": null,
+  "syndesmosExetasis": "https://zoom.gr/124143"
+},
+{
+  "_id": {
+    "$oid": "6853dfb0a8e66a0337031f00"
+  },
+  "titlos": "Ανάλυση Βιοϊατρικών Σημάτων",
+  "perigrafi": "Ανάλυση EEG και ECG σημάτων με Python.",
+  "mainKathigitis": {
+    "onoma": "Ελένη",
+    "epitheto": "Παναγιώτου",
+    "didaskonId": 10004
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_13.pdf",
+  "foititis": {
+    "onoma": "Νίκος",
+    "epitheto": "Παπαδάκης",
+    "arithmosMitroou": 20241004
+  },
+  "katastasi": "υπό εξέταση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": "link_to_draft_13.pdf",
+  "AP": 10533,
+  "sxolia": [
+    {
+      "didaskonId": 10004,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "καλή αρχή",
+      "createdAt": {
+        "$date": "2025-06-19T09:53:44.357Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Ελένη",
+      "epitheto": "Παναγιώτου",
+      "vathmos": null,
+      "didaskonId": 10004,
+      "vathmosAnalytika": {
+        "quality": null,
+        "duration": null,
+        "text": null,
+        "presentation": null
+      }
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": 5,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": 5,
+        "duration": 5,
+        "text": 5,
+        "presentation": 5
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "quality": null,
+        "duration": null,
+        "text": null,
+        "presentation": null
+      }
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": "https://youtube.com/video_link",
+  "imerominiaOraExetasis": {
+    "$date": "2025-07-17T09:00:00.000Z"
+  },
+  "troposExetasis": "δια ζώσης",
+  "aithousaExetasis": "Αίθουσα Α",
+  "syndesmosExetasis": null
+},
+{
+  "_id": {
+    "$oid": "6853dfb0a8e66a0337031f01"
+  },
+  "titlos": "Αυτόνομο Ρομπότ για Ανίχνευση Εμποδίων",
+  "perigrafi": "Χρήση αισθητήρων και τεχνικών αυτόνομης πλοήγησης.",
+  "mainKathigitis": {
+    "onoma": "Νικόλας",
+    "epitheto": "Παπαδάκης",
+    "didaskonId": 10005
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_14.pdf",
+  "foititis": {
+    "onoma": "Γιώργος",
+    "epitheto": "Καράλης",
+    "arithmosMitroou": 20241005
+  },
+  "katastasi": "υπό εξέταση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": null,
+  "AP": 10534,
+  "sxolia": [
+    {
+      "didaskonId": 10005,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "καλή αρχή",
+      "createdAt": {
+        "$date": "2025-06-19T09:53:44.357Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Νικόλας",
+      "epitheto": "Παπαδάκης",
+      "vathmos": null,
+      "didaskonId": 10005,
+      "vathmosAnalytika": {
+        "quality": null,
+        "duration": null,
+        "text": null,
+        "presentation": null
+      }
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": null,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": null,
+        "duration": null,
+        "text": null,
+        "presentation": null
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "quality": null,
+        "duration": null,
+        "text": null,
+        "presentation": null
+      }
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": "https://youtube.com/video_link",
+  "imerominiaOraExetasis": {
+    "$date": "2025-07-05T10:00:00.000Z"
+  },
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null
+},
+{
+  "_id": {
+    "$oid": "6853e21aa8e66a0337031f03"
+  },
+  "titlos": "Εφαρμογή Blockchain στην Εφοδιαστική Αλυσίδα",
+  "perigrafi": "Μελέτη της ιχνηλασιμότητας προϊόντων με χρήση blockchain.",
+  "mainKathigitis": {
+    "onoma": "Μαρία",
+    "epitheto": "Ιωάννου",
+    "didaskonId": 10002
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_active_1.pdf",
+  "foititis": {
+    "onoma": "Μαρία",
+    "epitheto": "Τσουκαλά",
+    "arithmosMitroou": 20241006
+  },
+  "katastasi": "ακυρωμένη",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": {
+    "$date": "2025-06-20T00:00:00.000Z"
+  },
+  "pdfProxeiroKeimeno": null,
+  "AP": null,
+  "sxolia": [
+    {
+      "didaskonId": 10002,
+      "username": "m.ioannou",
+      "keimeno": "Πολύ καλή δουλειά",
+      "createdAt": {
+        "$date": "2025-06-21T10:18:54.087Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": null,
+      "didaskonId": 10002,
+      "vathmosAnalytika": null
+    },
+    {
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "vathmos": null,
+      "didaskonId": 10001,
+      "vathmosAnalytika": null
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": null
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": null,
+  "imerominiaOraExetasis": null,
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null,
+  "arithmosGenikhsSynelefsisAkyrwshs": "202513",
+  "logosAkyrosis": "από Διδάσκοντα"
+},
+{
+  "_id": {
+    "$oid": "6853e21aa8e66a0337031f04"
+  },
+  "titlos": "Αναγνώριση Προσώπων με Deep Learning",
+  "perigrafi": "Ανάπτυξη μοντέλου αναγνώρισης προσώπων με CNN.",
+  "mainKathigitis": {
+    "onoma": "Κώστας",
+    "epitheto": "Κωνσταντίνου",
+    "didaskonId": 10003
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_active_2.pdf",
+  "foititis": {
+    "onoma": "Γιάννης",
+    "epitheto": "Μιχαήλ",
+    "arithmosMitroou": 20241007
+  },
+  "katastasi": "υπό εξέταση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": null,
+  "AP": 10601,
+  "sxolia": [
+    {
+      "didaskonId": 10003,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "Ξεκινάμε!",
+      "createdAt": {
+        "$date": "2025-06-19T09:53:44.357Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": null
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": null,
+      "didaskonId": 10002,
+      "vathmosAnalytika": null
+    },
+    {
+      "onoma": "Ανδρέας",
+      "epitheto": "Καραθανάσης",
+      "vathmos": null,
+      "didaskonId": 10006,
+      "vathmosAnalytika": null
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": null,
+  "imerominiaOraExetasis": null,
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null
+},
+{
+  "_id": {
+    "$oid": "6853e21aa8e66a0337031f05"
+  },
+  "titlos": "Ανάλυση Συναισθήματος σε Κοινωνικά Δίκτυα",
+  "perigrafi": "Εξαγωγή συναισθήματος από tweets με NLP.",
+  "mainKathigitis": {
+    "onoma": "Ελένη",
+    "epitheto": "Παναγιώτου",
+    "didaskonId": 10004
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_active_3.pdf",
+  "foititis": {
+    "onoma": "Ελένη",
+    "epitheto": "Κωνσταντινοπούλου",
+    "arithmosMitroou": 20241008
+  },
+  "katastasi": "ακυρωμένη",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": "2023-01-10T00:00:00Z",
+  "imerominiaAkyrosis": {
+    "$date": "2025-06-20T00:00:00.000Z"
+  },
+  "pdfProxeiroKeimeno": null,
+  "AP": "56623",
+  "sxolia": [
+    {
+      "didaskonId": 10004,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "Ξεκινάμε!",
+      "createdAt": {
+        "$date": "2025-06-19T09:53:44.357Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Ελένη",
+      "epitheto": "Παναγιώτου",
+      "vathmos": null,
+      "didaskonId": 10004,
+      "vathmosAnalytika": null
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": null,
+      "didaskonId": 10002,
+      "vathmosAnalytika": null
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": null
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": null,
+  "imerominiaOraExetasis": null,
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null,
+  "arithmosGenikhsSynelefsisAkyrwshs": "202506",
+  "logosAkyrosis": "Κατόπιν Αίτησης Φοιτητή"
+},
+{
+  "_id": {
+    "$oid": "6853e21aa8e66a0337031f06"
+  },
+  "titlos": "Αυτόνομη Πλοήγηση με Χάρτες SLAM",
+  "perigrafi": "Υλοποίηση αλγορίθμων SLAM για αυτόνομη πλοήγηση ρομπότ.",
+  "mainKathigitis": {
+    "onoma": "Νικόλας",
+    "epitheto": "Παπαδάκης",
+    "didaskonId": 10005
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_active_4.pdf",
+  "foititis": {
+    "onoma": "Δήμητρα",
+    "epitheto": "Παναγιώτου",
+    "arithmosMitroou": 20241002
+  },
+  "katastasi": "Ενεργή",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": "2025-01-10T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": null,
+  "AP": null,
+  "sxolia": [
+    {
+      "didaskonId": 10005,
+      "onoma": null,
+      "epitheto": null,
+      "keimeno": "Ξεκινάμε!",
+      "createdAt": {
+        "$date": "2025-06-19T09:53:44.357Z"
+      }
+    }
+  ],
+  "trimelisEpitropi": [
+    {
+      "onoma": "Νικόλας",
+      "epitheto": "Παπαδάκης",
+      "vathmos": null,
+      "didaskonId": 10005,
+      "vathmosAnalytika": null
+    },
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": null,
+      "didaskonId": 10002,
+      "vathmosAnalytika": null
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": null
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": null,
+  "imerominiaOraExetasis": null,
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null
+},
+{
+  "_id": {
+    "$oid": "6853e416a8e66a0337031f08"
+  },
+  "titlos": "Ανάπτυξη Εφαρμογής για Διαχείριση Προσωπικού",
+  "perigrafi": "Εφαρμογή για καταγραφή και διαχείριση δεδομένων εργαζομένων.",
+  "mainKathigitis": {
+    "onoma": "Γιώργος",
+    "epitheto": "Παπαδόπουλος",
+    "didaskonId": 10001
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_assignment_1.pdf",
+  "foititis": {
+    "onoma": "Πέτρος",
+    "epitheto": "Στεργίου",
+    "arithmosMitroou": 20241009
+  },
+  "katastasi": "υπό ανάθεση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": null,
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": null,
+  "AP": null,
+  "sxolia": null,
+  "trimelisEpitropi": [
+    {
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "vathmos": null,
+      "didaskonId": 10001,
+      "vathmosAnalytika": null
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": null,
+  "imerominiaOraExetasis": null,
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null
+},
+{
+  "_id": {
+    "$oid": "6853e416a8e66a0337031f09"
+  },
+  "titlos": "Σύστημα Αναγνώρισης Αριθμών Κυκλοφορίας",
+  "perigrafi": "Αναγνώριση πινακίδων κυκλοφορίας με τεχνικές όρασης υπολογιστών.",
+  "mainKathigitis": {
+    "onoma": "Μαρία",
+    "epitheto": "Ιωάννου",
+    "didaskonId": 10002
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_assignment_2.pdf",
+  "foititis": {
+    "onoma": "Βάσω",
+    "epitheto": "Χρήστου",
+    "arithmosMitroou": 20241010
+  },
+  "katastasi": "υπό ανάθεση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": null,
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": null,
+  "AP": null,
+  "sxolia": null,
+  "trimelisEpitropi": [
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": null,
+      "didaskonId": 10002,
+      "vathmosAnalytika": null
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": null,
+  "imerominiaOraExetasis": null,
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null
+},
+{
+  "_id": {
+    "$oid": "6853e416a8e66a0337031f0a"
+  },
+  "titlos": "Αξιολόγηση Αλγορίθμων Μηχανικής Μάθησης",
+  "perigrafi": "Σύγκριση απόδοσης μεταξύ διαφορετικών αλγορίθμων ML.",
+  "mainKathigitis": {
+    "onoma": "Κώστας",
+    "epitheto": "Κωνσταντίνου",
+    "didaskonId": 10003
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_assignment_3.pdf",
+  "foititis": {
+    "onoma": "Θεόδωρος",
+    "epitheto": "Αναγνώστου",
+    "arithmosMitroou": 20241011
+  },
+  "katastasi": "υπό ανάθεση",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": null,
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": null,
+  "AP": null,
+  "sxolia": null,
+  "trimelisEpitropi": [
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null,
+      "didaskonId": 10003,
+      "vathmosAnalytika": null
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": null,
+  "imerominiaOraExetasis": null,
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null
+},
+{
+  "_id": {
+    "$oid": "6853e416a8e66a0337031f0b"
+  },
+  "titlos": "Κατάταξη Εικόνων με Χρήση Transformers",
+  "perigrafi": "Εφαρμογή μοντέλων Vision Transformers σε ταξινόμηση εικόνων.",
+  "mainKathigitis": {
+    "onoma": "Ελένη",
+    "epitheto": "Παναγιώτου",
+    "didaskonId": 10004
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_assignment_4.pdf",
+  "foititis": {
+    "onoma": "Άννα",
+    "epitheto": "Καραμήτρου",
+    "arithmosMitroou": 20241001
+  },
+  "katastasi": "ενεργή",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση"
+  ],
+  "telikosVathmos": null,
+  "vathmosEpiBlepon": null,
+  "syndesmos": null,
+  "imerominiaAnathesis": {
+    "$date": "2025-06-21T17:26:26.007Z"
+  },
+  "imerominiaAkyrosis": null,
+  "pdfProxeiroKeimeno": null,
+  "AP": null,
+  "sxolia": null,
+  "trimelisEpitropi": [
+    {
+      "onoma": "Ελένη",
+      "epitheto": "Παναγιώτου",
+      "vathmos": null,
+      "didaskonId": 10004,
+      "vathmosAnalytika": null
+    },
+    {
+      "didaskonId": 10001,
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "vathmos": null
+    },
+    {
+      "didaskonId": 10003,
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": null
+    }
+  ],
+  "imerominiaPeratosis": null,
+  "linkYliko": null,
+  "imerominiaOraExetasis": null,
+  "troposExetasis": null,
+  "aithousaExetasis": null,
+  "syndesmosExetasis": null,
+  "proskliseis": [
+    {
+      "didaskonId": 10001,
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "apodoxi": true,
+      "imerominiaProsklisis": {
+        "$date": "2025-06-21T16:41:23.055Z"
+      },
+      "imerominiaApodoxis": {
+        "$date": "2025-06-21T16:48:10.487Z"
+      },
+      "imerominiaAporripsis": null
+    },
+    {
+      "didaskonId": 10002,
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "apodoxi": false,
+      "imerominiaProsklisis": {
+        "$date": "2025-06-21T16:41:47.670Z"
+      },
+      "imerominiaApodoxis": null,
+      "imerominiaAporripsis": {
+        "$date": "2025-06-21T16:57:07.458Z"
+      }
+    },
+    {
+      "didaskonId": 10003,
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "apodoxi": true,
+      "imerominiaProsklisis": {
+        "$date": "2025-06-21T16:42:16.256Z"
+      },
+      "imerominiaApodoxis": {
+        "$date": "2025-06-21T17:26:25.997Z"
+      },
+      "imerominiaAporripsis": null
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68566f5a95eca093812c0b50"
+  },
+  "titlos": "Αναγνώριση Συναισθημάτων Με Χρήση Πολυτροπικών Νευρωνικών Δικτύων(επεξεργασία)",
+  "perigrafi": "Ανάπτυξη συστήματος αναγνώρισης συναισθημάτων μέσω συνδυασμού κειμένου, εικόνας και ήχου με χρήση πολυτροπικών νευρωνικών δικτύων. (επεξεργασία)",
+  "mainKathigitis": {
+    "onoma": "Γιώργος",
+    "epitheto": "Παπαδόπουλος",
+    "didaskonId": 10001
+  },
+  "trimelisEpitropi": [
+    {
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "didaskonId": 10001,
+      "vathmos": null
+    }
+  ],
+  "dateCreated": {
+    "$date": "2025-06-21T08:37:46.031Z"
+  },
+  "katastasi": "διαθέσιμη προς ανάθεση",
+  "pdfPath": "uploads\\1750495514023.pdf",
+  "pdfExtraPerigrafi": "1750495514023.pdf",
+  "dateUpdated": {
+    "$date": "2025-06-21T08:45:14.028Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68568456d7a0a21649eb4c39"
+  },
+  "titlos": "Ανάλυση Συμπεριφοράς Χρηστών σε Ηλεκτρονικά Καταστήματα",
+  "perigrafi": "Χρήση τεχνικών ανάλυσης δεδομένων για την κατανόηση των αγοραστικών συνηθειών.",
+  "mainKathigitis": {
+    "onoma": "Μαρία",
+    "epitheto": "Ιωάννου",
+    "didaskonId": 10002
+  },
+  "pdfExtraPerigrafi": "link_to_pdf_user_behavior.pdf",
+  "foititis": {
+    "onoma": "Διονύσης",
+    "epitheto": "Ρίζος",
+    "arithmosMitroou": 20241020
+  },
+  "katastasi": "περατωμένη",
+  "proigoumenesKatastaseis": [
+    "διαθέσιμη προς ανάθεση",
+    "υπό ανάθεση",
+    "Ενεργή",
+    "υπό εξέταση"
+  ],
+  "telikosVathmos": 9,
+  "vathmosEpiBlepon": 10,
+  "syndesmos": "https://diplomatiki.gr/userbehavior",
+  "imerominiaAnathesis": "2025-01-12T00:00:00Z",
+  "imerominiaAkyrosis": null,
+  "imerominiaOraExetasis": {
+    "$date": "2025-06-05T10:00:00.000Z"
+  },
+  "troposExetasis": "δια ζώσης",
+  "aithousaExetasis": "Αμφιθέατρο 2",
+  "syndesmosExetasis": null,
+  "linkYliko": "https://youtube.com/user_behavior_demo",
+  "pdfProxeiroKeimeno": "link_to_draft_behavior.pdf",
+  "AP": 10503,
+  "sxolia": "Η εργασία ολοκληρώθηκε με επιτυχία και παρουσιάστηκε με σαφήνεια.",
+  "trimelisEpitropi": [
+    {
+      "onoma": "Μαρία",
+      "epitheto": "Ιωάννου",
+      "vathmos": 10,
+      "didaskonId": 10002,
+      "vathmosAnalytika": {
+        "quality": 10,
+        "duration": 10,
+        "text": 10,
+        "presentation": 10
+      }
+    },
+    {
+      "onoma": "Γιώργος",
+      "epitheto": "Παπαδόπουλος",
+      "vathmos": 9,
+      "didaskonId": 10001,
+      "vathmosAnalytika": {
+        "quality": 9,
+        "duration": 9,
+        "text": 8,
+        "presentation": 9
+      }
+    },
+    {
+      "onoma": "Κώστας",
+      "epitheto": "Κωνσταντίνου",
+      "vathmos": 8.5,
+      "didaskonId": 10003,
+      "vathmosAnalytika": {
+        "duration": 8,
+        "presentation": 9,
+        "quality": 8,
+        "text": 9
+      }
+    }
+  ],
+  "imerominiaPeratosis": "2025-06-08T00:00:00Z"
+}]

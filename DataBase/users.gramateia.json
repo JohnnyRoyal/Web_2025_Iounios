@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "681749370ff9d528d2dc0c6b"
+  },
+  "username": "admin.gram",
+  "password": "hashed_admin",
+  "email": "admin.gramateia.ceid@baby.comm",
+  "taxydromikiDieythinsi": "Οδός Πανεπιστημείου 99, Αθήνα",
+  "kinito": "6900000003",
+  "stathero": "2100000005",
+  "onoma": "admin",
+  "epitheto": "gramateia"
+}]
