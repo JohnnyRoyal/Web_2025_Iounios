@@ -14,7 +14,7 @@
 .create-container label {
   font-size: 1rem;
   margin-bottom: 5px;
-  display: block;
+  display: block; /* Για να βγαίνει το ένα κάτω από το άλλο ωραία, να είναι σαν header, δηλαδή να πιάνει όλο το μήκος  */
   text-align: left; /* Ευθυγράμμιση στην αριστερή πλευρά */
 }
 
@@ -36,12 +36,12 @@
   border: none;
   border-radius: 5px;
   font-size: 1rem;
-  cursor: pointer;
+  cursor: pointer; /* Χέρι όταν περνάει από πάνω δια διαδραστικότητα*/
   transition: background-color 0.3s ease;
   text-align: left; /* Ευθυγράμμιση στην αριστερή πλευρά */
 }
 
-.create-container button:hover {
+.create-container button:hover {  
   background-color: #45a049;
 }
 
